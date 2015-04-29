@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<!-- Ant config file for MaYoT -->
+<project name="MaYoT" default="build-app" basedir="." >
+
+	<!-- Properties -->
+	<property name="project.name" value="MaYoT" />
+	<property name="project.src.dir" value="src" />
+	<property name="project.srcTest.dir" value="test" />
+	<property name="project.build.dir" value="build" />
+	<property name="project.buildApp.dir" value="build/prod" />
+    <property name="project.buildJavadoc.dir" value="build/jdoc" />
+	<property name="project.buildTest.dir" value="build/test" />
+
+	<!-- Classpaths -->
+	<path id="JUnit.classpath">
+		<pathelement location="/usr/share/java/junit.jar" />
+		<pathelement location="/usr/share/java/junit4.jar" />
+	</path>
+	<path id="project.app.classpath">
+		<pathelement location="${project.buildApp.dir}" />
+		<path refid="JUnit.classpath" />
+	</path>
+	<path id="project.test.classpath">
+		<pathelement location="${project.buildApp.dir}" />
+		<pathelement location="${project.buildTest.dir}" />
+		<path refid="JUnit.classpath" />
+	</path>
+
+	<!-- Show all available targets -->
+	<target name="help">
+		<java classname="org.apache.tools.ant.Main">
+			<arg value="-projecthelp" />
+			<arg value="-buildfile" />
+			<arg value="${ant.file}" />
+		</java>
+	</target>
+
+
+	<!-- Create dirs for all build targets if not exist -->
+	<target name="init">
+		<mkdir dir="build" />
+        <mkdir dir="build/doc" />
+        <mkdir dir="build/jdoc" />
+		<mkdir dir="build/prod" />
+		<mkdir dir="build/test" />
+	</target>
+	
+	<!-- Build the App -->
+	<target name="build-app" depends="init">
+		<javac srcdir="${project.src.dir}" destdir="${project.buildApp.dir}" includeAntRuntime="false">
+			<classpath refid="project.app.classpath" />
+		</javac>
+	</target>
+
+	<!-- Clean the build folder -->
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<!-- Build the Test -->
+	<target name="build-test" depends="init,build-app">
+		<javac srcdir="${project.srcTest.dir}" destdir="${project.buildTest.dir}" includeAntRuntime="false">
+			<classpath refid="project.test.classpath" />
+		</javac>
+	</target>
+
+	<!-- Run the app -->
+	<target name="run-app">
+		<java classname="com.bunlang.mayot.Main" failonerror="true">
+			<classpath refid="project.app.classpath" />
+		</java>
+	</target>
+
+	<!-- Run the test -->
+    <target name="junit" depends="init">
+        <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
+            <batchtest todir="log">
+                <fileset dir="${project.srcTest.dir}">
+                    <include name="**/*Test*.java" />
+                </fileset>
+                <formatter type="brief" />
+            </batchtest>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="./log">
+            <fileset dir="./log">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report format="frames" todir="./log" />
+        </junitreport>
+    </target>
+	<target name="run-test" depends="junit">
+	</target>
+
+    <!-- Make the javadoc -->
+    <target name="build-javadoc" depends="init">
+        <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.test.classpath">
+            <fileset dir="src">
+
+            </fileset>
+            <fileset dir="test">
+
+            </fileset>
+        </javadoc>
+    </target>
+
+    <!-- -->
+    <target name="build-doc">
+        <exec executable="doxygen">
+
+        </exec>
+    </target>
+    <!-- Show the javadoc -->
+    <target name="show-javadoc">
+        <exec executable="firefox">
+            <arg value="build/jdoc/index.html" />
+        </exec>
+    </target>
+    <!-- -->
+    <target name="show-doc">
+        <exec executable="firefox">
+            <arg value="build/doc/html/index.html" />
+        </exec>
+    </target>
+
+</project>
