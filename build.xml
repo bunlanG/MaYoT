@@ -43,6 +43,7 @@
         <mkdir dir="build/jdoc" />
 		<mkdir dir="build/prod" />
 		<mkdir dir="build/test" />
+         	<mkdir dir="log/" />
 	</target>
 	
 	<!-- Build the App -->
@@ -72,8 +73,12 @@
 	</target>
 
 	<!-- Run the test -->
-    <target name="junit" depends="init">
+    <target name="junit" depends="init,build-test">
         <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
+            <classpath>
+                <pathelement location="${project.buildTest.dir}" />
+            </classpath>
+            <classpath refid="JUnit.classpath" />
             <batchtest todir="log">
                 <fileset dir="${project.srcTest.dir}">
                     <include name="**/*Test*.java" />
