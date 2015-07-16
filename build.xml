@@ -30,6 +30,7 @@
 	<target name="help">
 		<java classname="org.apache.tools.ant.Main">
 			<arg value="-projecthelp" />
+
 			<arg value="-buildfile" />
 			<arg value="${ant.file}" />
 		</java>
@@ -43,7 +44,7 @@
         <mkdir dir="build/jdoc" />
 		<mkdir dir="build/prod" />
 		<mkdir dir="build/test" />
-         	<mkdir dir="log/" />
+         	<mkdir dir="log" />
 	</target>
 	
 	<!-- Build the App -->
@@ -56,6 +57,7 @@
 	<!-- Clean the build folder -->
 	<target name="clean">
 		<delete dir="build" />
+		<delete dir="log" />
 	</target>
 
 	<!-- Build the Test -->
