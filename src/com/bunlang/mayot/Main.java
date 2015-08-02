@@ -18,20 +18,27 @@
 
 package com.bunlang.mayot;
 
+import javax.swing.JFrame;
+
 /** Main class of MaYoT.
  *  
  *  @author bunlanG
  */
 public class Main {
 
-	/** The main function of MaYoT.
-	 *  
-	 *  @param args
-	 *  Program parameters.
-	 */
-	public static void main(String[] args) {
-		System.out.println("MaYoT - Manage Your Tournament !");
-
-	}
-
+    /** The main function of MaYoT.
+     *  
+     *  @param args
+     *  Program parameters.
+     */
+    public static void main(String[] args) {
+        System.out.println("MaYoT : Manage Your Tournament");
+        
+        JFrame win = new JFrame();
+            win.setTitle("MaYoT");
+            win.setSize(600, 480);
+            win.setLocationRelativeTo(null);
+            win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        win.setVisible(true);       
+    }
 }
