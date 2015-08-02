@@ -69,7 +69,7 @@
 
 	<!-- Run the app -->
 	<target name="run-app">
-		<java classname="com.bunlang.mayot.Main" failonerror="true">
+		<java classname="com.bunlang.mayot.Main" fork="true" failonerror="true">
 			<classpath refid="project.app.classpath" />
 		</java>
 	</target>
