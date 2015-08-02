@@ -5,11 +5,11 @@
 	<!-- Properties -->
 	<property name="project.name" value="MaYoT" />
 	<property name="project.src.dir" value="src" />
-	<property name="project.srcTest.dir" value="test" />
+	<property name="project.srcUnitTest.dir" value="test/unit" />
 	<property name="project.build.dir" value="build" />
 	<property name="project.buildApp.dir" value="build/prod" />
-    <property name="project.buildJavadoc.dir" value="build/jdoc" />
-	<property name="project.buildTest.dir" value="build/test" />
+	<property name="project.buildJavadoc.dir" value="build/jdoc" />
+	<property name="project.buildUnitTest.dir" value="build/test/unit" />
 
 	<!-- Classpaths -->
 	<path id="JUnit.classpath">
@@ -20,9 +20,9 @@
 		<pathelement location="${project.buildApp.dir}" />
 		<path refid="JUnit.classpath" />
 	</path>
-	<path id="project.test.classpath">
+	<path id="project.unitTest.classpath">
 		<pathelement location="${project.buildApp.dir}" />
-		<pathelement location="${project.buildTest.dir}" />
+		<pathelement location="${project.buildUnitTest.dir}" />
 		<path refid="JUnit.classpath" />
 	</path>
 
@@ -40,11 +40,12 @@
 	<!-- Create dirs for all build targets if not exist -->
 	<target name="init">
 		<mkdir dir="build" />
-        <mkdir dir="build/doc" />
-        <mkdir dir="build/jdoc" />
-		<mkdir dir="build/prod" />
-		<mkdir dir="build/test" />
-         	<mkdir dir="log" />
+		  <mkdir dir="build/doc" />
+		  <mkdir dir="build/jdoc" />
+		  <mkdir dir="build/prod" />
+		  <mkdir dir="build/test" />
+		    <mkdir dir="build/test/unit" />
+		<mkdir dir="log" />
 	</target>
 	
 	<!-- Build the App -->
@@ -61,9 +62,9 @@
 	</target>
 
 	<!-- Build the Test -->
-	<target name="build-test" depends="init,build-app">
-		<javac srcdir="${project.srcTest.dir}" destdir="${project.buildTest.dir}" includeAntRuntime="false">
-			<classpath refid="project.test.classpath" />
+	<target name="build-unit-test" depends="init,build-app">
+		<javac srcdir="${project.srcUnitTest.dir}" destdir="${project.buildUnitTest.dir}" includeAntRuntime="false">
+			<classpath refid="project.unitTest.classpath" />
 		</javac>
 	</target>
 
@@ -75,14 +76,14 @@
 	</target>
 
 	<!-- Run the test -->
-    <target name="junit" depends="init,build-test">
+    <target name="junit" depends="init,build-unit-test">
         <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
             <classpath>
-                <pathelement location="${project.buildTest.dir}" />
+                <pathelement location="${project.buildUnitTest.dir}" />
             </classpath>
             <classpath refid="JUnit.classpath" />
             <batchtest todir="log">
-                <fileset dir="${project.srcTest.dir}">
+                <fileset dir="${project.srcUnitTest.dir}">
                     <include name="**/*Test*.java" />
                 </fileset>
                 <formatter type="brief" />
@@ -97,12 +98,12 @@
             <report format="frames" todir="./log" />
         </junitreport>
     </target>
-	<target name="run-test" depends="junit">
+        <target name="run-unit-test" depends="junit">
 	</target>
 
     <!-- Make the javadoc -->
     <target name="build-javadoc" depends="init">
-        <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.test.classpath">
+        <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.unitTest.classpath">
             <fileset dir="src">
 
             </fileset>
