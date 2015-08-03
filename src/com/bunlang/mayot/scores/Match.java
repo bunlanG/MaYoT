@@ -16,31 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.bunlang.mayot;
-
-import com.bunlang.mayot.scores.Match;
+package com.bunlang.mayot.scores;
 
 import javax.swing.JFrame;
 
-/** Main class of MaYoT.
+/** .
  *
  *  @author bunlanG
  */
-public class Main {
+public class Match extends JFrame {
+    // Attributes
 
-    /** The main function of MaYoT.
+    /** Constructor of a Match.
      *
-     *  @param args
-     *  Program parameters.
      */
-    public static void main(String[] args) {
-        System.out.println("MaYoT : Manage Your Tournament");
+    public Match() {
+        super();
 
-        Match win = new Match();
-            win.setTitle("MaYoT");
-            win.setSize(600, 480);
-            win.setLocationRelativeTo(null);
-            win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win.setVisible(true);
-    }
+        System.out.println("new Match()");
+	}
 }
