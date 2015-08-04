@@ -25,11 +25,10 @@ public class MatchUITest {
 
     @Test
     public void test() {
-        Match win = new Match();
-            win.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
-            win.setSize(600, 480);
-            win.setLocationRelativeTo(null);
+        Match win = new Match("Host", "Guest");
         win.setVisible(true);
+
+        System.out.println(win.getInfos());
 
         while(win.isShowing()) {
             try {
@@ -38,8 +37,6 @@ public class MatchUITest {
                 Thread.currentThread().interrupt();
             }
         }
-
-        System.out.println("Goodbye...");
 
         assertTrue(true);
     }

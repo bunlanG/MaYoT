@@ -18,16 +18,34 @@
 
 package com.bunlang.mayot.scores;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-
-import javax.swing.JFrame;
+import static org.junit.Assert.*;   
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;;
 
 public class MatchTest {
+    protected Match _match;
 
+    @Before
+    public void setUp() {
+        _match = new Match("Home", "Guest");
+    }
+
+    @After
+    public void tearDown() {
+        _match = null;
+    }
+
+    /** Test the init() function
+     *
+     */
     @Test
-    public void test() {
+    public void testInit() {
+        assertEquals("Host name initialisation broken", "Home", _match.getHostName());
+        assertEquals("Guest name initialisation broken", "Guest", _match.getGuestName());
 
-        assertTrue(true);
+        assertEquals("Host score initialisation broken", 0, _match.getHostScr());
+        assertEquals("Guest score initialisation broken", 0, _match.getGuestScr());
+
     }
 }

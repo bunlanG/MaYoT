@@ -18,21 +18,117 @@
 
 package com.bunlang.mayot.scores;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /** .
  *
  *  @author bunlanG
  */
 public class Match extends JFrame {
-    // Attributes
 
-    /** Constructor of a Match.
+    // Attributes
+    protected String _hostName;
+    protected String _guestName;
+    protected int _hostScr;
+    protected int _guestScr;
+
+    protected JButton _hostBut;
+    protected JButton _guestBut;
+    protected JLabel _scrUI;
+    protected JPanel _pan;
+
+    /** Default constructor of a Match.
      *
      */
     public Match() {
         super();
 
-        System.out.println("new Match()");
+        init("", "");
 	}
+
+    /** Another constructor of a Match, with the names of the teams.
+     *
+     * @param hostName The name of the host team
+     * @param guestName The name of the guest team
+     */
+    public Match(String hostName, String guestName) {
+        super();
+
+        init(hostName, guestName);
+    }
+
+    /** Initialize the Match object.
+     *
+     * @param hostName The name of the host team
+     * @param guestName The name of the guest team
+     */
+    protected void init(String hostName, String guestName) {
+        _hostName = hostName;
+        _hostBut = new JButton(_hostName);
+        _hostScr = 0;
+
+        _guestName = guestName;
+        _guestBut = new JButton(_guestName);
+        _guestScr = 0;
+
+        _scrUI = new JLabel(Integer.toString(_hostScr) + " - " + Integer.toString(_guestScr));
+
+        _pan = new JPanel();
+        _pan.setLayout(new BoxLayout(_pan, BoxLayout.LINE_AXIS));
+        _pan.add(_hostBut);
+        _pan.add(_scrUI);
+        _pan.add(_guestBut);
+
+        this.setContentPane(_pan);
+
+        this.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
+        this.setSize(500, 55);
+        this.setLocationRelativeTo(null);
+    }
+
+    // Getters / setters
+
+    /** Get information about the Match object.
+     *
+     * @return a String with all information
+     */
+    public String getInfos() {
+        return (_hostName + " " + _hostScr + " - " + _guestScr + " " + _guestName);
+    }
+
+    /** Get the name of the guest team.
+     *
+     * @return name of the guest team
+     */
+    public String getGuestName() {
+        return _guestName;
+    }
+
+    /** Get the name of the host team.
+     *
+     * @return name of the host team
+     */
+    public String getHostName() {
+        return _hostName;
+    }
+
+    /** Get the score of the guest team.
+     *
+     * @return score of the guest team
+     */
+    public int getGuestScr() {
+        return _guestScr;
+    }
+
+    /** Get the name of the host team.
+     *
+     * @return name of the host team
+     */
+    public int getHostScr() {
+        return _hostScr;
+    }
 }
