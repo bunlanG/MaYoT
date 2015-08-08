@@ -21,7 +21,7 @@ package com.bunlang.mayot.scores;
 import static org.junit.Assert.*;   
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;;
+import org.junit.Test;
 
 public class MatchTest {
     protected Match _match;
@@ -47,5 +47,23 @@ public class MatchTest {
         assertEquals("Host score initialisation broken", 0, _match.getHostScr());
         assertEquals("Guest score initialisation broken", 0, _match.getGuestScr());
 
+    }
+
+    /** Test the addPoint*() functions
+     *
+     */
+    @Test
+    public void testScoreUpdate() {
+        // 0-0 : @see testInit()
+
+        // 1-0
+        _match.addPointHost();
+        assertEquals("Should be 1-0 : Host", 1, _match.getHostScr());
+        assertEquals("Should be 1-0 : Guest", 0, _match.getGuestScr());
+
+        // 1-1
+        _match.addPointGuest();
+        assertEquals("Should be 1-1 : Host", 1, _match.getHostScr());
+        assertEquals("Should be 1-1 : Guest", 1, _match.getGuestScr());
     }
 }
