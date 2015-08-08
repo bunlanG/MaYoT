@@ -18,32 +18,18 @@
 
 package com.bunlang.mayot.scores;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /** Manage a Match.
  *
  *  @author bunlanG
  */
-public class Match extends JFrame implements ActionListener {
+public class Match {
 
     // Attributes
     protected String _hostName;
     protected String _guestName;
     protected int _hostScr;
     protected int _guestScr;
-
-    protected JButton _hostBut;
-    protected JButton _guestBut;
-    protected JLabel _scrUI;
-    protected JPanel _pan;
+    protected MatchUI _ui;
 
     /** Default constructor of a Match.
      *
@@ -77,68 +63,26 @@ public class Match extends JFrame implements ActionListener {
         _guestName = guestName;
         _guestScr = 0;
 
-        initUI();
+        _ui = new MatchUI(this);
+        _ui.init();
     }
 
-    protected void initUI() {
-        Dimension dimBut = new Dimension(200, 30);
-        Dimension dimLbl = new Dimension(75, 30);
-        Dimension dimTtl = new Dimension(475, 30);
+    public void addPointHost() {
+        _hostScr++;
 
-        _hostBut = new JButton();
-        _hostBut.setMinimumSize(dimBut);
-        _hostBut.setPreferredSize(dimBut);
-        _hostBut.setMaximumSize(dimBut);
-        _hostBut.addActionListener(this);
-
-        _guestBut = new JButton();
-        _guestBut.setMinimumSize(dimBut);
-        _guestBut.setPreferredSize(dimBut);
-        _guestBut.setMaximumSize(dimBut);
-        _guestBut.addActionListener(this);
-
-        _scrUI = new JLabel();
-        _scrUI.setMinimumSize(dimLbl);
-        _scrUI.setPreferredSize(dimLbl);
-        _scrUI.setMaximumSize(dimLbl);
-        _scrUI.setHorizontalAlignment(SwingConstants.CENTER);
-
-        _pan = new JPanel();
-        _pan.setLayout(new BoxLayout(_pan, BoxLayout.LINE_AXIS));
-        _pan.add(_hostBut);
-        _pan.add(_scrUI);
-        _pan.add(_guestBut);
-
-        this.setContentPane(_pan);
-
-        this.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
-        this.setMinimumSize(dimTtl);
-        this.setPreferredSize(dimTtl);
-        this.setMaximumSize(dimTtl);
-        this.setSize(475, 56);
-        this.setLocationRelativeTo(null);
-
-        updateUI();
+        _ui.update();
     }
 
-    protected void updateUI() {
-        _hostBut.setText(_hostName);
-        _guestBut.setText(_guestName);
-        _scrUI.setText(Integer.toString(_hostScr) + " - " + Integer.toString(_guestScr));
-    }
+    public void addPointGuest() {
+        _guestScr++;
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if(actionEvent.getSource() == _hostBut) {
-            _hostScr++;
-        }
-        if(actionEvent.getSource() == _guestBut) {
-            _guestScr++;
-        }
-        updateUI();
+        _ui.update();
     }
 
     // Getters / setters
+    public MatchUI getUI() {
+        return _ui;
+    }
 
     /** Get information about the Match object.
      *

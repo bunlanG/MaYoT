@@ -19,6 +19,7 @@
 package com.bunlang.mayot;
 
 import com.bunlang.mayot.scores.Match;
+import com.bunlang.mayot.scores.MatchUI;
 
 import javax.swing.JFrame;
 
@@ -36,7 +37,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("MaYoT : Manage Your Tournament");
 
-        Match win = new Match();
+        Match match = new Match("Home", "Guest");
+        MatchUI win = match.getUI();
             win.setTitle("MaYoT");
             win.setSize(600, 480);
             win.setLocationRelativeTo(null);

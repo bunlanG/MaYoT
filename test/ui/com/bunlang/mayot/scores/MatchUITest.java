@@ -25,12 +25,13 @@ public class MatchUITest {
 
     @Test
     public void test() {
-        Match win = new Match("Host", "Guest");
-        win.setVisible(true);
+        Match data = new Match("Host", "Guest");
+        MatchUI ui = data.getUI();
+        ui.setVisible(true);
 
-        System.out.println(win.getInfos());
+        System.out.println(data.getInfos());
 
-        while(win.isShowing()) {
+        while(ui.isShowing()) {
             try {
                 Thread.sleep(1000);
             } catch(InterruptedException ex) {
