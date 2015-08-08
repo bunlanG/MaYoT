@@ -46,7 +46,7 @@
     </path>
 
     <!-- Show all available targets -->
-    <target name="help">
+    <target name="help" description="Show this help.">
         <java classname="org.apache.tools.ant.Main">
             <arg value="-projecthelp" />
 
@@ -57,7 +57,7 @@
 
 
     <!-- Create dirs for all build targets if not exist -->
-    <target name="init">
+    <target name="init" description="Create folders for generated files.">
         <mkdir dir="build" />
           <mkdir dir="build/doc" />
           <mkdir dir="build/jdoc" />
@@ -69,33 +69,33 @@
     </target>
 
     <!-- Build the App -->
-    <target name="build-app" depends="init">
+    <target name="build-app" depends="init" description="Build the main app.">
         <javac srcdir="${project.src.dir}" destdir="${project.buildApp.dir}" includeAntRuntime="false">
             <classpath refid="project.app.classpath" />
         </javac>
     </target>
 
     <!-- Clean the build folder -->
-    <target name="clean">
+    <target name="clean" description="Clear ALL generated files.">
         <delete dir="build" />
         <delete dir="log" />
     </target>
 
     <!-- Build the Test -->
-    <target name="build-unit-test" depends="build-app">
+    <target name="build-unit-test" depends="build-app" description="Build the unit tests.">
         <javac srcdir="${project.srcUnitTest.dir}" destdir="${project.buildUnitTest.dir}" includeAntRuntime="false">
             <classpath refid="project.unitTest.classpath" />
         </javac>
     </target>
 
-    <target name="build-ui-test" depends="build-app">
+    <target name="build-ui-test" depends="build-app" description="Build the UI tests.">
         <javac srcdir="${project.srcUITest.dir}" destdir="${project.buildUITest.dir}" includeAntRuntime="false">
             <classpath refid="project.uiTest.classpath" />
         </javac>
     </target>
 
     <!-- Run the app -->
-    <target name="run-app" depends="build-app">
+    <target name="run-app" depends="build-app" description="Run the main app.">
         <java classname="com.bunlang.mayot.Main" fork="true" failonerror="true">
             <classpath refid="project.app.classpath" />
         </java>
@@ -121,7 +121,7 @@
             <report format="frames" todir="./log" />
         </junitreport>
     </target>
-    <target name="run-unit-test" depends="-junit-unit-test,-junitreport">
+    <target name="run-unit-test" depends="-junit-unit-test,-junitreport" description="Run all unit tests.">
     </target>
 
     <target name="-junit-ui-test" depends="build-ui-test">
@@ -135,11 +135,11 @@
             </batchtest>
         </junit>
     </target>
-	<target name="run-ui-test" depends="-junit-ui-test,-junitreport">
+	<target name="run-ui-test" depends="-junit-ui-test,-junitreport" description="Run the UI test.">
 	</target>
 
     <!-- Make the javadoc -->
-    <target name="build-javadoc" depends="init">
+    <target name="build-javadoc" depends="init" description="Build the JavaDoc.">
         <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.unitTest.classpath">
             <fileset dir="src">
 
@@ -151,19 +151,19 @@
     </target>
 
     <!-- -->
-    <target name="build-doc">
+    <target name="build-doc" description="Build the Doxygen doc.">
         <exec executable="doxygen">
 
         </exec>
     </target>
     <!-- Show the javadoc -->
-    <target name="show-javadoc">
+    <target name="show-javadoc" description="Show the JavaDoc in Firefox.">
         <exec executable="firefox">
             <arg value="build/jdoc/index.html" />
         </exec>
     </target>
     <!-- -->
-    <target name="show-doc">
+    <target name="show-doc" description="Show the Doxygen doc in Firefox.">
         <exec executable="firefox">
             <arg value="build/doc/html/index.html" />
         </exec>
