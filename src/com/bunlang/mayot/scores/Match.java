@@ -23,6 +23,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
 
 /** .
  *
@@ -67,15 +69,29 @@ public class Match extends JFrame {
      * @param guestName The name of the guest team
      */
     protected void init(String hostName, String guestName) {
+        Dimension dimBut = new Dimension(200, 30);
+        Dimension dimLbl = new Dimension(75, 30);
+        Dimension dimTtl = new Dimension(475, 30);
+
         _hostName = hostName;
         _hostBut = new JButton(_hostName);
+        _hostBut.setMinimumSize(dimBut);
+        _hostBut.setPreferredSize(dimBut);
+        _hostBut.setMaximumSize(dimBut);
         _hostScr = 0;
 
         _guestName = guestName;
         _guestBut = new JButton(_guestName);
+        _guestBut.setMinimumSize(dimBut);
+        _guestBut.setPreferredSize(dimBut);
+        _guestBut.setMaximumSize(dimBut);
         _guestScr = 0;
 
         _scrUI = new JLabel(Integer.toString(_hostScr) + " - " + Integer.toString(_guestScr));
+        _scrUI.setMinimumSize(dimLbl);
+        _scrUI.setPreferredSize(dimLbl);
+        _scrUI.setMaximumSize(dimLbl);
+        _scrUI.setHorizontalAlignment(SwingConstants.CENTER);
 
         _pan = new JPanel();
         _pan.setLayout(new BoxLayout(_pan, BoxLayout.LINE_AXIS));
@@ -86,7 +102,10 @@ public class Match extends JFrame {
         this.setContentPane(_pan);
 
         this.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
-        this.setSize(500, 55);
+        this.setMinimumSize(dimTtl);
+        this.setPreferredSize(dimTtl);
+        this.setMaximumSize(dimTtl);
+        this.setSize(475, 56);
         this.setLocationRelativeTo(null);
     }
 
