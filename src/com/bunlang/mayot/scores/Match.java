@@ -25,12 +25,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-/** .
+/** Manage a Match.
  *
  *  @author bunlanG
  */
-public class Match extends JFrame {
+public class Match extends JFrame implements ActionListener {
 
     // Attributes
     protected String _hostName;
@@ -69,25 +71,33 @@ public class Match extends JFrame {
      * @param guestName The name of the guest team
      */
     protected void init(String hostName, String guestName) {
+        _hostName = hostName;
+        _hostScr = 0;
+
+        _guestName = guestName;
+        _guestScr = 0;
+
+        initUI();
+    }
+
+    protected void initUI() {
         Dimension dimBut = new Dimension(200, 30);
         Dimension dimLbl = new Dimension(75, 30);
         Dimension dimTtl = new Dimension(475, 30);
 
-        _hostName = hostName;
-        _hostBut = new JButton(_hostName);
+        _hostBut = new JButton();
         _hostBut.setMinimumSize(dimBut);
         _hostBut.setPreferredSize(dimBut);
         _hostBut.setMaximumSize(dimBut);
-        _hostScr = 0;
+        _hostBut.addActionListener(this);
 
-        _guestName = guestName;
-        _guestBut = new JButton(_guestName);
+        _guestBut = new JButton();
         _guestBut.setMinimumSize(dimBut);
         _guestBut.setPreferredSize(dimBut);
         _guestBut.setMaximumSize(dimBut);
-        _guestScr = 0;
+        _guestBut.addActionListener(this);
 
-        _scrUI = new JLabel(Integer.toString(_hostScr) + " - " + Integer.toString(_guestScr));
+        _scrUI = new JLabel();
         _scrUI.setMinimumSize(dimLbl);
         _scrUI.setPreferredSize(dimLbl);
         _scrUI.setMaximumSize(dimLbl);
@@ -107,6 +117,25 @@ public class Match extends JFrame {
         this.setMaximumSize(dimTtl);
         this.setSize(475, 56);
         this.setLocationRelativeTo(null);
+
+        updateUI();
+    }
+
+    protected void updateUI() {
+        _hostBut.setText(_hostName);
+        _guestBut.setText(_guestName);
+        _scrUI.setText(Integer.toString(_hostScr) + " - " + Integer.toString(_guestScr));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(actionEvent.getSource() == _hostBut) {
+            _hostScr++;
+        }
+        if(actionEvent.getSource() == _guestBut) {
+            _guestScr++;
+        }
+        updateUI();
     }
 
     // Getters / setters
