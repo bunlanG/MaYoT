@@ -82,27 +82,27 @@
     </target>
 
     <!-- Build the Test -->
-    <target name="build-unit-test" depends="init,build-app">
+    <target name="build-unit-test" depends="build-app">
         <javac srcdir="${project.srcUnitTest.dir}" destdir="${project.buildUnitTest.dir}" includeAntRuntime="false">
             <classpath refid="project.unitTest.classpath" />
         </javac>
     </target>
 
-    <target name="build-ui-test" depends="init,build-app">
+    <target name="build-ui-test" depends="build-app">
         <javac srcdir="${project.srcUITest.dir}" destdir="${project.buildUITest.dir}" includeAntRuntime="false">
             <classpath refid="project.uiTest.classpath" />
         </javac>
     </target>
 
     <!-- Run the app -->
-    <target name="run-app">
+    <target name="run-app" depends="build-app">
         <java classname="com.bunlang.mayot.Main" fork="true" failonerror="true">
             <classpath refid="project.app.classpath" />
         </java>
     </target>
 
     <!-- Run the test -->
-    <target name="junit-unit-test" depends="init,build-unit-test">
+    <target name="-junit-unit-test" depends="build-unit-test">
         <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
             <classpath refid="project.unitTest.classpath" />
             <batchtest todir="log">
@@ -113,7 +113,7 @@
             </batchtest>
         </junit>
     </target>
-    <target name="junitreport">
+    <target name="-junitreport">
         <junitreport todir="./log">
             <fileset dir="./log">
                 <include name="TEST-*.xml" />
@@ -121,10 +121,10 @@
             <report format="frames" todir="./log" />
         </junitreport>
     </target>
-    <target name="run-unit-test" depends="junit-unit-test">
+    <target name="run-unit-test" depends="-junit-unit-test,-junitreport">
     </target>
 
-    <target name="junit-ui-test" depends="init,build-ui-test">
+    <target name="-junit-ui-test" depends="build-ui-test">
         <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
 			<classpath refid="project.uiTest.classpath" />
             <batchtest todir="log">
@@ -135,7 +135,7 @@
             </batchtest>
         </junit>
     </target>
-	<target name="run-ui-test" depends="junit-ui-test">
+	<target name="run-ui-test" depends="-junit-ui-test,-junitreport">
 	</target>
 
     <!-- Make the javadoc -->
