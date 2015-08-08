@@ -18,19 +18,31 @@
         <pathelement location="/usr/share/java/junit.jar" />
         <pathelement location="/usr/share/java/junit4.jar" />
     </path>
+    <path id="Log4J.classpath">
+        <pathelement location="/usr/share/java/log4j-1.2.jar" />
+    </path>
+    <path id="project.prop.classpath">
+        <pathelement location="prop" />
+    </path>
     <path id="project.app.classpath">
         <pathelement location="${project.buildApp.dir}" />
         <path refid="JUnit.classpath" />
+        <path refid="Log4J.classpath" />
+        <path refid="project.prop.classpath" />
     </path>
     <path id="project.unitTest.classpath">
         <pathelement location="${project.buildApp.dir}" />
         <pathelement location="${project.buildUnitTest.dir}" />
         <path refid="JUnit.classpath" />
+        <path refid="Log4J.classpath" />
+        <path refid="project.prop.classpath" />
     </path>
     <path id="project.uiTest.classpath">
         <pathelement location="${project.buildApp.dir}" />
         <pathelement location="${project.buildUITest.dir}" />
         <path refid="JUnit.classpath" />
+        <path refid="Log4J.classpath" />
+        <path refid="project.prop.classpath" />
     </path>
 
     <!-- Show all available targets -->

@@ -22,6 +22,7 @@ import com.bunlang.mayot.scores.Match;
 import com.bunlang.mayot.scores.MatchUI;
 
 import javax.swing.JFrame;
+import org.apache.log4j.Logger;
 
 /** Main class of MaYoT.
  *
@@ -29,13 +30,15 @@ import javax.swing.JFrame;
  */
 public class Main {
 
+    private static Logger logger = Logger.getLogger("com.bunlang.mayot");
+
     /** The main function of MaYoT.
      *
      *  @param args
      *  Program parameters.
      */
     public static void main(String[] args) {
-        System.out.println("MaYoT : Manage Your Tournament");
+        logger.info("MaYoT : Manage Your Tournament");
 
         Match match = new Match("Home", "Guest");
         MatchUI win = match.getUI();
