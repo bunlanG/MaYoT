@@ -66,6 +66,8 @@
             <mkdir dir="build/test/ui" />
             <mkdir dir="build/test/unit" />
         <mkdir dir="log" />
+          <mkdir dir="log/test-ui" />
+          <mkdir dir="log/test-unit" />
     </target>
 
     <!-- Build the App -->
@@ -105,38 +107,58 @@
     <target name="-junit-unit-test" depends="build-unit-test">
         <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
             <classpath refid="project.unitTest.classpath" />
-            <batchtest todir="log">
+            <batchtest todir="log/test-unit">
                 <fileset dir="${project.srcUnitTest.dir}">
                     <include name="**/*Test*.java" />
                 </fileset>
-                <formatter type="brief" />
+                <formatter type="xml" />
             </batchtest>
         </junit>
     </target>
-    <target name="-junitreport">
-        <junitreport todir="./log">
-            <fileset dir="./log">
+    <target name="-junitreport-unit">
+        <junitreport todir="./log/test-unit">
+            <fileset dir="./log/test-unit">
                 <include name="TEST-*.xml" />
             </fileset>
-            <report format="frames" todir="./log" />
+            <report format="frames" todir="./log/test-unit" />
         </junitreport>
     </target>
-    <target name="run-unit-test" depends="-junit-unit-test,-junitreport" description="Run all unit tests.">
+    <target name="run-unit-test" depends="-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
+    </target>
+
+    <target name="show-report-unit-test" description="Show the unit tests report in Firefox.">
+        <exec executable="firefox">
+            <arg value="log/test-unit/index.html" />
+        </exec>
     </target>
 
     <target name="-junit-ui-test" depends="build-ui-test">
         <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
 			<classpath refid="project.uiTest.classpath" />
-            <batchtest todir="log">
+            <batchtest todir="log/test-ui">
                 <fileset dir="${project.srcUITest.dir}">
                     <include name="**/*Test*.java" />
                 </fileset>
-                <formatter type="brief" />
+                <formatter type="xml" />
             </batchtest>
         </junit>
     </target>
-	<target name="run-ui-test" depends="-junit-ui-test,-junitreport" description="Run the UI test.">
+    <target name="-junitreport-ui">
+        <junitreport todir="./log/test-ui">
+            <fileset dir="./log/test-ui">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report format="frames" todir="./log/test-ui" />
+        </junitreport>
+    </target>
+	<target name="run-ui-test" depends="-junit-ui-test,-junitreport-ui" description="Run the UI test.">
 	</target>
+
+    <target name="show-report-ui-test" description="Show the UI test report in Firefox.">
+        <exec executable="firefox">
+            <arg value="log/test-ui/index.html" />
+        </exec>
+    </target>
 
     <!-- Make the javadoc -->
     <target name="build-javadoc" depends="init" description="Build the JavaDoc.">
