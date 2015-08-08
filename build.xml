@@ -49,9 +49,6 @@
     <target name="help" description="Show this help.">
         <java classname="org.apache.tools.ant.Main">
             <arg value="-projecthelp" />
-
-            <arg value="-buildfile" />
-            <arg value="${ant.file}" />
         </java>
     </target>
 
