@@ -102,7 +102,7 @@
 
     <!-- Run the test -->
     <target name="-junit-unit-test" depends="build-unit-test">
-        <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
+        <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.unit.failed">
             <classpath refid="project.unitTest.classpath" />
             <batchtest todir="log/test-unit">
                 <fileset dir="${project.srcUnitTest.dir}">
@@ -121,6 +121,7 @@
         </junitreport>
     </target>
     <target name="run-unit-test" depends="-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
+        <fail message="Unit Tests FAILED" if="test.unit.failed" />
     </target>
 
     <target name="show-report-unit-test" description="Show the unit tests report in Firefox.">
@@ -130,7 +131,7 @@
     </target>
 
     <target name="-junit-ui-test" depends="build-ui-test">
-        <junit printsummary="on" showoutput="on" fork="yes" haltonfailure="on">
+        <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.ui.failed">
 			<classpath refid="project.uiTest.classpath" />
             <batchtest todir="log/test-ui">
                 <fileset dir="${project.srcUITest.dir}">
@@ -149,7 +150,8 @@
         </junitreport>
     </target>
 	<target name="run-ui-test" depends="-junit-ui-test,-junitreport-ui" description="Run the UI test.">
-	</target>
+        <fail message="UI Test FAILED" if="test.ui.failed" />
+    </target>
 
     <target name="show-report-ui-test" description="Show the UI test report in Firefox.">
         <exec executable="firefox">
