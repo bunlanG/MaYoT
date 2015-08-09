@@ -53,6 +53,9 @@ public class Match {
     protected int _hostScr;
     protected int _guestScr;
     protected Period _period;
+    protected String _dateMatch;
+    protected String _hourMatch;
+
     protected MatchUI _ui;
 
 
@@ -89,6 +92,9 @@ public class Match {
         _guestScr = 0;
 
         _period = Period.values()[0];
+
+        _dateMatch = "xx/xx/20xx";
+        _hourMatch = "xx:xx";
 
         _ui = new MatchUI(this);
         _ui.init();
@@ -157,6 +163,22 @@ public class Match {
      */
     public int getHostScr() {
         return _hostScr;
+    }
+
+    /** Get the date of the match.
+     *
+     * @return date of the match
+     */
+    public String getDateMatch() {
+        return _dateMatch;
+    }
+
+    /** Get the hour of the match.
+     *
+     * @return date of the match
+     */
+    public String getHourMatch() {
+        return _hourMatch;
     }
 
     /** Get the label of the period.

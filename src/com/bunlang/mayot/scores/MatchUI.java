@@ -131,8 +131,15 @@ public class MatchUI extends JFrame implements ActionListener {
     protected void update() {
         _hostBut.setText(_data.getHostName());
         _guestBut.setText(_data.getGuestName());
-        _scrUI.setText(Integer.toString(_data.getHostScr()) + " - " + Integer.toString(_data.getGuestScr()));
-        _infoUI.setText(_data.getPeriodLabel());
+
+        // If not begun, show date / hour instead of the score
+        if(_data.isBegun()) {
+            _scrUI.setText(Integer.toString(_data.getHostScr()) + " - " + Integer.toString(_data.getGuestScr()));
+            _infoUI.setText(_data.getPeriodLabel());
+        } else {
+            _scrUI.setText(_data.getHourMatch());
+            _infoUI.setText(_data.getDateMatch());
+        }
 
         // Update Color
         Color blueC = new Color(120,150,255);
@@ -145,13 +152,17 @@ public class MatchUI extends JFrame implements ActionListener {
         if(_data.isBegun()) {
             if(_data.isFinished()) {
                 _scrUI.setForeground(whiteC);
+                _infoUI.setForeground(whiteC);
             } else if(_data.getPeriodLockScore()) {
                 _scrUI.setForeground(yellowC);
+                _infoUI.setForeground(yellowC);
             } else {
                 _scrUI.setForeground(greenC);
+                _infoUI.setForeground(greenC);
             }
         } else {
             _scrUI.setForeground(blueC);
+            _infoUI.setForeground(blueC);
         }
 
         // Teams
