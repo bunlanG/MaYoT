@@ -22,6 +22,9 @@ import com.bunlang.mayot.scores.Match;
 import com.bunlang.mayot.scores.MatchUI;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import java.awt.Color;
+
 import org.apache.log4j.Logger;
 
 /** Main class of MaYoT.
@@ -47,5 +50,19 @@ public class Main {
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setVisible(true);
+    }
+
+    /** Setup a custom L&F.
+     *
+     */
+    public static void initLAF() {
+        Color transparent = new Color(0,0,0,0);
+        Color semiTrans = new Color(255,255,255,50);
+
+        UIManager.put("Button.focus", new javax.swing.plaf.ColorUIResource(transparent));
+        UIManager.put("Button.shadow", new javax.swing.plaf.ColorUIResource(transparent));
+        UIManager.put("Button.darkShadow", new javax.swing.plaf.ColorUIResource(transparent));
+        UIManager.put("Button.select", new javax.swing.plaf.ColorUIResource(semiTrans));
+        UIManager.put("Button.gradient", new javax.swing.plaf.ColorUIResource(transparent));
     }
 }

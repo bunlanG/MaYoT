@@ -19,9 +19,16 @@
 package com.bunlang.mayot.scores;
 
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MatchUITest {
+
+    @BeforeClass
+    public static void setupAll() {
+        // Setup L&F in UI Test
+        com.bunlang.mayot.Main.initLAF();
+    }
 
     @Test
     public void test() {

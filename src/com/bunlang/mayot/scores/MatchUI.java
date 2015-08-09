@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,23 +51,32 @@ public class MatchUI extends JFrame implements ActionListener {
         Dimension dimBut = new Dimension(200, 30);
         Dimension dimLbl = new Dimension(75, 30);
         Dimension dimTtl = new Dimension(475, 30);
+        Color grey10 = new Color(0.1f, 0.1f, 0.1f);
+        Color grey15 = new Color(0.15f, 0.15f, 0.15f);
 
         _hostBut = new JButton();
         _hostBut.setMinimumSize(dimBut);
         _hostBut.setPreferredSize(dimBut);
         _hostBut.setMaximumSize(dimBut);
+        _hostBut.setForeground(Color.WHITE);
+        _hostBut.setBackground(grey10);
+        _hostBut.setBorder(null);
         _hostBut.addActionListener(this);
 
         _guestBut = new JButton();
         _guestBut.setMinimumSize(dimBut);
         _guestBut.setPreferredSize(dimBut);
         _guestBut.setMaximumSize(dimBut);
+        _guestBut.setForeground(Color.WHITE);
+        _guestBut.setBackground(grey10);
+        _guestBut.setBorder(null);
         _guestBut.addActionListener(this);
 
         _scrUI = new JLabel();
         _scrUI.setMinimumSize(dimLbl);
         _scrUI.setPreferredSize(dimLbl);
         _scrUI.setMaximumSize(dimLbl);
+        _scrUI.setForeground(Color.WHITE);
         _scrUI.setHorizontalAlignment(SwingConstants.CENTER);
 
         _pan = new JPanel();
@@ -82,6 +92,7 @@ public class MatchUI extends JFrame implements ActionListener {
         this.setPreferredSize(dimTtl);
         this.setMaximumSize(dimTtl);
         this.setSize(475, 56);
+        this.getContentPane().setBackground(grey15);
         this.setLocationRelativeTo(null);
 
         update();
