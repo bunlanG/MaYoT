@@ -1,7 +1,9 @@
 <?xml version="1.0" ?>
 <!-- Ant config file for MaYoT -->
 <project name="MaYoT" default="build-app" basedir="." >
-
+    <description>
+        MaYoT build file for Ant.
+    </description>
     <!-- Properties -->
     <property name="project.name" value="MaYoT" />
     <property name="project.src.dir" value="src" />
@@ -130,15 +132,17 @@
         </exec>
     </target>
 
+    <target name="-choice-ui-test">
+        <echo>Availables UI :</echo>
+        <echo>    > com.bunlang.mayot.scores.MatchUITest</echo>
+        <input addProperty="test.Ui.class" />
+    </target>
     <target name="-junit-ui-test" depends="build-ui-test">
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.ui.failed">
 			<classpath refid="project.uiTest.classpath" />
-            <batchtest todir="log/test-ui">
-                <fileset dir="${project.srcUITest.dir}">
-                    <include name="**/*Test*.java" />
-                </fileset>
+            <test name="${test.Ui.class}" todir="log/test-ui">
                 <formatter type="xml" />
-            </batchtest>
+            </test>
         </junit>
     </target>
     <target name="-junitreport-ui">
@@ -149,7 +153,7 @@
             <report format="frames" todir="./log/test-ui" />
         </junitreport>
     </target>
-	<target name="run-ui-test" depends="-junit-ui-test,-junitreport-ui" description="Run the UI test.">
+	<target name="run-ui-test" depends="-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
         <fail message="UI Test FAILED" if="test.ui.failed" />
     </target>
 
