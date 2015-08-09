@@ -42,6 +42,7 @@ public class Main {
      */
     public static void main(String[] args) {
         logger.info("MaYoT : Manage Your Tournament");
+        initLAF();
 
         Match match = new Match("Home", "Guest");
         MatchUI win = match.getUI();

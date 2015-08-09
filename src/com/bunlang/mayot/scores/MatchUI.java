@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,7 +40,9 @@ public class MatchUI extends JFrame implements ActionListener {
     protected JButton _hostBut;
     protected JButton _guestBut;
     protected JLabel _scrUI;
+    protected JButton _infoUI;
     protected JPanel _pan;
+    protected JPanel _panLbl;
 
     public MatchUI(Match data) {
         _data = data;
@@ -50,14 +53,20 @@ public class MatchUI extends JFrame implements ActionListener {
     protected void init() {
         Dimension dimBut = new Dimension(200, 30);
         Dimension dimLbl = new Dimension(75, 30);
+        Dimension dimLbl1 = new Dimension(75, 18);
+        Dimension dimLbl2 = new Dimension(75, 12);
         Dimension dimTtl = new Dimension(475, 30);
         Color grey10 = new Color(0.1f, 0.1f, 0.1f);
         Color grey15 = new Color(0.15f, 0.15f, 0.15f);
+        Color grey30 = new Color(0.3f, 0.3f, 0.3f);
+        Font dimFont = new Font("Dialog", Font.ITALIC, 9);
+        Font normFont = new Font("Dialog.Bold", 0, 15);
 
         _hostBut = new JButton();
         _hostBut.setMinimumSize(dimBut);
         _hostBut.setPreferredSize(dimBut);
         _hostBut.setMaximumSize(dimBut);
+        _hostBut.setFont(normFont);
         _hostBut.setForeground(Color.WHITE);
         _hostBut.setBackground(grey10);
         _hostBut.setBorder(null);
@@ -67,22 +76,43 @@ public class MatchUI extends JFrame implements ActionListener {
         _guestBut.setMinimumSize(dimBut);
         _guestBut.setPreferredSize(dimBut);
         _guestBut.setMaximumSize(dimBut);
+        _guestBut.setFont(normFont);
         _guestBut.setForeground(Color.WHITE);
         _guestBut.setBackground(grey10);
         _guestBut.setBorder(null);
         _guestBut.addActionListener(this);
 
         _scrUI = new JLabel();
-        _scrUI.setMinimumSize(dimLbl);
-        _scrUI.setPreferredSize(dimLbl);
-        _scrUI.setMaximumSize(dimLbl);
+        _scrUI.setMinimumSize(dimLbl1);
+        _scrUI.setPreferredSize(dimLbl1);
+        _scrUI.setMaximumSize(dimLbl1);
+        _scrUI.setFont(normFont);
         _scrUI.setForeground(Color.WHITE);
         _scrUI.setHorizontalAlignment(SwingConstants.CENTER);
+
+        _infoUI = new JButton();
+        _infoUI.setMinimumSize(dimLbl2);
+        _infoUI.setPreferredSize(dimLbl2);
+        _infoUI.setMaximumSize(dimLbl2);
+        _infoUI.setFont(dimFont);
+        _infoUI.setForeground(Color.WHITE);
+        _infoUI.setBackground(grey30);
+        _infoUI.setBorder(null);
+        _infoUI.addActionListener(this);
+
+        _panLbl = new JPanel();
+        _panLbl.setLayout(new BoxLayout(_panLbl, BoxLayout.PAGE_AXIS));
+        _panLbl.add(_scrUI);
+        _panLbl.add(_infoUI);
+        _panLbl.setMinimumSize(dimLbl);
+        _panLbl.setPreferredSize(dimLbl);
+        _panLbl.setMaximumSize(dimLbl);
+        _panLbl.setOpaque(false);
 
         _pan = new JPanel();
         _pan.setLayout(new BoxLayout(_pan, BoxLayout.LINE_AXIS));
         _pan.add(_hostBut);
-        _pan.add(_scrUI);
+        _pan.add(_panLbl);
         _pan.add(_guestBut);
 
         this.setContentPane(_pan);
@@ -102,6 +132,7 @@ public class MatchUI extends JFrame implements ActionListener {
         _hostBut.setText(_data.getHostName());
         _guestBut.setText(_data.getGuestName());
         _scrUI.setText(Integer.toString(_data.getHostScr()) + " - " + Integer.toString(_data.getGuestScr()));
+        _infoUI.setText("00/00/00 00:00");
     }
 
     @Override
@@ -111,6 +142,9 @@ public class MatchUI extends JFrame implements ActionListener {
         }
         if(actionEvent.getSource() == _guestBut) {
             _data.addPointGuest();
+        }
+        if(actionEvent.getSource() == _infoUI) {
+            // NULL
         }
     }
 }
