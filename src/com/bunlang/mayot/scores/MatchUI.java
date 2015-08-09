@@ -132,7 +132,7 @@ public class MatchUI extends JFrame implements ActionListener {
         _hostBut.setText(_data.getHostName());
         _guestBut.setText(_data.getGuestName());
         _scrUI.setText(Integer.toString(_data.getHostScr()) + " - " + Integer.toString(_data.getGuestScr()));
-        _infoUI.setText("00/00/00 00:00");
+        _infoUI.setText(_data.getPeriodLabel());
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MatchUI extends JFrame implements ActionListener {
             _data.addPointGuest();
         }
         if(actionEvent.getSource() == _infoUI) {
-            // NULL
+            _data.nextPeriod();
         }
     }
 }

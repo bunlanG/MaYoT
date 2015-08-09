@@ -23,13 +23,38 @@ package com.bunlang.mayot.scores;
  *  @author bunlanG
  */
 public class Match {
+    private enum Period {
+        NOT_BEGUN("...", true),
+        FIRST_HT("1st HT", false),
+        PAUSE_HT("Pause", true),
+        SECOND_HT("2nd HT", false),
+        FINISHED("Finished", true);
+
+        private String _str;
+        private boolean _lockScore;
+
+        Period(String str, boolean lockScr) {
+            _str = str;
+            _lockScore = lockScr;
+        }
+
+        public String getVal() {
+            return _str;
+        }
+
+        public boolean lockedScore() {
+            return _lockScore;
+        }
+    }
 
     // Attributes
     protected String _hostName;
     protected String _guestName;
     protected int _hostScr;
     protected int _guestScr;
+    protected Period _period;
     protected MatchUI _ui;
+
 
     /** Default constructor of a Match.
      *
@@ -63,6 +88,8 @@ public class Match {
         _guestName = guestName;
         _guestScr = 0;
 
+        _period = Period.values()[0];
+
         _ui = new MatchUI(this);
         _ui.init();
     }
@@ -75,6 +102,14 @@ public class Match {
 
     public void addPointGuest() {
         _guestScr++;
+
+        _ui.update();
+    }
+
+    public void nextPeriod() {
+        if(_period.ordinal() + 1 < Period.values().length) {
+            _period = Period.values()[_period.ordinal() + 1];
+        }
 
         _ui.update();
     }
@@ -122,5 +157,21 @@ public class Match {
      */
     public int getHostScr() {
         return _hostScr;
+    }
+
+    /** Get the label of the period.
+     *
+     * @return label of the current period
+     */
+    public String getPeriodLabel() {
+        return _period.getVal();
+    }
+
+    /** Ask if the current period lock the score edition.
+     *
+     * @return the score locked state
+     */
+    public boolean getPeriodLockScore() {
+        return _period.lockedScore();
     }
 }
