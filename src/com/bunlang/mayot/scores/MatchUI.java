@@ -139,7 +139,9 @@ public class MatchUI extends JFrame implements ActionListener {
         Color greenC = new Color(100,255,100);
         Color yellowC = new Color(255,255,90);
         Color whiteC = new Color(255,255,255);
+        Color greyC = new Color(150,150,150);
 
+        // Score
         if(_data.isBegun()) {
             if(_data.isFinished()) {
                 _scrUI.setForeground(whiteC);
@@ -150,6 +152,21 @@ public class MatchUI extends JFrame implements ActionListener {
             }
         } else {
             _scrUI.setForeground(blueC);
+        }
+
+        // Teams
+        if(_data.isFinished()) {
+            if(_data.hostWins()) {
+                _hostBut.setForeground(whiteC);
+                _guestBut.setForeground(greyC);
+            } else if(_data.guestWins()) {
+                _hostBut.setForeground(greyC);
+                _guestBut.setForeground(whiteC);
+            } else {
+                // Draw
+                _hostBut.setForeground(whiteC);
+                _guestBut.setForeground(whiteC);
+            }
         }
     }
 

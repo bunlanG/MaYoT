@@ -190,4 +190,20 @@ public class Match {
     public boolean isFinished() {
         return _period.ordinal() == Period.values().length - 1;
     }
+
+    /** Ask if the host win the match
+     *
+     * @return the host wins / wan
+     */
+    public boolean hostWins() {
+        return _hostScr > _guestScr;
+    }
+
+    /** Ask if the guest win the match
+     *
+     * @return the guest wins / wan
+     */
+    public boolean guestWins() {
+        return _hostScr < _guestScr;
+    }
 }
