@@ -174,4 +174,20 @@ public class Match {
     public boolean getPeriodLockScore() {
         return _period.lockedScore();
     }
+
+    /** Ask if the match has begun
+     *
+     * @return the match state
+     */
+    public boolean isBegun() {
+        return _period.ordinal() != 0;
+    }
+
+    /** Ask if the match has finished
+     *
+     * @return the match state
+     */
+    public boolean isFinished() {
+        return _period.ordinal() == Period.values().length - 1;
+    }
 }

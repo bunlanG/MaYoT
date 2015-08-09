@@ -133,6 +133,24 @@ public class MatchUI extends JFrame implements ActionListener {
         _guestBut.setText(_data.getGuestName());
         _scrUI.setText(Integer.toString(_data.getHostScr()) + " - " + Integer.toString(_data.getGuestScr()));
         _infoUI.setText(_data.getPeriodLabel());
+
+        // Update Color
+        Color blueC = new Color(120,150,255);
+        Color greenC = new Color(100,255,100);
+        Color yellowC = new Color(255,255,90);
+        Color whiteC = new Color(255,255,255);
+
+        if(_data.isBegun()) {
+            if(_data.isFinished()) {
+                _scrUI.setForeground(whiteC);
+            } else if(_data.getPeriodLockScore()) {
+                _scrUI.setForeground(yellowC);
+            } else {
+                _scrUI.setForeground(greenC);
+            }
+        } else {
+            _scrUI.setForeground(blueC);
+        }
     }
 
     @Override
