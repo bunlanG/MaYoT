@@ -47,6 +47,8 @@ public class MatchTest {
         assertEquals("Host score initialisation broken", 0, _match.getHostScr());
         assertEquals("Guest score initialisation broken", 0, _match.getGuestScr());
 
+        assertEquals("Fixer is disabled in init()", false, _match.isFixing());
+
     }
 
     /** Test the addPoint*() functions
@@ -65,5 +67,14 @@ public class MatchTest {
         _match.addPointGuest();
         assertEquals("Should be 1-1 : Host", 1, _match.getHostScr());
         assertEquals("Should be 1-1 : Guest", 1, _match.getGuestScr());
+
+        // Enable fixer
+        _match.changeFactFix();
+        assertEquals("Fixer should be enabled", true, _match.isFixing());
+
+        // 0-1
+        _match.addPointHost();
+        assertEquals("Should be 0-1 : Host", 0, _match.getHostScr());
+        assertEquals("Should be 0-1 : Guest", 1, _match.getGuestScr());
     }
 }
