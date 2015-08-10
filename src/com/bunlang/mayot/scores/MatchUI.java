@@ -194,6 +194,9 @@ public class MatchUI extends JFrame implements ActionListener {
                 _hostBut.setForeground(whiteC);
                 _guestBut.setForeground(whiteC);
             }
+        } else {
+            _hostBut.setForeground(whiteC);
+            _guestBut.setForeground(whiteC);
         }
 
         // FixBut
