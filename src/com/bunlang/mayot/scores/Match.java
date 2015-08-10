@@ -104,22 +104,28 @@ public class Match {
     }
 
     public void addPointHost() {
-        if(_factFix < 0 && _hostScr <= 0) {
-            // Don't support negative score !
-        } else {
-            _hostScr += _factFix;
-        }
+        // Do nothing if the current period lock the score
+        if(!this.getPeriodLockScore()) {
+            if (_factFix < 0 && _hostScr <= 0) {
+                // Don't support negative score !
+            } else {
+                _hostScr += _factFix;
+            }
 
-        _ui.update();
+            _ui.update();
+        }
     }
 
     public void addPointGuest() {
-        if(_factFix < 0 && _guestScr <= 0) {
-            // Don't support negative score !
-        } else {
-            _guestScr += _factFix;
+        // Do nothing if the current period lock the score
+        if(!this.getPeriodLockScore()) {
+            if (_factFix < 0 && _guestScr <= 0) {
+                // Don't support negative score !
+            } else {
+                _guestScr += _factFix;
+            }
+            _ui.update();
         }
-        _ui.update();
     }
 
     public void nextPeriod() {

@@ -49,13 +49,18 @@ public class MatchTest {
 
         assertEquals("Fixer is disabled in init()", false, _match.isFixing());
 
+        assertEquals("Match should have not begun yet", false, _match.isBegun());
     }
 
-    /** Test the addPoint*() functions
+    /** Test the addPoint*(), nextPeriod() and changeFactFix() functions
      *
      */
     @Test
     public void testScoreUpdate() {
+        // Start the match
+        _match.nextPeriod();
+        assertEquals("Match should be running", true, _match.isBegun());
+
         // 0-0 : @see testInit()
 
         // 1-0
@@ -76,5 +81,26 @@ public class MatchTest {
         _match.addPointHost();
         assertEquals("Should be 0-1 : Host", 0, _match.getHostScr());
         assertEquals("Should be 0-1 : Guest", 1, _match.getGuestScr());
+
+        // Disable fixer
+        _match.changeFactFix();
+        assertEquals("Fixer should be disabled", false, _match.isFixing());
+
+        // Half-time : score is locked
+        _match.nextPeriod();
+        assertEquals("Score should be locked", true, _match.getPeriodLockScore());
+
+        // Test that the score cannot change
+        _match.addPointHost();
+        _match.addPointGuest();
+        assertEquals("Should always be 0-1 : Host", 0, _match.getHostScr());
+        assertEquals("Should always be 0-1 : Guest", 1, _match.getGuestScr());
+
+        // Finish the match
+        _match.nextPeriod(); // 2nd HT
+        _match.nextPeriod(); // Finished
+        assertEquals("Match should be finished", true, _match.isFinished());
+        assertEquals("Guest wins", true, _match.guestWins());
+        assertEquals("Host loses", false, _match.hostWins());
     }
 }

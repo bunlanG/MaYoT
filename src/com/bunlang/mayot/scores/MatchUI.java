@@ -209,14 +209,11 @@ public class MatchUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        // Cut the link if the current Period order it
-        if(!_data.getPeriodLockScore()) {
-            if (actionEvent.getSource() == _hostBut) {
-                _data.addPointHost();
-            }
-            if (actionEvent.getSource() == _guestBut) {
-                _data.addPointGuest();
-            }
+        if (actionEvent.getSource() == _hostBut) {
+            _data.addPointHost();
+        }
+        if (actionEvent.getSource() == _guestBut) {
+            _data.addPointGuest();
         }
         if(actionEvent.getSource() == _infoUI) {
             _data.nextPeriod();
