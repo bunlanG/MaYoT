@@ -41,6 +41,7 @@ public class MatchUI extends JFrame implements ActionListener {
     protected JButton _guestBut;
     protected JLabel _scrUI;
     protected JButton _infoUI;
+    protected JButton _fixBut;
     protected JPanel _pan;
     protected JPanel _panLbl;
 
@@ -52,12 +53,14 @@ public class MatchUI extends JFrame implements ActionListener {
 
     protected void init() {
         Dimension dimBut = new Dimension(200, 30);
+        Dimension dimFix = new Dimension(60, 30);
         Dimension dimLbl = new Dimension(75, 30);
         Dimension dimLbl1 = new Dimension(75, 18);
         Dimension dimLbl2 = new Dimension(75, 12);
-        Dimension dimTtl = new Dimension(475, 30);
+        Dimension dimTtl = new Dimension(535, 30);
         Color grey10 = new Color(0.1f, 0.1f, 0.1f);
         Color grey15 = new Color(0.15f, 0.15f, 0.15f);
+        Color grey25 = new Color(0.25f, 0.25f, 0.25f);
         Color grey30 = new Color(0.3f, 0.3f, 0.3f);
         Font dimFont = new Font("Dialog", Font.ITALIC, 9);
         Font normFont = new Font("Dialog.Bold", 0, 15);
@@ -100,6 +103,16 @@ public class MatchUI extends JFrame implements ActionListener {
         _infoUI.setBorder(null);
         _infoUI.addActionListener(this);
 
+        _fixBut = new JButton();
+        _fixBut.setMinimumSize(dimFix);
+        _fixBut.setPreferredSize(dimFix);
+        _fixBut.setMaximumSize(dimFix);
+        _fixBut.setFont(normFont);
+        _fixBut.setForeground(Color.WHITE);
+        _fixBut.setBackground(grey25);
+        _fixBut.setBorder(null);
+        _fixBut.addActionListener(this);
+
         _panLbl = new JPanel();
         _panLbl.setLayout(new BoxLayout(_panLbl, BoxLayout.PAGE_AXIS));
         _panLbl.add(_scrUI);
@@ -114,6 +127,7 @@ public class MatchUI extends JFrame implements ActionListener {
         _pan.add(_hostBut);
         _pan.add(_panLbl);
         _pan.add(_guestBut);
+        _pan.add(_fixBut);
 
         this.setContentPane(_pan);
 
@@ -121,7 +135,7 @@ public class MatchUI extends JFrame implements ActionListener {
         this.setMinimumSize(dimTtl);
         this.setPreferredSize(dimTtl);
         this.setMaximumSize(dimTtl);
-        this.setSize(475, 56);
+        this.setSize(535, 56);
         this.getContentPane().setBackground(grey15);
         this.setLocationRelativeTo(null);
 
@@ -131,6 +145,7 @@ public class MatchUI extends JFrame implements ActionListener {
     protected void update() {
         _hostBut.setText(_data.getHostName());
         _guestBut.setText(_data.getGuestName());
+        _fixBut.setText("Fix" + (_data.isFixing() ? "!" : "?"));
 
         // If not begun, show date / hour instead of the score
         if(_data.isBegun()) {
@@ -144,6 +159,7 @@ public class MatchUI extends JFrame implements ActionListener {
         // Update Color
         Color blueC = new Color(120,150,255);
         Color greenC = new Color(100,255,100);
+        Color redC = new Color(255,100,100);
         Color yellowC = new Color(255,255,90);
         Color whiteC = new Color(255,255,255);
         Color greyC = new Color(150,150,150);
@@ -179,6 +195,13 @@ public class MatchUI extends JFrame implements ActionListener {
                 _guestBut.setForeground(whiteC);
             }
         }
+
+        // FixBut
+        if(_data.isFixing()) {
+            _fixBut.setForeground(redC);
+        } else {
+            _fixBut.setForeground(greenC);
+        }
     }
 
     @Override
@@ -194,6 +217,9 @@ public class MatchUI extends JFrame implements ActionListener {
         }
         if(actionEvent.getSource() == _infoUI) {
             _data.nextPeriod();
+        }
+        if(actionEvent.getSource() == _fixBut) {
+            _data.changeFactFix();
         }
     }
 }

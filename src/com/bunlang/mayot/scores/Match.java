@@ -55,6 +55,7 @@ public class Match {
     protected Period _period;
     protected String _dateMatch;
     protected String _hourMatch;
+    protected int _factFix;         // If you need to del a point.
 
     protected MatchUI _ui;
 
@@ -93,6 +94,8 @@ public class Match {
 
         _period = Period.values()[0];
 
+        _factFix = 1;
+
         _dateMatch = "xx/xx/20xx";
         _hourMatch = "xx:xx";
 
@@ -101,21 +104,40 @@ public class Match {
     }
 
     public void addPointHost() {
-        _hostScr++;
+        if(_factFix < 0 && _hostScr <= 0) {
+            // Don't support negative score !
+        } else {
+            _hostScr += _factFix;
+        }
 
         _ui.update();
     }
 
     public void addPointGuest() {
-        _guestScr++;
-
+        if(_factFix < 0 && _guestScr <= 0) {
+            // Don't support negative score !
+        } else {
+            _guestScr += _factFix;
+        }
         _ui.update();
     }
 
     public void nextPeriod() {
-        if(_period.ordinal() + 1 < Period.values().length) {
-            _period = Period.values()[_period.ordinal() + 1];
+        if(this.isFixing()) {
+            if (_period.ordinal() > 0) {
+                _period = Period.values()[_period.ordinal() - 1];
+            }
+        } else {
+            if (_period.ordinal() + 1 < Period.values().length) {
+                _period = Period.values()[_period.ordinal() + 1];
+            }
         }
+
+        _ui.update();
+    }
+
+    public void changeFactFix() {
+        _factFix *= -1; // 1 <-> -1
 
         _ui.update();
     }
@@ -227,5 +249,13 @@ public class Match {
      */
     public boolean guestWins() {
         return _hostScr < _guestScr;
+    }
+
+    /** Ask if we can fix the score
+     *
+     * @return match fixing state
+     */
+    public boolean isFixing() {
+        return (_factFix == -1);
     }
 }
