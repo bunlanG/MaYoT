@@ -131,7 +131,7 @@ public class MatchUI implements ActionListener {
         _pan.setMinimumSize(dimTtl);
         _pan.setPreferredSize(dimTtl);
         _pan.setMaximumSize(dimTtl);
-        _pan.setSize(535, 56);
+        _pan.setSize(dimTtl);
         _pan.setBackground(grey15);
 
         update();

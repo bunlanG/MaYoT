@@ -20,6 +20,8 @@ package com.bunlang.mayot;
 
 import com.bunlang.mayot.scores.Match;
 
+import com.bunlang.mayot.scores.MatchDay;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -44,8 +46,16 @@ public class Main {
         logger.info("MaYoT : Manage Your Tournament");
         initLAF();
 
+        MatchDay matchDay = new MatchDay();
         Match match = new Match("Home", "Guest");
-        JPanel content = match.getPanel();
+        Match match2 = new Match("Home 2", "Guest 2");
+        Match match3 = new Match("Home 3", "Guest 3");
+
+        matchDay.add(match);
+        matchDay.add(match2);
+        matchDay.add(match3);
+
+        JPanel content = matchDay.getPanel();
         JFrame win = new JFrame();
             win.setContentPane(content);
             win.setTitle("MaYoT");
