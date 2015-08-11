@@ -20,7 +20,6 @@ package com.bunlang.mayot.scores;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -34,7 +33,7 @@ import java.awt.event.ActionListener;
  *
  * @author bunlanG
  */
-public class MatchUI extends JFrame implements ActionListener {
+public class MatchUI implements ActionListener {
     protected Match _data;
 
     protected JButton _hostBut;
@@ -129,15 +128,11 @@ public class MatchUI extends JFrame implements ActionListener {
         _pan.add(_guestBut);
         _pan.add(_fixBut);
 
-        this.setContentPane(_pan);
-
-        this.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
-        this.setMinimumSize(dimTtl);
-        this.setPreferredSize(dimTtl);
-        this.setMaximumSize(dimTtl);
-        this.setSize(535, 56);
-        this.getContentPane().setBackground(grey15);
-        this.setLocationRelativeTo(null);
+        _pan.setMinimumSize(dimTtl);
+        _pan.setPreferredSize(dimTtl);
+        _pan.setMaximumSize(dimTtl);
+        _pan.setSize(535, 56);
+        _pan.setBackground(grey15);
 
         update();
     }
@@ -205,6 +200,10 @@ public class MatchUI extends JFrame implements ActionListener {
         } else {
             _fixBut.setForeground(greenC);
         }
+    }
+
+    public JPanel getPanel() {
+        return _pan;
     }
 
     @Override

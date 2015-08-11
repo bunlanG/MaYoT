@@ -19,9 +19,9 @@
 package com.bunlang.mayot;
 
 import com.bunlang.mayot.scores.Match;
-import com.bunlang.mayot.scores.MatchUI;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import java.awt.Color;
 
@@ -45,9 +45,12 @@ public class Main {
         initLAF();
 
         Match match = new Match("Home", "Guest");
-        MatchUI win = match.getUI();
+        JPanel content = match.getPanel();
+        JFrame win = new JFrame();
+            win.setContentPane(content);
             win.setTitle("MaYoT");
-            win.setSize(600, 480);
+            win.setSize(content.getSize());
+            win.setMinimumSize(content.getSize());
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setVisible(true);

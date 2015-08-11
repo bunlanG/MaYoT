@@ -22,6 +22,9 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 public class MatchUITest {
 
     @BeforeClass
@@ -33,12 +36,18 @@ public class MatchUITest {
     @Test
     public void test() {
         Match data = new Match("Host", "Guest");
-        MatchUI ui = data.getUI();
-        ui.setVisible(true);
+        JPanel ui = data.getPanel();
+        JFrame win = new JFrame();
+        win.setContentPane(ui);
+        win.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
+        win.setSize(ui.getSize());
+        win.setMinimumSize(ui.getSize());
+        win.setLocationRelativeTo(null);
+        win.setVisible(true);
 
         System.out.println(data.getInfos());
 
-        while(ui.isShowing()) {
+        while(win.isShowing()) {
             try {
                 Thread.sleep(1000);
             } catch(InterruptedException ex) {

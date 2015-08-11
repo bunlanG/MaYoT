@@ -18,6 +18,8 @@
 
 package com.bunlang.mayot.scores;
 
+import javax.swing.JPanel;
+
 /** Manage a Match.
  *
  *  @author bunlanG
@@ -149,8 +151,8 @@ public class Match {
     }
 
     // Getters / setters
-    public MatchUI getUI() {
-        return _ui;
+    public JPanel getPanel() {
+        return _ui.getPanel();
     }
 
     /** Get information about the Match object.
