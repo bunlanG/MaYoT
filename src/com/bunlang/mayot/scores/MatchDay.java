@@ -21,17 +21,17 @@ package com.bunlang.mayot.scores;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import java.awt.Dimension;
 import java.util.Vector;
 
-/** Manage Matches in a MatchDay.
+/** Manage several matches in a MatchDay.
  *
+ *  @see Match
  *  @author bunlanG
  */
 public class MatchDay {
     // Fields
-    Vector<Match> _matches;
+    protected Vector<Match> _matches;
 
     JPanel _pan;
 
