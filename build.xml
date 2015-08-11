@@ -135,6 +135,7 @@
     <target name="-choice-ui-test">
         <echo>Availables UI :</echo>
         <echo>    > com.bunlang.mayot.scores.MatchUITest</echo>
+        <echo>    > com.bunlang.mayot.scores.MatchDayUITest</echo>
         <input addProperty="test.Ui.class" />
     </target>
     <target name="-junit-ui-test" depends="build-ui-test">
