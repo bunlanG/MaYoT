@@ -60,9 +60,8 @@ public class MatchUI implements ActionListener {
         Color grey10 = new Color(0.1f, 0.1f, 0.1f);
         Color grey15 = new Color(0.15f, 0.15f, 0.15f);
         Color grey25 = new Color(0.25f, 0.25f, 0.25f);
-        Color grey30 = new Color(0.3f, 0.3f, 0.3f);
-        Font dimFont = new Font("Dialog", Font.ITALIC, 9);
-        Font normFont = new Font("Dialog.Bold", 0, 15);
+        Font dimFont = new Font("Sansation", Font.ITALIC | Font.BOLD, 9);
+        Font normFont = new Font("Sansation", Font.BOLD, 15);
 
         _hostBut = new JButton();
         _hostBut.setMinimumSize(dimBut);
@@ -98,7 +97,7 @@ public class MatchUI implements ActionListener {
         _infoUI.setMaximumSize(dimLbl2);
         _infoUI.setFont(dimFont);
         _infoUI.setForeground(Color.WHITE);
-        _infoUI.setBackground(grey30);
+        _infoUI.setBackground(grey25);
         _infoUI.setBorder(null);
         _infoUI.addActionListener(this);
 
