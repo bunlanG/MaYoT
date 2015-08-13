@@ -60,9 +60,6 @@ public class MatchDay {
             _pan.setSize(pref);
             _pan.setPreferredSize(pref);
             _pan.setMinimumSize(pref);
-
-            System.out.println("Panel M  height : " + match.getPanel().getHeight() + "px");
-            System.out.println("Panel MD height : " + _pan.getHeight() + "px");
         }
     }
 
