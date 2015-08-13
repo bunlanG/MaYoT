@@ -43,7 +43,13 @@ public class Main {
      *  Program parameters.
      */
     public static void main(String[] args) {
-        logger.info("MaYoT : Manage Your Tournament");
+        if(logger.isInfoEnabled()) {
+            logger.info("MaYoT : Manage Your Tournament");
+            logger.info("(C) 2015, Ronan GUILBAULT, License GPL v3");
+        }
+        if(logger.isDebugEnabled()) {
+            logger.debug("Launching MaYoT...");
+        }
         initLAF();
 
         MatchDay matchDay = new MatchDay();
@@ -64,6 +70,10 @@ public class Main {
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setVisible(true);
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("MaYoT launched.");
+        }
     }
 
     /** Setup a custom L&F.
