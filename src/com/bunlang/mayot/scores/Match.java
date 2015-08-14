@@ -102,7 +102,6 @@ public class Match {
         _hourMatch = "xx:xx";
 
         _ui = new MatchUI(this);
-        _ui.init();
     }
 
     public void addPointHost() {
