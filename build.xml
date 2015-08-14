@@ -103,6 +103,12 @@
     </target>
 
     <!-- Run the test -->
+    <target name="-clear-log-unit-test">
+        <delete includeemptydirs="true">
+            <fileset dir="log/test-unit" includes="**/*"/>
+        </delete>
+        <echo>log/test-unit folder clean.</echo>
+    </target>
     <target name="-junit-unit-test" depends="build-unit-test">
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.unit.failed">
             <classpath refid="project.unitTest.classpath" />
@@ -122,7 +128,7 @@
             <report format="frames" todir="./log/test-unit" />
         </junitreport>
     </target>
-    <target name="run-unit-test" depends="-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
+    <target name="run-unit-test" depends="-clear-log-unit-test,-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
         <fail message="Unit Tests FAILED" if="test.unit.failed" />
     </target>
 
@@ -132,6 +138,12 @@
         </exec>
     </target>
 
+    <target name="-clear-log-ui-test">
+        <delete includeemptydirs="true">
+            <fileset dir="log/test-ui" includes="**/*"/>
+        </delete>
+        <echo>log/test-ui folder clean.</echo>
+    </target>
     <target name="-choice-ui-test">
         <echo>Availables UI :</echo>
         <echo>    > com.bunlang.mayot.scores.MatchUITest</echo>
@@ -154,7 +166,7 @@
             <report format="frames" todir="./log/test-ui" />
         </junitreport>
     </target>
-	<target name="run-ui-test" depends="-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
+	<target name="run-ui-test" depends="-clear-log-ui-test,-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
         <fail message="UI Test FAILED" if="test.ui.failed" />
     </target>
 
