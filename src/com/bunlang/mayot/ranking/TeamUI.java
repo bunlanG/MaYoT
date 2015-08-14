@@ -218,22 +218,37 @@ public class TeamUI {
     }
 
     protected void update() {
-        _pos.setText(_data.getPos());
-        _name.setText(_data.getName());
-        _pTotal.setText(Integer.toString(_data.getPTotal()));
+        if(_data != null) {
+            _pos.setText(_data.getPos());
+            _name.setText(_data.getName());
+            _pTotal.setText(Integer.toString(_data.getPTotal()));
 
-        _mPlayed.setText(Integer.toString(_data.getMPlayed()));
-        _mWins.setText(Integer.toString(_data.getMWins()));
-        _mDraws.setText(Integer.toString(_data.getMDraws()));
-        _mLoses.setText(Integer.toString(_data.getMLoses()));
-        _pBonus.setText(Integer.toString(_data.getPBonus()));
-        _pFixer.setText(Integer.toString(_data.getPFixer()));
+            _mPlayed.setText(Integer.toString(_data.getMPlayed()));
+            _mWins.setText(Integer.toString(_data.getMWins()));
+            _mDraws.setText(Integer.toString(_data.getMDraws()));
+            _mLoses.setText(Integer.toString(_data.getMLoses()));
+            _pBonus.setText(Integer.toString(_data.getPBonus()));
+            _pFixer.setText(Integer.toString(_data.getPFixer()));
 
-        _sFor.setText(Integer.toString(_data.getSFor()));
-        _sAgnst.setText(Integer.toString(_data.getSAgnst()));
-        _sDiff.setText(Integer.toString(_data.getSDiff()));
+            _sFor.setText(Integer.toString(_data.getSFor()));
+            _sAgnst.setText(Integer.toString(_data.getSAgnst()));
+            _sDiff.setText(Integer.toString(_data.getSDiff()));
+        } else {
+            _pos.setText("Pos");
+            _name.setText("Name");
+            _pTotal.setText("Pts");
 
+            _mPlayed.setText("MP");
+            _mWins.setText("MW");
+            _mDraws.setText("MD");
+            _mLoses.setText("ML");
+            _pBonus.setText("Bon");
+            _pFixer.setText("Fix");
 
+            _sFor.setText("SF");
+            _sAgnst.setText("SA");
+            _sDiff.setText("Diff");
+        }
     }
 
     public JPanel getPanel() {

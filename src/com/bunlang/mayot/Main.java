@@ -86,6 +86,18 @@ public class Main {
             win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win2.setVisible(true);
 
+        // ranking - head
+        TeamUI head = new TeamUI(null);
+        JPanel hUI = head.getPanel();
+        JFrame win3 = new JFrame();
+        win3.setContentPane(hUI);
+        win3.setTitle("MaYoT - ranking - head");
+        win3.setSize(hUI.getSize());
+        win3.setMinimumSize(hUI.getSize());
+        win3.setLocationRelativeTo(null);
+        win3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        win3.setVisible(true);
+
 
         if(logger.isDebugEnabled()) {
             logger.debug("MaYoT launched.");
