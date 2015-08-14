@@ -18,6 +18,8 @@
 
 package com.bunlang.mayot;
 
+import com.bunlang.mayot.ranking.Team;
+import com.bunlang.mayot.ranking.TeamUI;
 import com.bunlang.mayot.scores.Match;
 
 import com.bunlang.mayot.scores.MatchDay;
@@ -52,6 +54,7 @@ public class Main {
         }
         initLAF();
 
+        // scores
         MatchDay matchDay = new MatchDay();
         Match match = new Match("Home", "Guest");
         Match match2 = new Match("Home 2", "Guest 2");
@@ -70,6 +73,19 @@ public class Main {
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setVisible(true);
+
+        // ranking
+        Team team = new Team("Hello", 0,0,0,0,0, 0,0);
+        JPanel tUI = team.getPanel();
+        JFrame win2 = new JFrame();
+            win2.setContentPane(tUI);
+            win2.setTitle("MaYoT - ranking");
+            win2.setSize(tUI.getSize());
+            win2.setMinimumSize(tUI.getSize());
+            win2.setLocationRelativeTo(null);
+            win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        win2.setVisible(true);
+
 
         if(logger.isDebugEnabled()) {
             logger.debug("MaYoT launched.");
