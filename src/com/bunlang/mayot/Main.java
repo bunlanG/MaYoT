@@ -52,6 +52,10 @@ public class Main {
             logger.info("Launching MaYoT...");
         }
         initLAF();
+        if(logger.isDebugEnabled()) {
+            logger.debug("L&F initialized.");
+            logger.debug("Creating the Group...");
+        }
 
         // scores
         MatchDay matchDay = new MatchDay();
@@ -78,13 +82,18 @@ public class Main {
         grp.add(team3);
         grp.add(team4);
 
+        if(logger.isDebugEnabled()) {
+            logger.debug("Group created.");
+            logger.debug("Making visible this Group...");
+        }
+
         JPanel ui = grp.getPanel();
         JFrame win2 = new JFrame();
             win2.setContentPane(ui);
             win2.setTitle("MaYoT - Group");
             win2.setSize(ui.getSize());
-            win2.setMinimumSize(ui.getSize());
-            win2.setLocationRelativeTo(null);
+        win2.setMinimumSize(ui.getSize());
+        win2.setLocationRelativeTo(null);
             win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win2.setVisible(true);
 
@@ -97,6 +106,9 @@ public class Main {
      *
      */
     public static void initLAF() {
+        if(logger.isDebugEnabled()) {
+            logger.debug("Initializing L&F...");
+        }
         Color transparent = new Color(0,0,0,0);
         Color semiTrans = new Color(255,255,255,50);
 
