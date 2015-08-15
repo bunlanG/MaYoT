@@ -108,7 +108,7 @@ public class Match {
         _ui = new MatchUI(this);
 
         if(logger.isDebugEnabled()) {
-            logger.debug("scores.Match created : " + this.getInfos());
+            logger.debug("scores.Match created : " + this);
         }
     }
 
@@ -124,7 +124,7 @@ public class Match {
             _ui.update();
 
             if(logger.isDebugEnabled()) {
-                logger.debug("scores.Match point for the Host : " + this.getInfos());
+                logger.debug("scores.Match point for the Host : " + this);
             }
         }
     }
@@ -140,7 +140,7 @@ public class Match {
             _ui.update();
 
             if(logger.isDebugEnabled()) {
-                logger.debug("scores.Match point for the Guest : " + this.getInfos());
+                logger.debug("scores.Match point for the Guest : " + this);
             }
         }
     }
@@ -159,7 +159,7 @@ public class Match {
         _ui.update();
 
         if(logger.isDebugEnabled()) {
-            logger.debug("scores.Match period has changed : " + this.getInfos());
+            logger.debug("scores.Match period has changed : " + this);
         }
     }
 
@@ -178,8 +178,12 @@ public class Match {
      *
      * @return a String with all information
      */
-    public String getInfos() {
-        return (_hostName + " " + _hostScr + " - " + _guestScr + " " + _guestName);
+    public String toString() {
+        return (_hostName + " / " + _guestName + " : " + _hostScr + "-" + _guestScr +
+                (this.isFinished() ? " [F]" : (
+                        !this.isBegun() ? " [N]" : (
+                                this.getPeriodLockScore() ? " [x]" : "")))
+        );
     }
 
     /** Get the name of the guest team.

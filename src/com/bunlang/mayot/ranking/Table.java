@@ -71,7 +71,7 @@ public class Table {
             _pan.setMinimumSize(pref);
 
             if(logger.isDebugEnabled()) {
-                logger.debug("ranking.Table add a Team");
+                logger.debug("ranking.Table add a Team : " + team);
             }
         }
     }

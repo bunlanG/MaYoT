@@ -45,8 +45,6 @@ public class MatchUITest {
         win.setLocationRelativeTo(null);
         win.setVisible(true);
 
-        System.out.println(data.getInfos());
-
         while(win.isShowing()) {
             try {
                 Thread.sleep(1000);

@@ -62,7 +62,7 @@ public class Team {
         this.update();
 
         if(logger.isDebugEnabled()) {
-            logger.debug("ranking.Team created");
+            logger.debug("ranking.Team created : " + this);
         }
     }
 
@@ -75,7 +75,7 @@ public class Team {
         _ui.update();
 
         if(logger.isDebugEnabled()) {
-            logger.debug("ranking.Team updated");
+            logger.debug("ranking.Team updated : " + this);
         }
     }
 
@@ -130,5 +130,9 @@ public class Team {
 
     public JPanel getPanel() {
         return _ui.getPanel();
+    }
+
+    public String toString() {
+        return _name + " | " + _pTotal + ':' + _mWins + '-' + _mDraws + '-' + _mLoses + " | " + _sFor + '-' + _sAgnst;
     }
 }
