@@ -49,9 +49,7 @@ public class Main {
         if(logger.isInfoEnabled()) {
             logger.info("MaYoT : Manage Your Tournament");
             logger.info("(C) 2015, Ronan GUILBAULT, License GPL v3");
-        }
-        if(logger.isDebugEnabled()) {
-            logger.debug("Launching MaYoT...");
+            logger.info("Launching MaYoT...");
         }
         initLAF();
 
@@ -90,8 +88,8 @@ public class Main {
             win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win2.setVisible(true);
 
-        if(logger.isDebugEnabled()) {
-            logger.debug("MaYoT launched.");
+        if(logger.isInfoEnabled()) {
+            logger.info("MaYoT launched.");
         }
     }
 

@@ -18,6 +18,8 @@
 
 package com.bunlang.mayot.scores;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -30,6 +32,7 @@ import java.util.Vector;
  *  @author bunlanG
  */
 public class MatchDay {
+    private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected Vector<Match> _matches;
 
@@ -40,6 +43,10 @@ public class MatchDay {
 
         _pan = new JPanel();
         _pan.setLayout(new BoxLayout(_pan, BoxLayout.PAGE_AXIS));
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("scores.MatchDay created");
+        }
     }
 
     public void add(Object obj) {

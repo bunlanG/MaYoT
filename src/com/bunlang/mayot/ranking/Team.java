@@ -18,6 +18,8 @@
 
 package com.bunlang.mayot.ranking;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.JPanel;
 
 /** Manage a Team.
@@ -25,6 +27,7 @@ import javax.swing.JPanel;
  *  @author bunlanG
  */
 public class Team {
+    private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected String _name;
 
@@ -57,6 +60,10 @@ public class Team {
         _ui = new TeamUI(this);
 
         this.update();
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("ranking.Team created");
+        }
     }
 
     public void update() {
@@ -66,6 +73,10 @@ public class Team {
         _pos = ".";
 
         _ui.update();
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("ranking.Team updated");
+        }
     }
 
     // Getters / Setters

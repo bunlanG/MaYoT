@@ -18,6 +18,8 @@
 
 package com.bunlang.mayot.ranking;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -30,6 +32,7 @@ import java.util.Vector;
  *  @author bunlanG
  */
 public class Table {
+    private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected Vector<Team> _teams;
     protected TeamUI _head;
@@ -44,6 +47,10 @@ public class Table {
         _pan.setLayout(new BoxLayout(_pan, BoxLayout.PAGE_AXIS));
 
         _pan.add(_head.getPanel());
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("ranking.Table created");
+        }
     }
 
     public void add(Object obj) {
@@ -62,6 +69,10 @@ public class Table {
             _pan.setSize(pref);
             _pan.setPreferredSize(pref);
             _pan.setMinimumSize(pref);
+
+            if(logger.isDebugEnabled()) {
+                logger.debug("ranking.Table add a Team");
+            }
         }
     }
 

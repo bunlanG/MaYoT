@@ -20,6 +20,7 @@ package com.bunlang.mayot;
 
 import com.bunlang.mayot.ranking.Table;
 import com.bunlang.mayot.scores.MatchDay;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,7 @@ import java.util.Vector;
  *  @author bunlanG
  */
 public class Group {
+    private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected Vector<MatchDay> _matchDays;
     protected int _currMDInd;
@@ -46,6 +48,10 @@ public class Group {
         GroupLayout bxLy = new GroupLayout(_pan);
         _pan.setLayout(bxLy);
         _pan.setBackground(new Color(0.33f,0.33f,0.33f));
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("Group created");
+        }
     }
 
     public void add(Object obj) {

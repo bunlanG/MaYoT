@@ -18,6 +18,8 @@
 
 package com.bunlang.mayot.scores;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.JPanel;
 
 /** Manage a Match.
@@ -25,6 +27,8 @@ import javax.swing.JPanel;
  *  @author bunlanG
  */
 public class Match {
+    private static Logger logger = Logger.getLogger("com.bunlang.mayot");
+
     private enum Period {
         NOT_BEGUN("...", true),
         FIRST_HT("1st HT", false),
@@ -102,6 +106,10 @@ public class Match {
         _hourMatch = "xx:xx";
 
         _ui = new MatchUI(this);
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("scores.Match created : " + this.getInfos());
+        }
     }
 
     public void addPointHost() {
@@ -114,6 +122,10 @@ public class Match {
             }
 
             _ui.update();
+
+            if(logger.isDebugEnabled()) {
+                logger.debug("scores.Match point for the Host : " + this.getInfos());
+            }
         }
     }
 
@@ -126,6 +138,10 @@ public class Match {
                 _guestScr += _factFix;
             }
             _ui.update();
+
+            if(logger.isDebugEnabled()) {
+                logger.debug("scores.Match point for the Guest : " + this.getInfos());
+            }
         }
     }
 
@@ -141,6 +157,10 @@ public class Match {
         }
 
         _ui.update();
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("scores.Match period has changed : " + this.getInfos());
+        }
     }
 
     public void changeFactFix() {
