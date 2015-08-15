@@ -65,16 +65,6 @@ public class Main {
         matchDay.add(match2);
         matchDay.add(match3);
 
-//        JPanel content = matchDay.getPanel();
-//        JFrame win = new JFrame();
-//            win.setContentPane(content);
-//            win.setTitle("MaYoT");
-//            win.setSize(content.getSize());
-//            win.setMinimumSize(content.getSize());
-//            win.setLocationRelativeTo(null);
-//            win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        win.setVisible(true);
-
         // ranking
         Team team1 = new Team("Team 1", 0,0,0,0,0, 0,0);
         Team team2 = new Team("Team 2", 0,0,0,0,0, 0,0);
@@ -89,16 +79,6 @@ public class Main {
         grp.add(team2);
         grp.add(team3);
         grp.add(team4);
-
-//        JPanel tableUI = table.getPanel();
-//        JFrame win2 = new JFrame();
-//            win2.setContentPane(tableUI);
-//            win2.setTitle("MaYoT - ranking");
-//            win2.setSize(tableUI.getSize());
-//            win2.setMinimumSize(tableUI.getSize());
-//            win2.setLocationRelativeTo(null);
-//            win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        win2.setVisible(true);
 
         JPanel ui = grp.getPanel();
         JFrame win2 = new JFrame();
