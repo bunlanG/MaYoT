@@ -55,7 +55,7 @@ public class MatchDay {
             _pan.add(match.getPanel());
 
             int width = match.getPanel().getWidth();
-            int height = _matches.size() * (match.getPanel().getHeight() + 2) + 24;
+            int height = _matches.size() * (match.getPanel().getHeight() + 2) - 2;
             Dimension pref = new Dimension(width, height);
             _pan.setSize(pref);
             _pan.setPreferredSize(pref);
