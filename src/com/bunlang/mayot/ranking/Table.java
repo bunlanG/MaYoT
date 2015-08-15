@@ -57,7 +57,7 @@ public class Table {
             _pan.add(team.getPanel());
 
             int width = team.getPanel().getWidth();
-            int height = _teams.size() * (team.getPanel().getHeight());
+            int height = (_teams.size() + 1) * (team.getPanel().getHeight() + 1) + 25;
             Dimension pref = new Dimension(width, height);
             _pan.setSize(pref);
             _pan.setPreferredSize(pref);

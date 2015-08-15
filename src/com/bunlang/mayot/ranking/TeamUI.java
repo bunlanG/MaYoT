@@ -57,7 +57,7 @@ public class TeamUI {
 
 
     public TeamUI(Team data) {
-        Dimension dimTtl = new Dimension(350, 16);
+        Dimension dimTtl = new Dimension(347, 16);
         Dimension dimName = new Dimension(60, 16);
         Dimension dimInt = new Dimension(25, 16);
         Dimension dimSep = new Dimension(2, 16);
