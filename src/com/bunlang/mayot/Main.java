@@ -18,6 +18,7 @@
 
 package com.bunlang.mayot;
 
+import com.bunlang.mayot.ranking.Table;
 import com.bunlang.mayot.ranking.Team;
 import com.bunlang.mayot.ranking.TeamUI;
 import com.bunlang.mayot.scores.Match;
@@ -75,28 +76,26 @@ public class Main {
         win.setVisible(true);
 
         // ranking
-        Team team = new Team("Hello", 0,0,0,0,0, 0,0);
-        JPanel tUI = team.getPanel();
+        Table table = new Table();
+        Team team1 = new Team("Team 1", 0,0,0,0,0, 0,0);
+        Team team2 = new Team("Team 2", 0,0,0,0,0, 0,0);
+        Team team3 = new Team("Team 3", 0,0,0,0,0, 0,0);
+        Team team4 = new Team("Team 4", 0,0,0,0,0, 0,0);
+
+        table.add(team1);
+        table.add(team2);
+        table.add(team3);
+        table.add(team4);
+
+        JPanel tableUI = table.getPanel();
         JFrame win2 = new JFrame();
-            win2.setContentPane(tUI);
+            win2.setContentPane(tableUI);
             win2.setTitle("MaYoT - ranking");
-            win2.setSize(tUI.getSize());
-            win2.setMinimumSize(tUI.getSize());
+            win2.setSize(tableUI.getSize());
+            win2.setMinimumSize(tableUI.getSize());
             win2.setLocationRelativeTo(null);
             win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win2.setVisible(true);
-
-        // ranking - head
-        TeamUI head = new TeamUI(null);
-        JPanel hUI = head.getPanel();
-        JFrame win3 = new JFrame();
-        win3.setContentPane(hUI);
-        win3.setTitle("MaYoT - ranking - head");
-        win3.setSize(hUI.getSize());
-        win3.setMinimumSize(hUI.getSize());
-        win3.setLocationRelativeTo(null);
-        win3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win3.setVisible(true);
 
 
         if(logger.isDebugEnabled()) {
