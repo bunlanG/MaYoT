@@ -18,17 +18,23 @@
 
 package com.bunlang.mayot.scores;
 
-import static org.junit.Assert.*;   
+import static org.junit.Assert.*;
+
+import com.bunlang.mayot.ranking.Team;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class MatchTest {
     protected Match _match;
+    protected com.bunlang.mayot.ranking.Team _host;
+    protected com.bunlang.mayot.ranking.Team _guest;
 
     @Before
     public void setUp() {
-        _match = new Match("Home", "Guest");
+        _host = new Team("Host", 0,0,0,0,0, 0,0);
+        _guest = new Team("Guest", 0,0,0,0,0, 0,0);
+        _match = new Match(_host, _guest);
     }
 
     @After
@@ -41,7 +47,7 @@ public class MatchTest {
      */
     @Test
     public void testInit() {
-        assertEquals("Host name initialisation broken", "Home", _match.getHostName());
+        assertEquals("Host name initialisation broken", "Host", _match.getHostName());
         assertEquals("Guest name initialisation broken", "Guest", _match.getGuestName());
 
         assertEquals("Host score initialisation broken", 0, _match.getHostScr());

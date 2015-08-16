@@ -19,6 +19,8 @@
 package com.bunlang.mayot.scores;
 
 import static org.junit.Assert.*;
+
+import com.bunlang.mayot.ranking.Team;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -35,7 +37,10 @@ public class MatchUITest {
 
     @Test
     public void test() {
-        Match data = new Match("Host", "Guest");
+        Team host = new Team("Host", 0,0,0,0,0, 0,0);
+        Team guest = new Team("Guest", 0,0,0,0,0, 0,0);
+
+        Match data = new Match(host, guest);
         JPanel ui = data.getPanel();
         JFrame win = new JFrame();
         win.setContentPane(ui);

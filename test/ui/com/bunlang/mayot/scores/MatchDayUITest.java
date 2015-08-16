@@ -18,10 +18,12 @@
 
 package com.bunlang.mayot.scores;
 
+import com.bunlang.mayot.ranking.Team;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import static org.junit.Assert.assertTrue;
 
@@ -35,10 +37,17 @@ public class MatchDayUITest {
 
     @Test
     public void test() {
+        Team home1 = new Team("Home 1", 0,0,0,0,0, 0,0);
+        Team guest1 = new Team("Guest 1", 0,0,0,0,0, 0,0);
+        Team home2 = new Team("Home 2", 0,0,0,0,0, 0,0);
+        Team guest2 = new Team("Guest 2", 0,0,0,0,0, 0,0);
+        Team home3 = new Team("Home 3", 0,0,0,0,0, 0,0);
+        Team guest3 = new Team("Guest 3", 0,0,0,0,0, 0,0);
+
         MatchDay matchDay = new MatchDay();
-        Match match1 = new Match("Home 1", "Guest 1");
-        Match match2 = new Match("Home 2", "Guest 2");
-        Match match3 = new Match("Home 3", "Guest 3");
+        Match match1 = new Match(home1, guest1);
+        Match match2 = new Match(home2, guest2);
+        Match match3 = new Match(home3, guest3);
 
         matchDay.add(match1);
         matchDay.add(match2);

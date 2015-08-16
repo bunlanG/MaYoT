@@ -57,16 +57,6 @@ public class Main {
             logger.debug("Creating the Group...");
         }
 
-        // scores
-        MatchDay matchDay = new MatchDay();
-        Match match = new Match("Team 1", "Team 5");
-        Match match2 = new Match("Team 4", "Team 6");
-        Match match3 = new Match("Team 2", "Team 3");
-
-        matchDay.add(match);
-        matchDay.add(match2);
-        matchDay.add(match3);
-
         // ranking
         Team team1 = new Team("Team 1", 0,0,0,0,0, 0,0);
         Team team2 = new Team("Team 2", 0,0,0,0,0, 0,0);
@@ -74,6 +64,16 @@ public class Main {
         Team team4 = new Team("Team 4", 0,0,0,0,0, 0,0);
         Team team5 = new Team("Team 5", 0,0,0,0,0, 0,0);
         Team team6 = new Team("Team 6", 0,0,0,0,0, 0,0);
+
+        // scores
+        MatchDay matchDay = new MatchDay();
+        Match match = new Match(team1, team5);
+        Match match2 = new Match(team4, team6);
+        Match match3 = new Match(team2, team3);
+
+        matchDay.add(match);
+        matchDay.add(match2);
+        matchDay.add(match3);
 
         Group grp = new Group();
 

@@ -56,8 +56,6 @@ public class Match {
     // Attributes
     protected Team _host;
     protected Team _guest;
-    protected String _hostName;
-    protected String _guestName;
     protected Period _period;
     protected String _dateMatch;
     protected String _hourMatch;
@@ -72,31 +70,29 @@ public class Match {
     public Match() {
         super();
 
-        init("", "");
+        init(null, null);
 	}
 
-    /** Another constructor of a Match, with the names of the teams.
+    /** Another constructor of a Match, with the teams from the Table.
      *
-     * @param hostName The name of the host team
-     * @param guestName The name of the guest team
+     * @param host The host team
+     * @param guest The guest team
      */
-    public Match(String hostName, String guestName) {
+    public Match(com.bunlang.mayot.ranking.Team host, com.bunlang.mayot.ranking.Team guest) {
         super();
 
-        init(hostName, guestName);
+        init(host, guest);
     }
 
     /** Initialize the Match object.
      *
-     * @param hostName The name of the host team
-     * @param guestName The name of the guest team
+     * @param host The host team
+     * @param guest The guest team
      */
-    protected void init(String hostName, String guestName) {
-        _host = new Team(null);
-        _hostName = hostName;
+    protected void init(com.bunlang.mayot.ranking.Team host,  com.bunlang.mayot.ranking.Team guest) {
+        _host = new Team(host);
 
-        _guest = new Team(null);
-        _guestName = guestName;
+        _guest = new Team(guest);
 
         _period = Period.values()[0];
 
@@ -179,7 +175,7 @@ public class Match {
      * @return a String with all information
      */
     public String toString() {
-        return (_hostName + " / " + _guestName + " : " + _host.getScore() + "-" + _guest.getScore() +
+        return (_host.getTeamName() + " / " + _guest.getTeamName()  + " : " + _host.getScore() + "-" + _guest.getScore() +
                 (this.isFinished() ? " [F]" : (
                         !this.isBegun() ? " [N]" : (
                                 this.getPeriodLockScore() ? " [x]" : "")))
@@ -191,7 +187,7 @@ public class Match {
      * @return name of the guest team
      */
     public String getGuestName() {
-        return _guestName;
+        return _guest.getTeamName() ;
     }
 
     /** Get the name of the host team.
@@ -199,7 +195,7 @@ public class Match {
      * @return name of the host team
      */
     public String getHostName() {
-        return _hostName;
+        return _host.getTeamName() ;
     }
 
     /** Get the score of the guest team.
