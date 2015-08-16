@@ -24,6 +24,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
 /** Manage several teams in a Table.
@@ -31,7 +34,7 @@ import java.util.Vector;
  *  @see Team
  *  @author bunlanG
  */
-public class Table {
+public class Table implements Observer {
     private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected Vector<Team> _teams;
@@ -57,6 +60,7 @@ public class Table {
         if(obj.getClass().getName().equals("com.bunlang.mayot.ranking.Team")) {
             Team team = (Team) obj;
             _teams.add(team);
+            team.addObserver(this);
 
             // Add a spacer
             _pan.add(Box.createRigidArea(new Dimension(0, 1)));
@@ -70,9 +74,33 @@ public class Table {
             _pan.setPreferredSize(pref);
             _pan.setMinimumSize(pref);
 
+            this.update(null, null);
+
             if(logger.isDebugEnabled()) {
                 logger.debug("ranking.Table add a Team : " + team);
             }
+        }
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        // Clear _pan
+        _pan.removeAll();
+
+        // Sort _teams
+        Collections.sort(_teams);
+
+        // Re-make _pan
+        // Header
+        _pan.add(_head.getPanel());
+        for(int i = 0 ; i < _teams.size() ; i++) {
+            _pan.add(Box.createRigidArea(new Dimension(0, 1)));
+
+            _pan.add(_teams.get(i).getPanel());
+        }
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("ranking.Table updated.");
         }
     }
 
