@@ -49,24 +49,44 @@ public class Team {
 
     public Team(String name, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
         _name = name;
-        _mWins = mWins;
-        _mDraws = mDraws;
-        _mLoses = mLoses;
-        _pBonus = pBonus;
-        _pFixer = pFixer;
-        _sFor = sFor;
-        _sAgnst = sAgnst;
+        _mWins = 0;
+        _mDraws = 0;
+        _mLoses = 0;
+        _pBonus = 0;
+        _pFixer = 0;
+        _sFor = 0;
+        _sAgnst = 0;
 
         _ui = new TeamUI(this);
 
-        this.update();
+        this.updateAdd(mWins,mDraws,mLoses,pBonus,pFixer, sFor,sAgnst);
 
         if(logger.isDebugEnabled()) {
             logger.debug("ranking.Team created : " + this);
         }
     }
 
-    public void update() {
+    /** Update all fields by adding all params to their linked fileds
+     *
+     * @param mWins
+     * @param mDraws
+     * @param mLoses
+     * @param pBonus
+     * @param pFixer
+     * @param sFor
+     * @param sAgnst
+     */
+    public void updateAdd(int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
+        // Raw Fields
+        _mWins += mWins;
+        _mDraws += mDraws;
+        _mLoses += mLoses;
+        _pBonus += pBonus;
+        _pFixer += pFixer;
+        _sFor += sFor;
+        _sAgnst += sAgnst;
+
+        // Calculated Fields
         _pTotal =  3 * _mWins + _mDraws + _pBonus + _pFixer;
         _mPlayed = _mWins + _mDraws + _mLoses;
         _sDiff = _sFor - _sAgnst;
