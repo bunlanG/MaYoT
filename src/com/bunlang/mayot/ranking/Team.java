@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  *
  *  @author bunlanG
  */
-public class Team {
+public class Team implements Comparable<Team> {
     private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected String _name;
@@ -96,6 +96,17 @@ public class Team {
 
         if(logger.isDebugEnabled()) {
             logger.debug("ranking.Team updated : " + this);
+        }
+    }
+
+    @Override
+    public int compareTo(Team t) {
+        if(this.getPTotal() != t.getPTotal()) {
+            return (t.getPTotal() - this.getPTotal());
+        } else if(this.getSDiff() != t.getSDiff()){
+            return (t.getSDiff() - this.getSDiff());
+        } else {
+            return (this.getName().compareTo(t.getName()));
         }
     }
 
