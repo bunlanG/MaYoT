@@ -146,6 +146,7 @@
     </target>
     <target name="-choice-ui-test">
         <echo>Availables UI :</echo>
+        <echo>    > com.bunlang.mayot.GroupUITest</echo>
         <echo>    > com.bunlang.mayot.ranking.TableUITest</echo>
         <echo>    > com.bunlang.mayot.ranking.TeamUITest</echo>
         <echo>    > com.bunlang.mayot.scores.MatchUITest</echo>
