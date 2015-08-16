@@ -120,6 +120,11 @@ public class Team extends Observable implements Comparable<Team> {
         return _pos;
     }
 
+    public void setPos(String pos) {
+        _pos = pos;
+        _ui.update();
+    }
+
     public String getName() {
         return _name;
     }

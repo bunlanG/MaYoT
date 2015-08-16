@@ -97,6 +97,8 @@ public class Table implements Observer {
             _pan.add(Box.createRigidArea(new Dimension(0, 1)));
 
             _pan.add(_teams.get(i).getPanel());
+
+            _teams.get(i).setPos((i+1) + "e");
         }
 
         if(logger.isDebugEnabled()) {
