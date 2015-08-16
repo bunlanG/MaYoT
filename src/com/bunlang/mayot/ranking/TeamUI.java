@@ -57,9 +57,9 @@ public class TeamUI {
 
 
     public TeamUI(Team data) {
-        Dimension dimTtl = new Dimension(347, 16);
-        Dimension dimName = new Dimension(60, 16);
-        Dimension dimInt = new Dimension(25, 16);
+        Dimension dimTtl = new Dimension(455, 16);
+        Dimension dimName = new Dimension(113, 16);
+        Dimension dimInt = new Dimension(30, 16);
         Dimension dimSep = new Dimension(2, 16);
         Color grey15 = new Color(0.15f, 0.15f, 0.15f);
         Font normFont = new Font("Sansation", Font.BOLD, 12);
