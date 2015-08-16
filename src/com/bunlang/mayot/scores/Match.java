@@ -54,10 +54,10 @@ public class Match {
     }
 
     // Attributes
+    protected Team _host;
+    protected Team _guest;
     protected String _hostName;
     protected String _guestName;
-    protected int _hostScr;
-    protected int _guestScr;
     protected Period _period;
     protected String _dateMatch;
     protected String _hourMatch;
@@ -92,11 +92,11 @@ public class Match {
      * @param guestName The name of the guest team
      */
     protected void init(String hostName, String guestName) {
+        _host = new Team(null);
         _hostName = hostName;
-        _hostScr = 0;
 
+        _guest = new Team(null);
         _guestName = guestName;
-        _guestScr = 0;
 
         _period = Period.values()[0];
 
@@ -115,10 +115,10 @@ public class Match {
     public void addPointHost() {
         // Do nothing if the current period lock the score
         if(!this.getPeriodLockScore()) {
-            if (_factFix < 0 && _hostScr <= 0) {
+            if (_factFix < 0 && _host.getScore() <= 0) {
                 // Don't support negative score !
             } else {
-                _hostScr += _factFix;
+                _host.addToScore(_factFix);
             }
 
             _ui.update();
@@ -132,10 +132,10 @@ public class Match {
     public void addPointGuest() {
         // Do nothing if the current period lock the score
         if(!this.getPeriodLockScore()) {
-            if (_factFix < 0 && _guestScr <= 0) {
+            if (_factFix < 0 && _guest.getScore() <= 0) {
                 // Don't support negative score !
             } else {
-                _guestScr += _factFix;
+                _guest.addToScore(_factFix);
             }
             _ui.update();
 
@@ -179,7 +179,7 @@ public class Match {
      * @return a String with all information
      */
     public String toString() {
-        return (_hostName + " / " + _guestName + " : " + _hostScr + "-" + _guestScr +
+        return (_hostName + " / " + _guestName + " : " + _host.getScore() + "-" + _guest.getScore() +
                 (this.isFinished() ? " [F]" : (
                         !this.isBegun() ? " [N]" : (
                                 this.getPeriodLockScore() ? " [x]" : "")))
@@ -207,7 +207,7 @@ public class Match {
      * @return score of the guest team
      */
     public int getGuestScr() {
-        return _guestScr;
+        return _guest.getScore();
     }
 
     /** Get the name of the host team.
@@ -215,7 +215,7 @@ public class Match {
      * @return name of the host team
      */
     public int getHostScr() {
-        return _hostScr;
+        return _host.getScore();
     }
 
     /** Get the date of the match.
@@ -271,7 +271,7 @@ public class Match {
      * @return the host wins / wan
      */
     public boolean hostWins() {
-        return _hostScr > _guestScr;
+        return _host.getScore() > _guest.getScore();
     }
 
     /** Ask if the guest win the match
@@ -279,7 +279,7 @@ public class Match {
      * @return the guest wins / wan
      */
     public boolean guestWins() {
-        return _hostScr < _guestScr;
+        return _host.getScore() < _guest.getScore();
     }
 
     /** Ask if we can fix the score
