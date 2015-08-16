@@ -53,6 +53,12 @@ public class Match {
         }
     }
 
+    private enum ScoreUpdate {
+        HOST_POINT,
+        GUEST_POINT,
+        PERIOD_CHANGED
+    }
+
     // Attributes
     protected Team _host;
     protected Team _guest;
@@ -115,9 +121,10 @@ public class Match {
                 // Don't support negative score !
             } else {
                 _host.addToScore(_factFix);
-            }
 
-            _ui.update();
+                this.updateTable(ScoreUpdate.HOST_POINT);
+                _ui.update();
+            }
 
             if(logger.isDebugEnabled()) {
                 logger.debug("scores.Match point for the Host : " + this);
@@ -132,8 +139,10 @@ public class Match {
                 // Don't support negative score !
             } else {
                 _guest.addToScore(_factFix);
+
+                this.updateTable(ScoreUpdate.GUEST_POINT);
+                _ui.update();
             }
-            _ui.update();
 
             if(logger.isDebugEnabled()) {
                 logger.debug("scores.Match point for the Guest : " + this);
@@ -145,18 +154,109 @@ public class Match {
         if(this.isFixing()) {
             if (_period.ordinal() > 0) {
                 _period = Period.values()[_period.ordinal() - 1];
+
+                this.updateTable(ScoreUpdate.PERIOD_CHANGED);
+                _ui.update();
             }
         } else {
             if (_period.ordinal() + 1 < Period.values().length) {
                 _period = Period.values()[_period.ordinal() + 1];
+
+                this.updateTable(ScoreUpdate.PERIOD_CHANGED);
+                _ui.update();
             }
         }
-
-        _ui.update();
 
         if(logger.isDebugEnabled()) {
             logger.debug("scores.Match period has changed : " + this);
         }
+    }
+
+    public void updateTable(ScoreUpdate reason) {
+        int scoreHostDiff = 0;
+        int scoreGuestDiff = 0;
+        int winHost = 0;
+        int winNone = 0;
+        int winGuest = 0;
+
+        // Store some data
+        int hostScr = _host.getScore();
+        int guestScr = _guest.getScore();
+
+        if(reason == ScoreUpdate.HOST_POINT) {
+            scoreHostDiff = _factFix;
+
+            // winX
+            if(isFixing()) {
+                if(hostScr == guestScr) {
+                    // 1 -> N
+                    winHost = -1;
+                    winNone = 1;
+                } else if(hostScr == guestScr - 1) {
+                    // N -> 2
+                    winNone = -1;
+                    winGuest = 1;
+                }
+            } else {
+                if(hostScr == guestScr) {
+                    // 2 -> N
+                    winGuest = -1;
+                    winNone = 1;
+                } else if(hostScr == guestScr + 1) {
+                    // N -> 1
+                    winNone = -1;
+                    winHost = 1;
+                }
+            }
+        } else if(reason == ScoreUpdate.GUEST_POINT) {
+            scoreGuestDiff = _factFix;
+
+            // winX
+            if(isFixing()) {
+                if(guestScr == hostScr) {
+                    // 2 -> N
+                    winGuest = -1;
+                    winNone = 1;
+                } else if(guestScr == hostScr - 1) {
+                    // N -> 1
+                    winNone = -1;
+                    winHost = 1;
+                }
+            } else {
+                if(guestScr == hostScr) {
+                    // 1 -> N
+                    winHost = -1;
+                    winNone = 1;
+                } else if(guestScr == hostScr + 1) {
+                    // N -> 2
+                    winNone = -1;
+                    winGuest = 1;
+                }
+            }
+        } else if(reason == ScoreUpdate.PERIOD_CHANGED) {
+            if(isFixing()) {
+                if(_period == Period.NOT_BEGUN) {
+                    // Running -> Not Begun
+                    winGuest = (guestWins() ? -1 : 0);
+                    winHost = (hostWins() ? -1 : 0);
+                    winNone = (guestWins() || hostWins() ? 0 : -1);
+                    scoreHostDiff = -1 * hostScr;
+                    scoreGuestDiff = -1 * guestScr;
+                }
+            } else {
+                if(_period == Period.FIRST_HT) {
+                    // Not Begun -> Running
+                    winGuest = (guestWins() ? 1 : 0);
+                    winHost = (hostWins() ? 1 : 0);
+                    winNone = (guestWins() || hostWins() ? 0 : 1);
+                    scoreHostDiff = hostScr;
+                    scoreGuestDiff = guestScr;
+                }
+            }
+        }
+
+        _host.updateTableAdd(winHost, winNone, winGuest, scoreHostDiff, scoreGuestDiff);
+        _guest.updateTableAdd(winGuest, winNone, winHost, scoreGuestDiff, scoreHostDiff);
     }
 
     public void changeFactFix() {

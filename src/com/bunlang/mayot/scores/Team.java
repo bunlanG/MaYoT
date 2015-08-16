@@ -37,6 +37,10 @@ public class Team {
         _score = score;
     }
 
+    public void updateTableAdd(int mWins, int mDraws, int mLoses, int sFor, int sAgnst) {
+        _teamRef.updateAdd(mWins, mDraws, mLoses, 0, 0, sFor, sAgnst);
+    }
+
     // Getters / Setters
     public int getScore() {
         return _score;
