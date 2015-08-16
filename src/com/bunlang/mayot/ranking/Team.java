@@ -21,12 +21,13 @@ package com.bunlang.mayot.ranking;
 import org.apache.log4j.Logger;
 
 import javax.swing.JPanel;
+import java.util.Observable;
 
 /** Manage a Team.
  *
  *  @author bunlanG
  */
-public class Team implements Comparable<Team> {
+public class Team extends Observable implements Comparable<Team> {
     private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected String _name;
@@ -93,6 +94,10 @@ public class Team implements Comparable<Team> {
         _pos = ".";
 
         _ui.update();
+
+        // Observable state changed
+        setChanged();
+        notifyObservers();
 
         if(logger.isDebugEnabled()) {
             logger.debug("ranking.Team updated : " + this);
