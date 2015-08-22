@@ -188,7 +188,7 @@ public class Match {
         }
     }
 
-    public void updateTable(ScoreUpdate reason) {
+    protected void updateTable(ScoreUpdate reason) {
         int scoreHostDiff = 0;
         int scoreGuestDiff = 0;
         int winHost = 0;
