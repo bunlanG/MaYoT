@@ -60,32 +60,8 @@ public class Group {
             _matchDays.add(matchDay);
             _currMDInd = _matchDays.size() - 1;
 
-            if(_currMDInd >= 0) {
-                _pan.removeAll();
-            }
-
-            // Update the layout
-            GroupLayout layout = ((GroupLayout) _pan.getLayout());
-            Component gap = Box.createRigidArea(new Dimension(50, 5));
-            GroupLayout.Group hGroup = layout.createSequentialGroup();
-            hGroup.addGroup(layout.createParallelGroup().addComponent(matchDay.getPanel()));
-            hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
-            hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
-            layout.setHorizontalGroup(hGroup);
-            GroupLayout.Group vGroup = layout.createSequentialGroup();
-            vGroup.addGroup(layout.createParallelGroup()
-                    .addComponent(matchDay.getPanel())
-                    .addComponent(gap)
-                    .addComponent(_table.getPanel()));
-            layout.setVerticalGroup(vGroup);
-
-
-            int width = matchDay.getPanel().getWidth() + 50 + _table.getPanel().getWidth();
-            int height = Math.max(matchDay.getPanel().getWidth(), _table.getPanel().getWidth()) + 26;
-            Dimension pref = new Dimension(width, height);
-            _pan.setSize(pref);
-            _pan.setPreferredSize(pref);
-            _pan.setMinimumSize(pref);
+            resetPanel();
+            update();
         } else if(obj.getClass().getName().equals("com.bunlang.mayot.ranking.Team")) {
             _table.add(obj);
 
@@ -96,6 +72,39 @@ public class Group {
             _pan.setPreferredSize(pref);
             _pan.setMinimumSize(pref);
         }
+    }
+
+    public void resetPanel() {
+        if(_currMDInd >= 0) {
+            _pan.removeAll();
+        }
+    }
+
+    public void update() {
+        MatchDay matchDay = _matchDays.get(_currMDInd);
+
+        // Update the layout
+        GroupLayout layout = ((GroupLayout) _pan.getLayout());
+        Component gap = Box.createRigidArea(new Dimension(50, 5));
+        GroupLayout.Group hGroup = layout.createSequentialGroup();
+        hGroup.addGroup(layout.createParallelGroup().addComponent(matchDay.getPanel()));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
+        layout.setHorizontalGroup(hGroup);
+        GroupLayout.Group vGroup = layout.createSequentialGroup();
+        vGroup.addGroup(layout.createParallelGroup()
+                .addComponent(matchDay.getPanel())
+                .addComponent(gap)
+                .addComponent(_table.getPanel()));
+        layout.setVerticalGroup(vGroup);
+
+
+        int width = matchDay.getPanel().getWidth() + 50 + _table.getPanel().getWidth();
+        int height = Math.max(matchDay.getPanel().getWidth(), _table.getPanel().getWidth()) + 26;
+        Dimension pref = new Dimension(width, height);
+        _pan.setSize(pref);
+        _pan.setPreferredSize(pref);
+        _pan.setMinimumSize(pref);
     }
 
     public JPanel getPanel() {
