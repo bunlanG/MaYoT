@@ -22,7 +22,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.Vector;
 
 /** Represent a tournament.
@@ -44,23 +47,61 @@ public class Tournament implements Navigable {
     protected JPanel _pan;
 
     public Tournament() {
+        Dimension dimNav = new Dimension(90,90);
+        Dimension dimTrnTtl = new Dimension(740,100);
+        Dimension dimMDTtl = new Dimension(535,50);
+        Dimension dimTblTtl = new Dimension(455,50);
+        Color grey = new Color(0.23f, 0.23f, 0.23f);
+        Font bigFont = new Font("Sansation", Font.BOLD, 28);
+        Font normFont = new Font("Sansation", Font.BOLD | Font.ITALIC, 21);
+
         _groups = new Vector<>();
         _currGroup = -1;
+
         _nav = new Navigator(this);
+        _nav.setSize(dimNav);
+        _nav.setMinimumSize(dimNav);
+        _nav.setMaximumSize(dimNav);
+        _nav.setPreferredSize(dimNav);
 
         _tournamentTitleUI = new JLabel("Tournament :");
+        _tournamentTitleUI.setSize(dimTrnTtl);
+        _tournamentTitleUI.setMinimumSize(dimTrnTtl);
+        _tournamentTitleUI.setMaximumSize(dimTrnTtl);
+        _tournamentTitleUI.setPreferredSize(dimTrnTtl);
+        _tournamentTitleUI.setForeground(Color.WHITE);
+        _tournamentTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
+        _tournamentTitleUI.setFont(bigFont);
 
         _tableTitleUI = new JLabel("Raking :");
+        _tableTitleUI.setSize(dimTblTtl);
+        _tableTitleUI.setMinimumSize(dimTblTtl);
+        _tableTitleUI.setMaximumSize(dimTblTtl);
+        _tableTitleUI.setPreferredSize(dimTblTtl);
+        _tableTitleUI.setForeground(Color.WHITE);
+        _tableTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
+        _tableTitleUI.setFont(normFont);
 
         _matchdayTitleUI = new JLabel("MatchDay :");
+        _matchdayTitleUI.setSize(dimMDTtl);
+        _matchdayTitleUI.setMinimumSize(dimMDTtl);
+        _matchdayTitleUI.setMaximumSize(dimMDTtl);
+        _matchdayTitleUI.setPreferredSize(dimMDTtl);
+        _matchdayTitleUI.setForeground(Color.WHITE);
+        _matchdayTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
+        _matchdayTitleUI.setFont(normFont);
 
         _panLine1 = new JPanel();
         _panLine1.setLayout(new BoxLayout(_panLine1, BoxLayout.LINE_AXIS));
+        _panLine1.setBackground(grey);
+        _panLine1.add(Box.createRigidArea(new Dimension(175,5)));
         _panLine1.add(_tournamentTitleUI);
         _panLine1.add(_nav);
+        _panLine1.add(Box.createRigidArea(new Dimension(35,5)));
 
         _panLine2 = new JPanel();
         _panLine2.setLayout(new BoxLayout(_panLine2, BoxLayout.LINE_AXIS));
+        _panLine2.setBackground(grey);
         _panLine2.add(_matchdayTitleUI);
         _panLine2.add(Box.createRigidArea(new Dimension(50,5)));
         _panLine2.add(_tableTitleUI);
@@ -85,6 +126,12 @@ public class Tournament implements Navigable {
         _pan.add(_panLine1);
         _pan.add(_panLine2);
         _pan.add(_groups.get(_currGroup).getPanel());
+
+        int grpSizeW = _groups.get(_currGroup).getPanel().getWidth();
+        int sizeH = 150 + _groups.get(_currGroup).getPanel().getHeight();
+
+        _pan.setSize(grpSizeW, sizeH);
+        _pan.setMinimumSize(new Dimension(grpSizeW, sizeH));
 
     }
 
