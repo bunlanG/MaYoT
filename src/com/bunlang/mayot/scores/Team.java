@@ -18,7 +18,9 @@
 
 package com.bunlang.mayot.scores;
 
-/**
+/** Manage a Team in a {@link com.bunlang.mayot.scores.Match}.
+ *
+ * It is closely linked with the {@link com.bunlang.mayot.ranking.Team} class from {@link com.bunlang.mayot.ranking} package.
  *
  * @author bunlanG
  */
@@ -28,6 +30,10 @@ public class Team {
     protected int _score;
     protected com.bunlang.mayot.ranking.Team _teamRef;
 
+    /** Create a team with {@link teamRef}.
+     *
+     * @param teamRef The {@link com.bunlang.mayot.ranking.Team} reference
+     */
     public Team(com.bunlang.mayot.ranking.Team teamRef) {
         init(teamRef, 0);
     }

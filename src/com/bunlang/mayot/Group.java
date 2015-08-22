@@ -26,7 +26,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
 
-/** A Group contains all MatchDay and a Table.
+/** A Group contains all {@link MatchDay} and a {@link Table}.
  *
  *  @author bunlanG
  */
@@ -39,6 +39,9 @@ public class Group {
 
     protected JPanel _pan;
 
+    /** Create a new {@link Group}.
+     *
+     */
     public Group() {
         _matchDays = new Vector<>();
         _currMDInd = -1;
@@ -54,6 +57,10 @@ public class Group {
         }
     }
 
+    /** Adds an object in the internal containers.
+     *
+     * @param obj The object passed. It must be a {@link MatchDay} or a {@link com.bunlang.mayot.ranking.Team}.
+     */
     public void add(Object obj) {
         if(obj.getClass().getName().equals("com.bunlang.mayot.scores.MatchDay")) {
             MatchDay matchDay = (MatchDay) obj;
@@ -74,12 +81,18 @@ public class Group {
         }
     }
 
+    /** Clear the Panel content.
+     *
+     */
     public void resetPanel() {
         if(_currMDInd >= 0) {
             _pan.removeAll();
         }
     }
 
+    /** Update the Panel content.
+     *
+     */
     public void update() {
         MatchDay matchDay = _matchDays.get(_currMDInd);
 
@@ -107,6 +120,9 @@ public class Group {
         _pan.setMinimumSize(pref);
     }
 
+    /** Change current {@link MatchDay} to the next one.
+     *
+     */
     public void nextMatchDay() {
         if(_currMDInd < _matchDays.size() - 1) {
             _currMDInd++;
@@ -120,6 +136,9 @@ public class Group {
         }
     }
 
+    /** Change current {@link MatchDay} to the previous one.
+     *
+     */
     public void prevMatchDay() {
         if(_currMDInd > 0) {
             _currMDInd--;
@@ -133,6 +152,10 @@ public class Group {
         }
     }
 
+    /** Returns the panel of the Group, for GUIs.
+     *
+     * @return the panel of the Group
+     */
     public JPanel getPanel() {
         return _pan;
     }

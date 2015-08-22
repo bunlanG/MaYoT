@@ -29,7 +29,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
-/** Manage several teams in a Table.
+/** Manage several {@link Team} in a {@link Table}.
  *
  *  @see Team
  *  @author bunlanG
@@ -56,6 +56,10 @@ public class Table implements Observer {
         }
     }
 
+    /** Adds an object in the internal containers.
+     *
+     * @param obj The object passed. It must be a {@link Team}.
+     */
     public void add(Object obj) {
         if(obj.getClass().getName().equals("com.bunlang.mayot.ranking.Team")) {
             Team team = (Team) obj;
@@ -105,7 +109,10 @@ public class Table implements Observer {
             logger.debug("ranking.Table updated.");
         }
     }
-
+    /** Returns the panel of the Table, for GUIs.
+     *
+     * @return the panel of the Table
+     */
     public JPanel getPanel() {
         return _pan;
     }

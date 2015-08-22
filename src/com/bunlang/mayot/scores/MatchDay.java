@@ -70,6 +70,10 @@ public class MatchDay {
         }
     }
 
+    /** Returns the panel of the MatchDay, for GUIs.
+     *
+     * @return the panel of the MatchDay
+     */
     public JPanel getPanel() {
         return _pan;
     }

@@ -48,6 +48,10 @@ public class Match {
             return _str;
         }
 
+        /** Returns if the current period locks the score.
+         *
+         * @return the lockedScore property.
+         */
         public boolean lockedScore() {
             return _lockScore;
         }
@@ -114,6 +118,10 @@ public class Match {
         }
     }
 
+    /** Add a point to the host Team.
+     *
+     * It can also remove a point if the Fixer mode is enabled.
+     */
     public void addPointHost() {
         // Do nothing if the current period lock the score
         if(!this.getPeriodLockScore()) {
@@ -132,6 +140,10 @@ public class Match {
         }
     }
 
+    /** Add a point to the guest Team.
+     *
+     * It can also remove a point if the Fixer mode is enabled.
+     */
     public void addPointGuest() {
         // Do nothing if the current period lock the score
         if(!this.getPeriodLockScore()) {
@@ -150,6 +162,10 @@ public class Match {
         }
     }
 
+    /** Goes to the next period
+     *
+     * It can also go to the previous period if the Fixer mode is enabled.
+     */
     public void nextPeriod() {
         if(this.isFixing()) {
             if (_period.ordinal() > 0) {
@@ -259,6 +275,12 @@ public class Match {
         _guest.updateTableAdd(winGuest, winNone, winHost, scoreGuestDiff, scoreHostDiff);
     }
 
+
+    /** Enable or disable the Fixer mode.
+     *
+     * If the Fixer mode is enabled, you can remove points and / or go back to previous periods.
+     *
+     */
     public void changeFactFix() {
         _factFix *= -1; // 1 <-> -1
 
@@ -266,6 +288,10 @@ public class Match {
     }
 
     // Getters / setters
+    /** Returns the panel of the Match, for GUIs.
+     *
+     * @return the panel of the Match
+     */
     public JPanel getPanel() {
         return _ui.getPanel();
     }

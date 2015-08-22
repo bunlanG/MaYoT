@@ -48,6 +48,17 @@ public class Team extends Observable implements Comparable<Team> {
     protected TeamUI _ui;
 
 
+    /** Create a Team with all customisable fields.
+     *
+     * @param name The name of the team.
+     * @param mWins The number of matches won.
+     * @param mDraws The number of matches drawn.
+     * @param mLoses The number of matches lose.
+     * @param pBonus The number of bonus points.
+     * @param pFixer A manual fixer for the points.
+     * @param sFor The score for the team.
+     * @param sAgnst The score against the team.
+     */
     public Team(String name, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
         _name = name;
         _mWins = 0;
@@ -67,7 +78,7 @@ public class Team extends Observable implements Comparable<Team> {
         }
     }
 
-    /** Update all fields by adding all params to their linked fileds
+    /** Update all fields by adding all params to their linked fields
      *
      * @param mWins
      * @param mDraws
@@ -104,6 +115,12 @@ public class Team extends Observable implements Comparable<Team> {
         }
     }
 
+    /** The {@link compareTo} override from {@link Comparable} Interface.
+     *
+     * @param t the other team to compare with.
+     *
+     * @return a negative integer, zero, or a positive integer as this team is better than, equal to, or worse than the other team.
+     */
     @Override
     public int compareTo(Team t) {
         if(this.getPTotal() != t.getPTotal()) {
@@ -116,59 +133,115 @@ public class Team extends Observable implements Comparable<Team> {
     }
 
     // Getters / Setters
+    /** Gets the current position.
+     *
+     * @return the current position
+     */
     public String getPos() {
         return _pos;
     }
 
+    /** Set the new position.
+     *
+     * @param pos the new position
+     */
     public void setPos(String pos) {
         _pos = pos;
         _ui.update();
     }
 
+    /** Gets the name of the Team.
+     *
+     * @return the name of the Team
+     */
     public String getName() {
         return _name;
     }
 
+    /** Gets the total of points.
+     *
+     * @return the total of points
+     */
     public int getPTotal() {
         return _pTotal;
     }
 
+    /** Gets the total of matches played.
+     *
+     * @return the total of matches played.
+     */
     public int getMPlayed() {
         return _mPlayed;
     }
 
+    /** Gets the number of won matches.
+     *
+     * @return the number of won matches
+     */
     public int getMWins() {
         return _mWins;
     }
 
+    /** Gets the number of drawn matches.
+     *
+     * @return the number of drawn matches
+     */
     public int getMDraws() {
         return _mDraws;
     }
 
+    /** Gets the number of lose matches.
+     *
+     * @return the number of lose matches
+     */
     public int getMLoses() {
         return _mLoses;
     }
 
+    /** Gets the total of bonus points.
+     *
+     * @return the total of bonus points
+     */
     public int getPBonus() {
         return _pBonus;
     }
 
+    /** Gets the point fixer.
+     *
+     * @return the point fixer.
+     */
     public int getPFixer() {
         return _pFixer;
     }
 
+    /** Gets the score FOR the team.
+     *
+     * @return the score FOR the team.
+     */
     public int getSFor() {
         return _sFor;
     }
 
+    /** Gets the score AGAINST the team.
+     *
+     * @return the score AGAINST the team.
+     */
     public int getSAgnst() {
         return _sAgnst;
     }
 
+    /** Gets the difference score.
+     *
+     * @return the difference score
+     */
     public int getSDiff() {
         return _sDiff;
     }
 
+    /** Returns the panel of the Team, for GUIs.
+     *
+     * @return the panel of the Team
+     */
     public JPanel getPanel() {
         return _ui.getPanel();
     }
