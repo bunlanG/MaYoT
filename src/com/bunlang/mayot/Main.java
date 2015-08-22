@@ -98,59 +98,38 @@ public class Main {
         grp.add(team5);
         grp.add(team6);
 
+        Tournament trnmt = new Tournament();
+        trnmt.add(grp);
+
         if(logger.isDebugEnabled()) {
-            logger.debug("Group created.");
-            logger.debug("Making visible this Group...");
+            logger.debug("Tournament created.");
+            logger.debug("Making visible this Tournament...");
         }
 
-        JPanel ui = grp.getPanel();
-        final JFrame win2 = new JFrame();
-            win2.setContentPane(ui);
-            win2.setTitle("MaYoT - Group");
-            win2.setSize(ui.getSize());
-        win2.setMinimumSize(ui.getSize());
-        win2.setLocationRelativeTo(null);
-            win2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win2.setVisible(true);
+        JPanel ui = trnmt.getPanel();
+        final JFrame win = new JFrame();
+            win.setContentPane(ui);
+            win.setTitle("MaYoT - Tournoi Essai");
+            win.setSize(ui.getSize());
+            win.setMinimumSize(ui.getSize());
+            win.setLocationRelativeTo(null);
+            win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        win.setVisible(true);
 
         if(logger.isInfoEnabled()) {
             logger.info("MaYoT launched.");
         }
-
-        // Test the nextMD with another Thread
-        Runnable test = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                grp.prevMatchDay();
-
-                try {
-                    Thread.sleep(2500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                grp.nextMatchDay();
-            }
-        };
-        new Thread(test, "TEST change MatchDay").start();
-
-        // Navigator
-        Navigator nav = new Navigator();
-        JFrame winN = new JFrame();
-        winN.setContentPane(nav);
-        winN.setTitle("MaYoT - Navigator");
-        winN.setSize(100,100);
-        winN.setLocationRelativeTo(null);
-        winN.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        winN.setVisible(true);
-
-
+//
+//        // Navigator
+//        Navigator nav = new Navigator();
+//        JFrame winN = new JFrame();
+//        winN.setContentPane(nav);
+//        winN.setTitle("MaYoT - Navigator");
+//        winN.setSize(100,100);
+//        winN.setLocationRelativeTo(null);
+//        winN.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        winN.setVisible(true);
+//
     }
 
     /** Setup a custom L&F.
