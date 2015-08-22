@@ -61,7 +61,7 @@ public class GroupUITest {
         // MD02
         MatchDay matchDay2 = new MatchDay();
         Match match21 = new Match(team5, team4);
-        Match match22 = new Match(team6, team3);
+        Match match22 = new Match(team6, team2);
         Match match23 = new Match(team3, team1);
 
         matchDay2.add(match21);
