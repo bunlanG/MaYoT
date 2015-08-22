@@ -53,13 +53,33 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
     // Fields
     protected Zone _currZone;
     protected boolean _isPressed;
+    protected Navigable _nav;
 
+    /** Default constructor.
+     *
+     *  @deprecated
+     */
     public Navigator() {
         super();
 
+        init(null);
+    }
+
+    /** A Constructor with the {@link Navigable} object
+     *
+     * @param nav the object the {@link Navigator} can use
+     */
+    public Navigator(Navigable nav) {
+        super();
+
+        init(nav);
+    }
+
+    protected void init(Navigable nav) {
         addMouseListener(this);
         addMouseMotionListener(this);
 
+        _nav = nav;
         _currZone = Zone.OUT;
         _isPressed = false;
     }
@@ -141,6 +161,24 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+        if(_nav != null) {
+            switch (getCurrZone()) {
+                case UP:
+                    _nav.gotoUp();
+                    break;
+                case DOWN:
+                    _nav.gotoDown();
+                    break;
+                case LEFT:
+                    _nav.gotoLeft();
+                    break;
+                case RIGHT:
+                    _nav.gotoRight();
+                    break;
+                case OUT:
+                    break;
+            }
+        }
 
     }
 
