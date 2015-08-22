@@ -20,6 +20,7 @@ package com.bunlang.mayot;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,7 +36,8 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
         UP("Up"),
         DOWN("Down"),
         LEFT("Left"),
-        RIGHT("Right");
+        RIGHT("Right"),
+        OUT("__OUT__");
 
         private String _val;
 
@@ -48,87 +50,132 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
         }
     }
 
+    // Fields
+    protected Zone _currZone;
+    protected boolean _isPressed;
+
     public Navigator() {
         super();
 
         addMouseListener(this);
         addMouseMotionListener(this);
+
+        _currZone = Zone.OUT;
+        _isPressed = false;
     }
 
     public void paintComponent(Graphics g) {
-        int x1 = this.getWidth() / 4;
-        int y1 = this.getHeight() / 4;
+        int x1 = this.getWidth();
+        int y1 = this.getHeight();
+        int sizeFont = Math.min(x1, y1) / 3;
+        Font font = new Font("Dialog", Font.BOLD, sizeFont);
+        g.setFont(font);
+
+        g.setColor(Color.RED);
+        g.fillOval(0,0, x1, y1);
+
         g.setColor(Color.BLACK);
         g.drawLine(0,0,this.getWidth(),this.getHeight());
         g.drawLine(0,this.getHeight(),this.getWidth(),0);
-        g.setColor(Color.RED);
-        g.fillOval(x1, y1, x1 * 2, y1 * 2);
+
+        g.drawLine(0,this.getHeight() / 2,this.getWidth(),this.getHeight() / 2);
+        g.drawLine(this.getWidth() / 2,0,this.getWidth() / 2,this.getHeight());
+
+        int midX = (x1 - (76 * sizeFont / 100)) / 2;
+        int midY = (y1 + (53 * sizeFont / 100)) / 2;
+        int leftBor = x1 / 15;
+        int upBor = y1 / 15 + (50 * sizeFont / 100);
+        int rightBor = x1 - x1 / 15 - (75 * sizeFont / 100);
+        int downBor = y1 - y1 / 15;
+        g.setColor((getCurrZone() == Zone.DOWN ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.drawString("▼", midX     , downBor);
+        g.setColor((getCurrZone() == Zone.UP ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.drawString("▲", midX     , upBor);
+        g.setColor((getCurrZone() == Zone.LEFT ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.drawString("◀", leftBor  , midY);
+        g.setColor((getCurrZone() == Zone.RIGHT ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.drawString("▶", rightBor , midY);
     }
 
     /** Detect in which zone the mouse is.
-     * 
+     *
      * @param x the x position of the mouse
      * @param y the y position of the mouse
      * @return the zone where the mouse is
      */
-    private Zone getZone(int x, int y) {
-        // Calc 3 fact : the panel dimension and the position of mouse with up-left and down-left corners
-        float factHWPan = (float) this.getHeight() / (float) this.getWidth();
-        float factHWUL = (float) y / (float) x;
-        float factHWDL = (float) (this.getHeight() - y) / (float) x;
-
-        // Calc if the mouse is over or under the 2 lines
-        boolean overDwnDiag = factHWPan < factHWUL;
-        boolean overUpDiag = factHWPan < factHWDL;
-
-        // Calc the current zone, depends of the previous booleans
-        if(overDwnDiag) {
-            if(overUpDiag) {
-                return Zone.LEFT;
-            } else {
-                return Zone.DOWN;
-            }
+    private Zone updateZone(int x, int y) {
+        if(x < 0 || y < 0) {
+            _currZone = Zone.OUT;
         } else {
-            if (overUpDiag) {
-                return Zone.UP;
+            // Calc 3 fact : the panel dimension and the position of mouse with up-left and down-left corners
+            float factHWPan = (float) this.getHeight() / (float) this.getWidth();
+            float factHWUL = (float) y / (float) x;
+            float factHWDL = (float) (this.getHeight() - y) / (float) x;
+
+            // Calc if the mouse is over or under the 2 lines
+            boolean overDwnDiag = factHWPan < factHWUL;
+            boolean overUpDiag = factHWPan < factHWDL;
+
+            // Calc the current zone, depends of the previous booleans
+            if (overDwnDiag) {
+                if (overUpDiag) {
+                    _currZone = Zone.LEFT;
+                } else {
+                    _currZone = Zone.DOWN;
+                }
             } else {
-                return Zone.RIGHT;
+                if (overUpDiag) {
+                    _currZone = Zone.UP;
+                } else {
+                    _currZone = Zone.RIGHT;
+                }
             }
         }
+
+        return _currZone;
+    }
+
+    private Zone getCurrZone() {
+        return _currZone;
     }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        System.out.println("Nav : mouseClicked");
+
     }
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        System.out.println("Nav : mousePressed");
+        _isPressed = true;
+        repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        System.out.println("Nav : mouseReleased");
+        _isPressed = false;
+        repaint();
     }
 
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
-        System.out.println("Nav : mouseEntered");
+        updateZone(mouseEvent.getX(), mouseEvent.getY());
+        repaint();
     }
 
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
-        System.out.println("Nav : mouseExited");
+        updateZone(-1,-1);
+        repaint();
     }
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
-        System.out.println("Nav : mouseDragged");
+
     }
 
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
-        System.out.println("Nav : mouseMoved / Zone : " + getZone(mouseEvent.getX(),mouseEvent.getY()));
+        updateZone(mouseEvent.getX(), mouseEvent.getY());
+        repaint();
     }
 }

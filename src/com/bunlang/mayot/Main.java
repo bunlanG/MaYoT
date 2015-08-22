@@ -104,7 +104,7 @@ public class Main {
         }
 
         JPanel ui = grp.getPanel();
-        JFrame win2 = new JFrame();
+        final JFrame win2 = new JFrame();
             win2.setContentPane(ui);
             win2.setTitle("MaYoT - Group");
             win2.setSize(ui.getSize());
@@ -145,7 +145,7 @@ public class Main {
         JFrame winN = new JFrame();
         winN.setContentPane(nav);
         winN.setTitle("MaYoT - Navigator");
-        winN.setSize(200,200);
+        winN.setSize(100,100);
         winN.setLocationRelativeTo(null);
         winN.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         winN.setVisible(true);
