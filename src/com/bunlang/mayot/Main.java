@@ -66,18 +66,30 @@ public class Main {
         Team team6 = new Team("Team 6", 0,0,0,0,0, 0,0);
 
         // scores
-        MatchDay matchDay = new MatchDay();
-        Match match = new Match(team1, team5);
-        Match match2 = new Match(team4, team6);
-        Match match3 = new Match(team2, team3);
+        // MD 01
+        MatchDay matchDay1 = new MatchDay();
+        Match match11 = new Match(team1, team5);
+        Match match12 = new Match(team4, team6);
+        Match match13 = new Match(team2, team3);
 
-        matchDay.add(match);
-        matchDay.add(match2);
-        matchDay.add(match3);
+        matchDay1.add(match11);
+        matchDay1.add(match12);
+        matchDay1.add(match13);
 
-        Group grp = new Group();
+        // MD02
+        MatchDay matchDay2 = new MatchDay();
+        Match match21 = new Match(team5, team4);
+        Match match22 = new Match(team6, team3);
+        Match match23 = new Match(team3, team1);
 
-        grp.add(matchDay);
+        matchDay2.add(match21);
+        matchDay2.add(match22);
+        matchDay2.add(match23);
+
+        final Group grp = new Group();
+
+        grp.add(matchDay1);
+        grp.add(matchDay2);
 
         grp.add(team1);
         grp.add(team2);
@@ -104,6 +116,29 @@ public class Main {
         if(logger.isInfoEnabled()) {
             logger.info("MaYoT launched.");
         }
+
+        // Test the nextMD with another Thread
+        Runnable test = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                grp.prevMatchDay();
+
+                try {
+                    Thread.sleep(2500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                grp.nextMatchDay();
+            }
+        };
+        new Thread(test, "TEST change MatchDay").start();
     }
 
     /** Setup a custom L&F.

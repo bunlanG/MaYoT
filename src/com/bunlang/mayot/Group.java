@@ -107,6 +107,32 @@ public class Group {
         _pan.setMinimumSize(pref);
     }
 
+    public void nextMatchDay() {
+        if(_currMDInd < _matchDays.size() - 1) {
+            _currMDInd++;
+
+            resetPanel();
+            update();
+
+            if(logger.isDebugEnabled()) {
+                logger.debug("next MatchDay.");
+            }
+        }
+    }
+
+    public void prevMatchDay() {
+        if(_currMDInd > 0) {
+            _currMDInd--;
+
+            resetPanel();
+            update();
+
+            if(logger.isDebugEnabled()) {
+                logger.debug("previous MatchDay.");
+            }
+        }
+    }
+
     public JPanel getPanel() {
         return _pan;
     }
