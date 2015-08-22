@@ -139,6 +139,18 @@ public class Main {
             }
         };
         new Thread(test, "TEST change MatchDay").start();
+
+        // Navigator
+        Navigator nav = new Navigator();
+        JFrame winN = new JFrame();
+        winN.setContentPane(nav);
+        winN.setTitle("MaYoT - Navigator");
+        winN.setSize(200,200);
+        winN.setLocationRelativeTo(null);
+        winN.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        winN.setVisible(true);
+
+
     }
 
     /** Setup a custom L&F.
