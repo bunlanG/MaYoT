@@ -160,4 +160,8 @@ public class Group {
         return _pan;
     }
 
+    public String getCurrMDTitle() {
+        return _matchDays.get(_currMDInd).getTitle();
+    }
+
 }

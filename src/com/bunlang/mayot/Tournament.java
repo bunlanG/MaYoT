@@ -121,6 +121,10 @@ public class Tournament implements Navigable {
     }
 
     public void update() {
+        // Update titles
+        _matchdayTitleUI.setText(_groups.get(_currGroup).getCurrMDTitle());
+
+        // Update UI
         _pan.removeAll();
 
         _pan.add(_panLine1);
@@ -156,11 +160,15 @@ public class Tournament implements Navigable {
     @Override
     public void gotoUp() {
         _groups.get(_currGroup).prevMatchDay();
+
+        update();
     }
 
     @Override
     public void gotoDown() {
         _groups.get(_currGroup).nextMatchDay();
+
+        update();
     }
 
     public JPanel getPanel() {
