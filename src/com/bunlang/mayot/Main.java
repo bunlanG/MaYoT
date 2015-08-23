@@ -106,12 +106,9 @@ public class Main {
             logger.debug("Making visible this Tournament...");
         }
 
-        JPanel ui = trnmt.getPanel();
-        final JFrame win = new JFrame();
-            win.setContentPane(ui);
-            win.setTitle("MaYoT - Tournoi Essai");
-            win.setSize(ui.getSize());
-            win.setMinimumSize(ui.getSize());
+        MaYoT win = new MaYoT();
+            win.setTournament(trnmt);
+            win.setTitle("MaYoT");
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setVisible(true);
