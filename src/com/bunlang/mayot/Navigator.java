@@ -90,15 +90,10 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
         int x2 = (int) (0.1465f * (float) this.getWidth());
         int y2 = (int) (0.1465f * (float) this.getHeight());
         int sizeFont = Math.min(x1, y1) / 3;
+        Color arrow = new Color(0xCC_CC_CC);
+        Color linesSep = new Color(0xFF_FF_FF);
         Font font = new Font("Dialog", Font.BOLD, sizeFont);
         g.setFont(font);
-
-        g.setColor(Color.RED);
-        g.fillOval(0,0, x1, y1);
-
-        g.setColor(Color.BLACK);
-        g.drawLine(x2,y2,this.getWidth() - x2,this.getHeight() - y2);
-        g.drawLine(x2,this.getHeight() - y2,this.getWidth() - x2,y2);
 
         int midX = (x1 - (76 * sizeFont / 100)) / 2;
         int midY = (y1 + (53 * sizeFont / 100)) / 2;
@@ -106,14 +101,34 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
         int upBor = y1 / 15 + (50 * sizeFont / 100);
         int rightBor = x1 - x1 / 15 - (75 * sizeFont / 100);
         int downBor = y1 - y1 / 15;
-        g.setColor((getCurrZone() == Zone.DOWN ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.setColor(getArrowColor(Zone.DOWN));
+        g.fillArc(0,0,x1,y1,-135,90);
+        g.setColor(arrow);
         g.drawString("▼", midX     , downBor);
-        g.setColor((getCurrZone() == Zone.UP ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.setColor(getArrowColor(Zone.UP));
+        g.fillArc(0,0,x1,y1,45,90);
+        g.setColor(arrow);
         g.drawString("▲", midX     , upBor);
-        g.setColor((getCurrZone() == Zone.LEFT ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.setColor(getArrowColor(Zone.LEFT));
+        g.fillArc(0,0,x1,y1,135,90);
+        g.setColor(arrow);
         g.drawString("◀", leftBor  , midY);
-        g.setColor((getCurrZone() == Zone.RIGHT ? (_isPressed ? Color.ORANGE : Color.GREEN) : Color.BLUE));
+        g.setColor(getArrowColor(Zone.RIGHT));
+        g.fillArc(0,0,x1,y1,-45,90);
+        g.setColor(arrow);
         g.drawString("▶", rightBor , midY);
+
+        g.setColor(linesSep);
+        g.drawLine(x2,y2,this.getWidth() - x2,this.getHeight() - y2);
+        g.drawLine(x2,this.getHeight() - y2,this.getWidth() - x2,y2);
+    }
+
+    private Color getArrowColor(Zone zone) {
+        Color pressedC = new Color(0x00_FF_55);
+        Color hoveredC = new Color(0x44_99_FF);
+        Color unhoveredC = new Color(0x55_55_55);
+
+        return (getCurrZone() == zone ? (_isPressed ? pressedC : hoveredC) : unhoveredC);
     }
 
     /** Detect in which zone the mouse is.
