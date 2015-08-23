@@ -138,11 +138,16 @@ public class Main {
         }
         Color transparent = new Color(0,0,0,0);
         Color semiTrans = new Color(255,255,255,50);
+        Color grey10 = new Color(0.1f, 0.1f, 0.1f);
 
         UIManager.put("Button.focus", new javax.swing.plaf.ColorUIResource(transparent));
         UIManager.put("Button.shadow", new javax.swing.plaf.ColorUIResource(transparent));
         UIManager.put("Button.darkShadow", new javax.swing.plaf.ColorUIResource(transparent));
         UIManager.put("Button.select", new javax.swing.plaf.ColorUIResource(semiTrans));
         UIManager.put("Button.gradient", new javax.swing.plaf.ColorUIResource(transparent));
+        UIManager.put("Menu.font", new javax.swing.plaf.FontUIResource("Sansation", Font.BOLD, 14));
+        UIManager.put("MenuItem.font", new javax.swing.plaf.FontUIResource("Sansation", Font.BOLD, 14));
+
+        System.out.println(UIManager.get("Menu.background"));
     }
 }

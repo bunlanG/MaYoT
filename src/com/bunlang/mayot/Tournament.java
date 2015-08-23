@@ -132,7 +132,7 @@ public class Tournament implements Navigable {
         _pan.add(_groups.get(_currGroup).getPanel());
 
         int grpSizeW = _groups.get(_currGroup).getPanel().getWidth();
-        int sizeH = 150 + _groups.get(_currGroup).getPanel().getHeight();
+        int sizeH = 152 + _groups.get(_currGroup).getPanel().getHeight();
 
         _pan.setSize(grpSizeW, sizeH);
         _pan.setMinimumSize(new Dimension(grpSizeW, sizeH));
