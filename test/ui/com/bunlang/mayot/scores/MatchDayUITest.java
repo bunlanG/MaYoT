@@ -44,7 +44,7 @@ public class MatchDayUITest {
         Team home3 = new Team("Home 3", 0,0,0,0,0, 0,0);
         Team guest3 = new Team("Guest 3", 0,0,0,0,0, 0,0);
 
-        MatchDay matchDay = new MatchDay();
+        MatchDay matchDay = new MatchDay("Test");
         Match match1 = new Match(home1, guest1);
         Match match2 = new Match(home2, guest2);
         Match match3 = new Match(home3, guest3);

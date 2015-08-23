@@ -35,11 +35,13 @@ public class MatchDay {
     private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
     protected Vector<Match> _matches;
+    protected String _title;
 
     JPanel _pan;
 
-    public MatchDay() {
+    public MatchDay(String title) {
         _matches = new Vector<>();
+        _title = title;
 
         _pan = new JPanel();
         _pan.setLayout(new BoxLayout(_pan, BoxLayout.PAGE_AXIS));
@@ -76,5 +78,13 @@ public class MatchDay {
      */
     public JPanel getPanel() {
         return _pan;
+    }
+
+    /** Returns the MatchDay's title
+     *
+     * @return the MatchDay's title
+     */
+    public String getTitle() {
+        return _title;
     }
 }

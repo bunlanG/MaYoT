@@ -49,7 +49,7 @@ public class GroupUITest {
 
         // scores
         // MD 01
-        MatchDay matchDay1 = new MatchDay();
+        MatchDay matchDay1 = new MatchDay("1st Day");
         Match match11 = new Match(team1, team5);
         Match match12 = new Match(team4, team6);
         Match match13 = new Match(team2, team3);
@@ -59,7 +59,7 @@ public class GroupUITest {
         matchDay1.add(match13);
 
         // MD02
-        MatchDay matchDay2 = new MatchDay();
+        MatchDay matchDay2 = new MatchDay("2nd Day");
         Match match21 = new Match(team5, team4);
         Match match22 = new Match(team6, team2);
         Match match23 = new Match(team3, team1);
