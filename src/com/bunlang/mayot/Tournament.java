@@ -73,7 +73,7 @@ public class Tournament implements Navigable {
         _tournamentTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
         _tournamentTitleUI.setFont(bigFont);
 
-        _tableTitleUI = new JLabel("Raking :");
+        _tableTitleUI = new JLabel("Table :");
         _tableTitleUI.setSize(dimTblTtl);
         _tableTitleUI.setMinimumSize(dimTblTtl);
         _tableTitleUI.setMaximumSize(dimTblTtl);
