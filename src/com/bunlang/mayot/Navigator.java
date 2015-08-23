@@ -87,6 +87,8 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
     public void paintComponent(Graphics g) {
         int x1 = this.getWidth();
         int y1 = this.getHeight();
+        int x2 = (int) (0.1465f * (float) this.getWidth());
+        int y2 = (int) (0.1465f * (float) this.getHeight());
         int sizeFont = Math.min(x1, y1) / 3;
         Font font = new Font("Dialog", Font.BOLD, sizeFont);
         g.setFont(font);
@@ -95,11 +97,8 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
         g.fillOval(0,0, x1, y1);
 
         g.setColor(Color.BLACK);
-        g.drawLine(0,0,this.getWidth(),this.getHeight());
-        g.drawLine(0,this.getHeight(),this.getWidth(),0);
-
-        g.drawLine(0,this.getHeight() / 2,this.getWidth(),this.getHeight() / 2);
-        g.drawLine(this.getWidth() / 2,0,this.getWidth() / 2,this.getHeight());
+        g.drawLine(x2,y2,this.getWidth() - x2,this.getHeight() - y2);
+        g.drawLine(x2,this.getHeight() - y2,this.getWidth() - x2,y2);
 
         int midX = (x1 - (76 * sizeFont / 100)) / 2;
         int midY = (y1 + (53 * sizeFont / 100)) / 2;
