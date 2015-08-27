@@ -80,7 +80,7 @@ public class Match {
     public Match() {
         super();
 
-        init(null, null);
+        init(null, null, 0, 0);
 	}
 
     /** Another constructor of a Match, with the teams from the Table.
@@ -91,7 +91,18 @@ public class Match {
     public Match(com.bunlang.mayot.ranking.Team host, com.bunlang.mayot.ranking.Team guest) {
         super();
 
-        init(host, guest);
+        init(host, guest, 0, 0);
+    }
+
+    /** Another constructor of a Match, with the teams from the Table, the score.
+     *
+     * @param host The host team
+     * @param guest The guest team
+     */
+    public Match(com.bunlang.mayot.ranking.Team host, com.bunlang.mayot.ranking.Team guest, int hstScr, int gstScr) {
+        super();
+
+        init(host, guest, hstScr, gstScr);
     }
 
     /** Initialize the Match object.
@@ -99,10 +110,10 @@ public class Match {
      * @param host The host team
      * @param guest The guest team
      */
-    protected void init(com.bunlang.mayot.ranking.Team host,  com.bunlang.mayot.ranking.Team guest) {
-        _host = new Team(host);
+    protected void init(com.bunlang.mayot.ranking.Team host,  com.bunlang.mayot.ranking.Team guest, int hstScr, int gstScr) {
+        _host = new Team(host, hstScr);
 
-        _guest = new Team(guest);
+        _guest = new Team(guest, gstScr);
 
         _period = Period.values()[0];
 
