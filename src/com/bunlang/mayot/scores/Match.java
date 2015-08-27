@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 public class Match {
     private static Logger logger = Logger.getLogger("com.bunlang.mayot");
 
-    private enum Period {
+    public enum Period {
         NOT_BEGUN("...", true),
         FIRST_HT("1st HT", false),
         PAUSE_HT("Pause", true),
@@ -80,7 +80,7 @@ public class Match {
     public Match() {
         super();
 
-        init(null, null, 0, 0);
+        init(null, null, 0, 0, Period.NOT_BEGUN);
 	}
 
     /** Another constructor of a Match, with the teams from the Table.
@@ -91,18 +91,21 @@ public class Match {
     public Match(com.bunlang.mayot.ranking.Team host, com.bunlang.mayot.ranking.Team guest) {
         super();
 
-        init(host, guest, 0, 0);
+        init(host, guest, 0, 0, Period.NOT_BEGUN);
     }
 
-    /** Another constructor of a Match, with the teams from the Table, the score.
+    /** Another constructor of a Match, with the teams from the Table, the score and the period.
      *
      * @param host The host team
      * @param guest The guest team
+     * @param hstScr The host score
+     * @param gstScr The guest score
+     * @param period The period
      */
-    public Match(com.bunlang.mayot.ranking.Team host, com.bunlang.mayot.ranking.Team guest, int hstScr, int gstScr) {
+    public Match(com.bunlang.mayot.ranking.Team host, com.bunlang.mayot.ranking.Team guest, int hstScr, int gstScr, Period period) {
         super();
 
-        init(host, guest, hstScr, gstScr);
+        init(host, guest, hstScr, gstScr, period);
     }
 
     /** Initialize the Match object.
@@ -110,12 +113,12 @@ public class Match {
      * @param host The host team
      * @param guest The guest team
      */
-    protected void init(com.bunlang.mayot.ranking.Team host,  com.bunlang.mayot.ranking.Team guest, int hstScr, int gstScr) {
+    protected void init(com.bunlang.mayot.ranking.Team host,  com.bunlang.mayot.ranking.Team guest, int hstScr, int gstScr, Period period) {
         _host = new Team(host, hstScr);
 
         _guest = new Team(guest, gstScr);
 
-        _period = Period.values()[0];
+        _period = period;
 
         _factFix = 1;
 
