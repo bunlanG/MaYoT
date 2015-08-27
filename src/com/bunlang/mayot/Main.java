@@ -32,6 +32,8 @@ import java.awt.*;
 
 import org.apache.log4j.Logger;
 
+import static com.bunlang.mayot.Data.*;
+
 /** Main class of MaYoT.
  *
  *  @author bunlanG
