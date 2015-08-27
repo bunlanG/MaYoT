@@ -171,6 +171,26 @@ public class Tournament implements Navigable {
         update();
     }
 
+    @Override
+    public boolean lockedLeft() {
+        return _currGroup == 0;
+    }
+
+    @Override
+    public boolean lockedRight() {
+        return _currGroup == _groups.size() - 1;
+    }
+
+    @Override
+    public boolean lockedUp() {
+        return _groups.get(_currGroup).isFirstMD();
+    }
+
+    @Override
+    public boolean lockedDown() {
+        return _groups.get(_currGroup).isLastMD();
+    }
+
     public JPanel getPanel() {
         return _pan;
     }

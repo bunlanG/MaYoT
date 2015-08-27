@@ -164,4 +164,12 @@ public class Group {
         return _matchDays.get(_currMDInd).getTitle();
     }
 
+    public boolean isFirstMD() {
+        return _currMDInd == 0;
+    }
+
+    public boolean isLastMD() {
+        return _currMDInd == _matchDays.size() - 1;
+    }
+
 }

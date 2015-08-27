@@ -127,8 +127,30 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
         Color pressedC = new Color(0x00_FF_55);
         Color hoveredC = new Color(0x44_99_FF);
         Color unhoveredC = new Color(0x55_55_55);
+        Color disabledC = new Color(0xFF_55_55);
 
-        return (getCurrZone() == zone ? (_isPressed ? pressedC : hoveredC) : unhoveredC);
+        boolean locked = true;
+        if(_nav != null) {
+            switch (zone) {
+                case UP:
+                    locked = _nav.lockedUp();
+                    break;
+                case DOWN:
+                    locked = _nav.lockedDown();
+                    break;
+                case LEFT:
+                    locked = _nav.lockedLeft();
+                    break;
+                case RIGHT:
+                    locked = _nav.lockedRight();
+                    break;
+                case OUT:
+                    locked = false;
+                    break;
+            }
+        }
+
+        return (locked ? disabledC : (getCurrZone() == zone ? (_isPressed ? pressedC : hoveredC) : unhoveredC));
     }
 
     /** Detect in which zone the mouse is.

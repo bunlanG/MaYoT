@@ -28,4 +28,9 @@ public interface Navigable {
     void gotoUp();
     void gotoDown();
 
+    boolean lockedLeft();
+    boolean lockedRight();
+    boolean lockedUp();
+    boolean lockedDown();
+
 }
