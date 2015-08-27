@@ -38,6 +38,15 @@ public class Team {
         init(teamRef, 0);
     }
 
+    /** Create a team with {@link teamRef} and a {@link score}.
+     *
+     * @param teamRef The {@link com.bunlang.mayot.ranking.Team} reference
+     * @param score Current score
+     */
+    public Team(com.bunlang.mayot.ranking.Team teamRef, int score) {
+        init(teamRef, score);
+    }
+
     protected void init(com.bunlang.mayot.ranking.Team teamRef, int score) {
         _teamRef = teamRef;
         _score = score;
