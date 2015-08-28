@@ -90,31 +90,52 @@ public class Group {
      *
      */
     public void update() {
-        MatchDay matchDay = _matchDays.get(_currMDInd);
+        if(_currMDInd >= 0) {
+            MatchDay matchDay = _matchDays.get(_currMDInd);
 
-        // Update the layout
-        GroupLayout layout = ((GroupLayout) _pan.getLayout());
-        Component gap = Box.createRigidArea(new Dimension(50, 5));
-        GroupLayout.Group hGroup = layout.createSequentialGroup();
-        hGroup.addGroup(layout.createParallelGroup().addComponent(matchDay.getPanel()));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
-        hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
-        layout.setHorizontalGroup(hGroup);
-        GroupLayout.Group vGroup = layout.createSequentialGroup();
-        vGroup.addGroup(layout.createParallelGroup()
-                .addComponent(matchDay.getPanel())
-                .addComponent(gap)
-                .addComponent(_table.getPanel()));
-        layout.setVerticalGroup(vGroup);
+            // Update the layout
+            GroupLayout layout = ((GroupLayout) _pan.getLayout());
+            Component gap = Box.createRigidArea(new Dimension(50, 5));
+            GroupLayout.Group hGroup = layout.createSequentialGroup();
+            hGroup.addGroup(layout.createParallelGroup().addComponent(matchDay.getPanel()));
+            hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
+            hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
+            layout.setHorizontalGroup(hGroup);
+            GroupLayout.Group vGroup = layout.createSequentialGroup();
+            vGroup.addGroup(layout.createParallelGroup()
+                    .addComponent(matchDay.getPanel())
+                    .addComponent(gap)
+                    .addComponent(_table.getPanel()));
+            layout.setVerticalGroup(vGroup);
+        } else {
+            // Update the layout
+            GroupLayout layout = ((GroupLayout) _pan.getLayout());
+            Component gap = Box.createRigidArea(new Dimension(50, 5));
+            GroupLayout.Group hGroup = layout.createSequentialGroup();
+            hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
+            hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
+            layout.setHorizontalGroup(hGroup);
+            GroupLayout.Group vGroup = layout.createSequentialGroup();
+            vGroup.addGroup(layout.createParallelGroup()
+                    .addComponent(gap)
+                    .addComponent(_table.getPanel()));
+            layout.setVerticalGroup(vGroup);
+        }
 
         updateSize();
     }
 
     private void updateSize() {
-        MatchDay matchDay = _matchDays.get(_currMDInd);
+        Dimension mthDayDim;
+        if(_currMDInd >= 0) {
+            MatchDay matchDay = _matchDays.get(_currMDInd);
+            mthDayDim = matchDay.getPanel().getSize();
+        } else {
+            mthDayDim = new Dimension(0,0);
+        }
 
-        int width = matchDay.getPanel().getWidth() + 50 + _table.getPanel().getWidth();
-        int height = Math.max(matchDay.getPanel().getHeight(), _table.getPanel().getHeight()) + 26;
+        int width = (int)(mthDayDim.getWidth()) + 50 + _table.getPanel().getWidth();
+        int height = Math.max((int)(mthDayDim.getHeight()), _table.getPanel().getHeight()) + 26;
         Dimension pref = new Dimension(width, height);
         _pan.setSize(pref);
         _pan.setPreferredSize(pref);
