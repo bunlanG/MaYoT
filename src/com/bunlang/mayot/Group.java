@@ -162,7 +162,11 @@ public class Group {
     }
 
     public String getCurrMDTitle() {
-        return _matchDays.get(_currMDInd).getTitle();
+        if(_currMDInd >= 0) {
+            return _matchDays.get(_currMDInd).getTitle();
+        } else {
+            return "";
+        }
     }
 
     public boolean isFirstMD() {
