@@ -58,49 +58,53 @@ public class Main {
             logger.debug("Creating the Group...");
         }
 
-        // ranking
-        Team team1 = new Team("Team 1", 0,0,0,0,0, 0,0);
-        Team team2 = new Team("Team 2", 0,0,0,0,0, 0,0);
-        Team team3 = new Team("Team 3", 0,0,0,0,0, 0,0);
-        Team team4 = new Team("Team 4", 0,0,0,0,0, 0,0);
-        Team team5 = new Team("Team 5", 0,0,0,0,0, 0,0);
-        Team team6 = new Team("Team 6", 0,0,0,0,0, 0,0);
-
-        // scores
-        // MD 01
-        MatchDay matchDay1 = new MatchDay("1st Day");
-        Match match11 = new Match(team1, team5);
-        Match match12 = new Match(team4, team6, 0,0, Match.Period.NOT_BEGUN);
-        Match match13 = new Match(team2, team3);
-
-        matchDay1.add(match11);
-        matchDay1.add(match12);
-        matchDay1.add(match13);
-
-        // MD02
-        MatchDay matchDay2 = new MatchDay("2nd Day");
-        Match match21 = new Match(team5, team4, 0,0, Match.Period.NOT_BEGUN);
-        Match match22 = new Match(team6, team2);
-        Match match23 = new Match(team3, team1);
-
-        matchDay2.add(match21);
-        matchDay2.add(match22);
-        matchDay2.add(match23);
-
-        final Group grp = new Group();
-
-        grp.add(matchDay1);
-        grp.add(matchDay2);
-
-        grp.add(team1);
-        grp.add(team2);
-        grp.add(team3);
-        grp.add(team4);
-        grp.add(team5);
-        grp.add(team6);
+//        // ranking
+//        Team team1 = new Team("Team 1", 0,0,0,0,0, 0,0);
+//        Team team2 = new Team("Team 2", 0,0,0,0,0, 0,0);
+//        Team team3 = new Team("Team 3", 0,0,0,0,0, 0,0);
+//        Team team4 = new Team("Team 4", 0,0,0,0,0, 0,0);
+//        Team team5 = new Team("Team 5", 0,0,0,0,0, 0,0);
+//        Team team6 = new Team("Team 6", 0,0,0,0,0, 0,0);
+//
+//        // scores
+//        // MD 01
+//        MatchDay matchDay1 = new MatchDay("1st Day");
+//        Match match11 = new Match(team1, team5);
+//        Match match12 = new Match(team4, team6, 0,0, Match.Period.NOT_BEGUN);
+//        Match match13 = new Match(team2, team3);
+//
+//        matchDay1.add(match11);
+//        matchDay1.add(match12);
+//        matchDay1.add(match13);
+//
+//        // MD02
+//        MatchDay matchDay2 = new MatchDay("2nd Day");
+//        Match match21 = new Match(team5, team4, 0,0, Match.Period.NOT_BEGUN);
+//        Match match22 = new Match(team6, team2);
+//        Match match23 = new Match(team3, team1);
+//
+//        matchDay2.add(match21);
+//        matchDay2.add(match22);
+//        matchDay2.add(match23);
+//
+//        final Group grp = new Group();
+//
+//        grp.add(matchDay1);
+//        grp.add(matchDay2);
+//
+//        grp.add(team1);
+//        grp.add(team2);
+//        grp.add(team3);
+//        grp.add(team4);
+//        grp.add(team5);
+//        grp.add(team6);
 
         Tournament trnmt = new Tournament();
-        trnmt.add(grp);
+//        trnmt.add(grp);
+
+        com.bunlang.mayot.file.Tournament loader = new com.bunlang.mayot.file.Tournament(trnmt);
+
+        loader.load("res/test-000.mtt");
 
         if(logger.isDebugEnabled()) {
             logger.debug("Tournament created.");
@@ -113,7 +117,6 @@ public class Main {
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setVisible(true);
-
         if(logger.isInfoEnabled()) {
             logger.info("MaYoT launched.");
         }

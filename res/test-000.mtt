@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tournament>
+    <group>
+        <table>
+            <team id="1" name="Team 1" pts="0_0_0_0_0" scr="0_0" />
+            <team id="2" name="Team 2" pts="0_0_0_0_0" scr="0_0" />
+            <team id="3" name="Team 3" pts="0_0_0_0_0" scr="0_0" />
+            <team id="4" name="Team 4" pts="0_0_0_0_0" scr="0_0" />
+            <team id="5" name="Team 5" pts="0_0_0_0_0" scr="0_0" />
+            <team id="6" name="Team 6" pts="0_0_0_0_0" scr="0_0" />
+        </table>
+        <scores>
+            <matchday ttl="1st Day">
+                <match hId="1" gId="5" scr="0_0" prd="0" />
+                <match hId="4" gId="6" scr="0_0" prd="0" />
+                <match hId="2" gId="3" scr="0_0" prd="0" />
+            </matchday>
+            <matchday ttl="2nd Day">
+                <match hId="5" gId="4" scr="0_0" prd="0" />
+                <match hId="6" gId="2" scr="0_0" prd="0" />
+                <match hId="3" gId="1" scr="0_0" prd="0" />
+            </matchday>
+        </scores>
+    </group>
+</tournament>
