@@ -30,6 +30,9 @@ import java.util.Observable;
 public class Team extends Observable implements Comparable<Team> {
     private static Logger logger = Logger.getLogger("com.bunlang.mayot");
     // Fields
+    private static int _nextId = 1;
+
+    protected int _id;
     protected String _name;
 
     protected int _pTotal;
@@ -60,6 +63,7 @@ public class Team extends Observable implements Comparable<Team> {
      * @param sAgnst The score against the team.
      */
     public Team(String name, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
+        _id = nextId();
         _name = name;
         _mWins = 0;
         _mDraws = 0;
@@ -115,6 +119,10 @@ public class Team extends Observable implements Comparable<Team> {
         }
     }
 
+    private static int nextId() {
+        return (_nextId++);
+    }
+
     /** The {@link compareTo} override from {@link Comparable} Interface.
      *
      * @param t the other team to compare with.
@@ -156,6 +164,14 @@ public class Team extends Observable implements Comparable<Team> {
      */
     public String getName() {
         return _name;
+    }
+
+    /** Gets the id of the Team.
+     *
+     * @return the id of the Team
+     */
+    public int getId() {
+        return _id;
     }
 
     /** Gets the total of points.
@@ -247,6 +263,6 @@ public class Team extends Observable implements Comparable<Team> {
     }
 
     public String toString() {
-        return _name + " | " + _pTotal + ':' + _mWins + '-' + _mDraws + '-' + _mLoses + " | " + _sFor + '-' + _sAgnst;
+        return _name + "[" + _id + "] | " + _pTotal + ':' + _mWins + '-' + _mDraws + '-' + _mLoses + " | " + _sFor + '-' + _sAgnst;
     }
 }
