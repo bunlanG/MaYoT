@@ -73,12 +73,7 @@ public class Group {
         } else if(obj.getClass().getName().equals("com.bunlang.mayot.ranking.Team")) {
             _table.add(obj);
 
-            int width = _matchDays.get(_currMDInd).getPanel().getWidth() + 50 + _table.getPanel().getWidth();
-            int height = Math.max(_matchDays.get(_currMDInd).getPanel().getHeight(), _table.getPanel().getHeight()) + 26;
-            Dimension pref = new Dimension(width, height);
-            _pan.setSize(pref);
-            _pan.setPreferredSize(pref);
-            _pan.setMinimumSize(pref);
+            updateSize();
         }
     }
 
@@ -112,9 +107,14 @@ public class Group {
                 .addComponent(_table.getPanel()));
         layout.setVerticalGroup(vGroup);
 
+        updateSize();
+    }
+
+    private void updateSize() {
+        MatchDay matchDay = _matchDays.get(_currMDInd);
 
         int width = matchDay.getPanel().getWidth() + 50 + _table.getPanel().getWidth();
-        int height = Math.max(matchDay.getPanel().getWidth(), _table.getPanel().getWidth()) + 26;
+        int height = Math.max(matchDay.getPanel().getHeight(), _table.getPanel().getHeight()) + 26;
         Dimension pref = new Dimension(width, height);
         _pan.setSize(pref);
         _pan.setPreferredSize(pref);
