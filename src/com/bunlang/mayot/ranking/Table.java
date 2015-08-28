@@ -116,4 +116,26 @@ public class Table implements Observer {
     public JPanel getPanel() {
         return _pan;
     }
+
+    public Team findTeamById(int id) {
+        for (Team _team : _teams) {
+            if (id == _team.getId()) {
+                return _team;
+            }
+        }
+
+        // Default value if not founded
+        return null;
+    }
+
+    public Team findTeamByName(String name) {
+        for (Team _team : _teams) {
+            if (name.equals(_team.getName())) {
+                return _team;
+            }
+        }
+
+        // Default value if not founded
+        return null;
+    }
 }

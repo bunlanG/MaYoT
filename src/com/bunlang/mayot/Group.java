@@ -19,6 +19,7 @@
 package com.bunlang.mayot;
 
 import com.bunlang.mayot.ranking.Table;
+import com.bunlang.mayot.ranking.Team;
 import com.bunlang.mayot.scores.MatchDay;
 import org.apache.log4j.Logger;
 
@@ -170,6 +171,14 @@ public class Group {
 
     public boolean isLastMD() {
         return _currMDInd == _matchDays.size() - 1;
+    }
+
+    public Team findTeamById(int id) {
+        return _table.findTeamById(id);
+    }
+
+    public Team findTeamByName(String name) {
+        return _table.findTeamByName(name);
     }
 
 }
