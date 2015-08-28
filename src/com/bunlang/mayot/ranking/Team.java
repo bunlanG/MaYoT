@@ -187,6 +187,22 @@ public class Team extends Observable implements Comparable<Team> {
         return _id;
     }
 
+    /** Get the next id WITHOUT MODIFY IT.
+     *
+     * @warning Use it carefully !
+     */
+    public static int getNextId() {
+        return _nextId;
+    }
+
+    /** Set the next id.
+     *
+     * @warning Use it carefully !
+     */
+    public static void setNextId(int nextId) {
+        _nextId = nextId;
+    }
+
     /** Gets the total of points.
      *
      * @return the total of points
