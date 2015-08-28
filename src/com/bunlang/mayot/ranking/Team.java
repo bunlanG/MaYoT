@@ -51,9 +51,22 @@ public class Team extends Observable implements Comparable<Team> {
     protected TeamUI _ui;
 
 
+    public Team(String name) {
+        init(name, nextId(), 0,0,0,0,0, 0,0);
+    }
+
+    public Team(String name, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
+        init(name, nextId(), mWins,mDraws,mLoses,pBonus,pFixer, sFor,sAgnst);
+    }
+
+    public Team(String name, int id, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
+        init(name, id, mWins,mDraws,mLoses,pBonus,pFixer, sFor,sAgnst);
+    }
+
     /** Create a Team with all customisable fields.
      *
      * @param name The name of the team.
+     * @param id The id of the team.
      * @param mWins The number of matches won.
      * @param mDraws The number of matches drawn.
      * @param mLoses The number of matches lose.
@@ -62,8 +75,8 @@ public class Team extends Observable implements Comparable<Team> {
      * @param sFor The score for the team.
      * @param sAgnst The score against the team.
      */
-    public Team(String name, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
-        _id = nextId();
+    public void init(String name, int id, int mWins, int mDraws, int mLoses, int pBonus, int pFixer, int sFor, int sAgnst) {
+        _id = id;
         _name = name;
         _mWins = 0;
         _mDraws = 0;
