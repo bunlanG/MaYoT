@@ -128,7 +128,7 @@
             <report format="frames" todir="./log/test-unit" />
         </junitreport>
     </target>
-    <target name="run-unit-test" depends="-clear-log-unit-test,-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
+    <target name="run-unit-test" depends="init,-clear-log-unit-test,-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
         <fail message="Unit Tests FAILED" if="test.unit.failed" />
     </target>
 
@@ -169,7 +169,7 @@
             <report format="frames" todir="./log/test-ui" />
         </junitreport>
     </target>
-	<target name="run-ui-test" depends="-clear-log-ui-test,-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
+	<target name="run-ui-test" depends="init,-clear-log-ui-test,-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
         <fail message="UI Test FAILED" if="test.ui.failed" />
     </target>
 
