@@ -18,6 +18,7 @@
     <!-- Classpaths -->
     <path id="JUnit.classpath">
         <pathelement location="lib/junit4.jar" />
+        <pathelement location="lib/hamcrest-all.jar" />
     </path>
     <path id="Log4J.classpath">
         <pathelement location="lib/log4j-1.2.jar" />
