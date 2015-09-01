@@ -17,11 +17,10 @@
 
     <!-- Classpaths -->
     <path id="JUnit.classpath">
-        <pathelement location="/usr/share/java/junit.jar" />
-        <pathelement location="/usr/share/java/junit4.jar" />
+        <pathelement location="lib/junit4.jar" />
     </path>
     <path id="Log4J.classpath">
-        <pathelement location="/usr/share/java/log4j-1.2.jar" />
+        <pathelement location="lib/log4j-1.2.jar" />
     </path>
     <path id="project.prop.classpath">
         <pathelement location="prop" />
