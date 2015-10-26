@@ -194,4 +194,24 @@ public class Tournament implements Navigable {
     public JPanel getPanel() {
         return _pan;
     }
+
+    /** Get XML-format of the Tournament, with header line for XML.
+     *
+     * @return a XML-format of the Tournament
+     */
+    public String toXml() {
+        String s = "";
+
+        s += "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+
+        s += "<tournament>\n";
+
+        for(Group g : _groups) {
+            s += g.toXml();
+        }
+
+        s += "</tournament>\n";
+
+        return s;
+    }
 }

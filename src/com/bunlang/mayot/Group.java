@@ -174,6 +174,28 @@ public class Group {
         }
     }
 
+    /** Get XML-format of the Group.
+     *
+     * @return a XML-format of the Group
+     */
+    public String toXml() {
+        String s = "";
+
+        s += "\t<group>\n";
+        s += _table.toXml();
+
+        s += "\t\t<scores>\n";
+
+        for(MatchDay md : _matchDays) {
+            s += md.toXml();
+        }
+
+        s += "\t\t</scores>\n";
+        s += "\t</group>\n";
+
+        return s;
+    }
+
     /** Returns the panel of the Group, for GUIs.
      *
      * @return the panel of the Group

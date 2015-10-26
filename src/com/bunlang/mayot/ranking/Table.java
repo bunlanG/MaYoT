@@ -138,4 +138,23 @@ public class Table implements Observer {
         // Default value if not founded
         return null;
     }
+
+    /** Get XML-format of the Table.
+     *
+     * @return a XML-format of the Table
+     */
+    public String toXml() {
+        String s = "";
+
+        s += "\t\t<table>\n";
+
+        for(Team t : _teams) {
+            s += t.toXml();
+        }
+
+        s += "\t\t</table>\n";
+
+
+        return s;
+    }
 }

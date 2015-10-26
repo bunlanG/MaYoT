@@ -294,4 +294,30 @@ public class Team extends Observable implements Comparable<Team> {
     public String toString() {
         return _name + "[" + _id + "] | " + _pTotal + ':' + _mWins + '-' + _mDraws + '-' + _mLoses + " | " + _sFor + '-' + _sAgnst;
     }
+
+    /** Get XML-format of the Team.
+     *
+     * @return a XML-format of the Team
+     */
+    public String toXml() {
+        String s = "";
+
+        s += "\t\t\t<team ";
+
+        s += "id=\"" + _id  + "\" ";
+        s += "name=\"" + _name + "\" ";
+        s += "pts=\"" + _mWins +
+                "_" + _mDraws +
+                "_" + _mLoses +
+                "_" + _pBonus +
+                "_" + _pFixer +
+                "\" ";
+        s += "scr=\"" + _sFor +
+                "_" + _sAgnst +
+                "\" ";
+
+        s += "/>\n";
+
+        return s;
+    }
 }

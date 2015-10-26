@@ -72,4 +72,8 @@ public class Team {
     public void addToScore(int scoreOffset) {
         _score += scoreOffset;
     }
+
+    public int getTeamId() {
+        return _teamRef.getId();
+    }
 }

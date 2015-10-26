@@ -322,6 +322,25 @@ public class Match {
         );
     }
 
+    /** Get XML-format of the Match.
+     *
+     * @return a XML-format of the Match
+     */
+    public String toXml() {
+        String s = "";
+
+        s += "\t\t\t\t<match ";
+
+        s += "hId=\"" + _host.getTeamId() + "\" ";
+        s += "gId=\"" + _guest.getTeamId() + "\" ";
+        s += "scr=\"" + _host.getScore() + "_" + _guest.getScore() + "\" ";
+        s += "prd=\"" + _period.ordinal() + "\" ";
+
+        s += "/>\n";
+
+        return s;
+    }
+
     /** Get the name of the guest team.
      *
      * @return name of the guest team

@@ -87,4 +87,22 @@ public class MatchDay {
     public String getTitle() {
         return _title;
     }
+
+    /** Get XML-format of the MatchDay.
+     *
+     * @return a XML-format of the MatchDay
+     */
+    public String toXml() {
+        String s = "";
+
+        s += "\t\t\t<matchday ttl=\"" + _title + "\">\n";
+
+        for(Match m : _matches) {
+            s += m.toXml();
+        }
+
+        s += "\t\t\t</matchday>\n";
+
+        return s;
+    }
 }
