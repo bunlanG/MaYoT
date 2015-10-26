@@ -33,7 +33,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Vector;
 
 import static com.bunlang.mayot.Data.*;
@@ -52,12 +54,13 @@ public class Tournament {
     }
 
     public void save(String path) {
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
-            final DocumentBuilder builder = factory.newDocumentBuilder();
+            Writer w = new FileWriter(path);
 
-            final Document doc = builder.newDocument();
-        } catch (ParserConfigurationException e) {
+            w.write(_trmnt.toXml());
+
+            w.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
