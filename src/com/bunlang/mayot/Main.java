@@ -102,7 +102,7 @@ public class Main {
         Tournament trnmt = new Tournament();
 //        trnmt.add(grp);
 
-        com.bunlang.mayot.file.Tournament loader = new com.bunlang.mayot.file.Tournament(trnmt);
+        final com.bunlang.mayot.file.Tournament loader = new com.bunlang.mayot.file.Tournament(trnmt);
 
         loader.load("res/test-000.mtt");
 
@@ -131,6 +131,22 @@ public class Main {
 //        winN.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        winN.setVisible(true);
 //
+        Runnable save = new Runnable() {
+            @Override
+            public void run() {
+                loader.save("res/test-000.mtt");
+                logger.debug("File saved.");
+            }
+        };
+
+        while(win.isShowing()) {
+            new Thread(save, "autosave").start();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     /** Setup a custom L&F.
