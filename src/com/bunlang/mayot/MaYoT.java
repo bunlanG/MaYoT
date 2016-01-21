@@ -148,7 +148,7 @@ public class MaYoT extends JFrame implements ActionListener {
     }
 
     private void quitAction() {
-        JOptionPane.showMessageDialog(this, "Quit");
+        System.exit(0);
     }
 
 }
