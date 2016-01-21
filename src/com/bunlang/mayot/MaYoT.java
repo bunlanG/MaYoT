@@ -19,6 +19,7 @@
 package com.bunlang.mayot;
 
 import javax.swing.Box;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -30,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.io.File;
 
 /** The window of MaYoT
  *
@@ -122,7 +124,13 @@ public class MaYoT extends JFrame implements ActionListener {
     }
 
     private void openFileAction() {
-        JOptionPane.showMessageDialog(this, "Open File");
+        JFileChooser openDialog = new JFileChooser(".");
+        File f = null;
+        if(openDialog.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            f = openDialog.getSelectedFile();
+        }
+
+        JOptionPane.showMessageDialog(this, f);
     }
 
     private void saveFileAction() {
