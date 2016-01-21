@@ -138,7 +138,13 @@ public class MaYoT extends JFrame implements ActionListener {
     }
 
     private void saveFileAsAction() {
-        JOptionPane.showMessageDialog(this, "Save File As");
+        JFileChooser saveDialog = new JFileChooser(".");
+        File f = null;
+        if(saveDialog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            f = saveDialog.getSelectedFile();
+        }
+
+        JOptionPane.showMessageDialog(this, f);
     }
 
     private void quitAction() {
