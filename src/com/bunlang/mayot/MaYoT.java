@@ -18,14 +18,24 @@
 
 package com.bunlang.mayot;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.Box;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 
 /** The window of MaYoT
  *
  * @author bunlanG
  */
-public class MaYoT extends JFrame {
+public class MaYoT extends JFrame implements ActionListener {
     // Fields
     Tournament _tournament;
 
@@ -38,9 +48,12 @@ public class MaYoT extends JFrame {
         _tournament = null;
 
         _menuBar = new JMenuBar();
-        _fileMenu = new JMenu("File");
-            _newFileMenu = new JMenuItem("New...");
 
+        _fileMenu = new JMenu("File");
+
+        _newFileMenu = new JMenuItem("New...");
+        _newFileMenu.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_MASK));
+        _newFileMenu.addActionListener(this);
         _fileMenu.add(_newFileMenu);
 
         _menuBar.add(_fileMenu);
@@ -59,5 +72,12 @@ public class MaYoT extends JFrame {
         this.setSize(new Dimension(box.getWidth(), box.getHeight() + 21));
         this.setPreferredSize(new Dimension(box.getWidth(), box.getHeight() + 21));
         this.setMinimumSize(new Dimension(box.getWidth(), box.getHeight()  + 21));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(actionEvent.getSource() == _newFileMenu) {
+            JOptionPane.showMessageDialog(this, "New File clicked !");
+        }
     }
 }
