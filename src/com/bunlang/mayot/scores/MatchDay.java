@@ -37,14 +37,13 @@ public class MatchDay {
     protected Vector<Match> _matches;
     protected String _title;
 
-    JPanel _pan;
+    Box _box;
 
     public MatchDay(String title) {
         _matches = new Vector<>();
         _title = title;
 
-        _pan = new JPanel();
-        _pan.setLayout(new BoxLayout(_pan, BoxLayout.PAGE_AXIS));
+        _box = Box.createVerticalBox();
 
         if(logger.isDebugEnabled()) {
             logger.debug("scores.MatchDay created");
@@ -58,17 +57,18 @@ public class MatchDay {
 
             // Add a spacer
             if(_matches.size() > 1) {
-                _pan.add(Box.createRigidArea(new Dimension(0,2)));
+                _box.add(Box.createRigidArea(new Dimension(0,2)));
             }
 
-            _pan.add(match.getPanel());
+            _box.add(match.getPanel());
 
-            int width = match.getPanel().getWidth();
-            int height = _matches.size() * (match.getPanel().getHeight() + 2) - 2;
+            int width = match.getPanel().getPreferredSize().width;
+            int height = _matches.size() * (match.getPanel().getPreferredSize().height + 2) - 2;
             Dimension pref = new Dimension(width, height);
-            _pan.setSize(pref);
-            _pan.setPreferredSize(pref);
-            _pan.setMinimumSize(pref);
+            _box.setMaximumSize(pref);
+            _box.setPreferredSize(pref);
+            _box.setMinimumSize(pref);
+            _box.setSize(pref);
         }
     }
 
@@ -76,8 +76,8 @@ public class MatchDay {
      *
      * @return the panel of the MatchDay
      */
-    public JPanel getPanel() {
-        return _pan;
+    public Box getPanel() {
+        return _box;
     }
 
     /** Returns the MatchDay's title

@@ -18,10 +18,9 @@
 
 package com.bunlang.mayot.scores;
 
-import javax.swing.BoxLayout;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -41,8 +40,8 @@ public class MatchUI implements ActionListener {
     protected JLabel _scrUI;
     protected JButton _infoUI;
     protected JButton _fixBut;
-    protected JPanel _pan;
-    protected JPanel _panLbl;
+    protected Box _box;
+    protected Box _boxLbl;
 
     public MatchUI(Match data) {
         _data = data;
@@ -89,6 +88,8 @@ public class MatchUI implements ActionListener {
         _scrUI.setMaximumSize(dimLbl1);
         _scrUI.setFont(normFont);
         _scrUI.setForeground(Color.WHITE);
+        _scrUI.setBackground(grey15);
+        _scrUI.setOpaque(true);
         _scrUI.setHorizontalAlignment(SwingConstants.CENTER);
 
         _infoUI = new JButton();
@@ -111,27 +112,24 @@ public class MatchUI implements ActionListener {
         _fixBut.setBorder(null);
         _fixBut.addActionListener(this);
 
-        _panLbl = new JPanel();
-        _panLbl.setLayout(new BoxLayout(_panLbl, BoxLayout.PAGE_AXIS));
-        _panLbl.add(_scrUI);
-        _panLbl.add(_infoUI);
-        _panLbl.setMinimumSize(dimLbl);
-        _panLbl.setPreferredSize(dimLbl);
-        _panLbl.setMaximumSize(dimLbl);
-        _panLbl.setOpaque(false);
+        _boxLbl = Box.createVerticalBox();
+        _boxLbl.add(_scrUI);
+        _boxLbl.add(_infoUI);
+        _boxLbl.setMinimumSize(dimLbl);
+        _boxLbl.setPreferredSize(dimLbl);
+        _boxLbl.setMaximumSize(dimLbl);
+        _boxLbl.setOpaque(false);
 
-        _pan = new JPanel();
-        _pan.setLayout(new BoxLayout(_pan, BoxLayout.LINE_AXIS));
-        _pan.add(_hostBut);
-        _pan.add(_panLbl);
-        _pan.add(_guestBut);
-        _pan.add(_fixBut);
+        _box = Box.createHorizontalBox();
+        _box.add(_hostBut);
+        _box.add(_boxLbl);
+        _box.add(_guestBut);
+        _box.add(_fixBut);
 
-        _pan.setMinimumSize(dimTtl);
-        _pan.setPreferredSize(dimTtl);
-        _pan.setMaximumSize(dimTtl);
-        _pan.setSize(dimTtl);
-        _pan.setBackground(grey15);
+        _box.setMinimumSize(dimTtl);
+        _box.setPreferredSize(dimTtl);
+        _box.setMaximumSize(dimTtl);
+        _box.setBackground(grey15);
 
         update();
     }
@@ -201,8 +199,8 @@ public class MatchUI implements ActionListener {
         }
     }
 
-    public JPanel getPanel() {
-        return _pan;
+    public Box getPanel() {
+        return _box;
     }
 
     @Override

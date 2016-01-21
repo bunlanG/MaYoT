@@ -20,7 +20,7 @@ package com.bunlang.mayot.ranking;
 
 import org.apache.log4j.Logger;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.util.Observable;
 
 /** Manage a Team.
@@ -287,7 +287,7 @@ public class Team extends Observable implements Comparable<Team> {
      *
      * @return the panel of the Team
      */
-    public JPanel getPanel() {
+    public Box getPanel() {
         return _ui.getPanel();
     }
 

@@ -38,7 +38,7 @@ public class Group {
     protected int _currMDInd;
     protected Table _table;
 
-    protected JPanel _pan;
+    protected Box _box;
 
     /** Create a new {@link Group}.
      *
@@ -47,11 +47,9 @@ public class Group {
         _matchDays = new Vector<>();
         _currMDInd = -1;
         _table = new Table();
+        _table.getPanel().setAlignmentY(Component.TOP_ALIGNMENT);
 
-        _pan = new JPanel();
-        GroupLayout bxLy = new GroupLayout(_pan);
-        _pan.setLayout(bxLy);
-        _pan.setBackground(new Color(0.33f,0.33f,0.33f));
+        _box = Box.createHorizontalBox();
 
         if(logger.isDebugEnabled()) {
             logger.debug("Group created");
@@ -65,6 +63,7 @@ public class Group {
     public void add(Object obj) {
         if(obj.getClass().getName().equals("com.bunlang.mayot.scores.MatchDay")) {
             MatchDay matchDay = (MatchDay) obj;
+            matchDay.getPanel().setAlignmentY(Component.TOP_ALIGNMENT);
             _matchDays.add(matchDay);
             _currMDInd = _matchDays.size() - 1;
 
@@ -82,7 +81,7 @@ public class Group {
      */
     public void resetPanel() {
         if(_currMDInd >= 0) {
-            _pan.removeAll();
+            _box.removeAll();
         }
     }
 
@@ -90,36 +89,20 @@ public class Group {
      *
      */
     public void update() {
+        Component gap = Box.createRigidArea(new Dimension(50, 5));
         if(_currMDInd >= 0) {
             MatchDay matchDay = _matchDays.get(_currMDInd);
 
             // Update the layout
-            GroupLayout layout = ((GroupLayout) _pan.getLayout());
-            Component gap = Box.createRigidArea(new Dimension(50, 5));
-            GroupLayout.Group hGroup = layout.createSequentialGroup();
-            hGroup.addGroup(layout.createParallelGroup().addComponent(matchDay.getPanel()));
-            hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
-            hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
-            layout.setHorizontalGroup(hGroup);
-            GroupLayout.Group vGroup = layout.createSequentialGroup();
-            vGroup.addGroup(layout.createParallelGroup()
-                    .addComponent(matchDay.getPanel())
-                    .addComponent(gap)
-                    .addComponent(_table.getPanel()));
-            layout.setVerticalGroup(vGroup);
+            _box.removeAll();
+            _box.add(matchDay.getPanel());
+            _box.add(gap);
+            _box.add(_table.getPanel());
         } else {
             // Update the layout
-            GroupLayout layout = ((GroupLayout) _pan.getLayout());
-            Component gap = Box.createRigidArea(new Dimension(50, 5));
-            GroupLayout.Group hGroup = layout.createSequentialGroup();
-            hGroup.addGroup(layout.createParallelGroup().addComponent(gap));
-            hGroup.addGroup(layout.createParallelGroup().addComponent(_table.getPanel()));
-            layout.setHorizontalGroup(hGroup);
-            GroupLayout.Group vGroup = layout.createSequentialGroup();
-            vGroup.addGroup(layout.createParallelGroup()
-                    .addComponent(gap)
-                    .addComponent(_table.getPanel()));
-            layout.setVerticalGroup(vGroup);
+            _box.removeAll();
+            _box.add(gap);
+            _box.add(_table.getPanel());
         }
 
         updateSize();
@@ -137,9 +120,9 @@ public class Group {
         int width = (int)(mthDayDim.getWidth()) + 50 + _table.getPanel().getWidth();
         int height = Math.max((int)(mthDayDim.getHeight()), _table.getPanel().getHeight()) + 26;
         Dimension pref = new Dimension(width, height);
-        _pan.setSize(pref);
-        _pan.setPreferredSize(pref);
-        _pan.setMinimumSize(pref);
+        _box.setSize(pref);
+        _box.setPreferredSize(pref);
+        _box.setMinimumSize(pref);
     }
 
     /** Change current {@link MatchDay} to the next one.
@@ -200,8 +183,8 @@ public class Group {
      *
      * @return the panel of the Group
      */
-    public JPanel getPanel() {
-        return _pan;
+    public Box getPanel() {
+        return _box;
     }
 
     public String getCurrMDTitle() {

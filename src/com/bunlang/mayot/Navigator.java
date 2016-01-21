@@ -18,7 +18,7 @@
 
 package com.bunlang.mayot;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -30,7 +30,7 @@ import java.awt.event.MouseMotionListener;
  *
  * @author bunlanG
  */
-public class Navigator extends JPanel implements MouseListener, MouseMotionListener {
+public class Navigator extends Box implements MouseListener, MouseMotionListener {
 
     private enum Zone {
         UP("Up"),
@@ -60,7 +60,7 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
      *  @deprecated
      */
     public Navigator() {
-        super();
+        super(BoxLayout.LINE_AXIS);
 
         init(null);
     }
@@ -70,7 +70,7 @@ public class Navigator extends JPanel implements MouseListener, MouseMotionListe
      * @param nav the object the {@link Navigator} can use
      */
     public Navigator(Navigable nav) {
-        super();
+        super(BoxLayout.LINE_AXIS);
 
         init(nav);
     }

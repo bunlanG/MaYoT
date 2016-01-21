@@ -38,7 +38,7 @@ public class TeamUITest {
     public void test() {
         // ranking
         Team team = new Team("Hello", 0,0,0,0,0, 0,0);
-        JPanel tUI = team.getPanel();
+        Box tUI = team.getPanel();
         JFrame win = new JFrame();
             win.setContentPane(tUI);
             win.setTitle("MaYoT - org.bunlang.mayot.ranking.Team UI Test");

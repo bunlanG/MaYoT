@@ -21,8 +21,7 @@ package com.bunlang.mayot.ranking;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -47,11 +46,10 @@ public class TableUITest {
         table.add(team3);
         table.add(team4);
 
-        JPanel ui = table.getPanel();
+        Box ui = table.getPanel();
         JFrame win = new JFrame();
         win.setContentPane(ui);
         win.setTitle("MaYoT - org.bunlang.mayot.ranking.Table UI Test");
-        win.setSize(ui.getSize());
         win.setMinimumSize(ui.getSize());
         win.setLocationRelativeTo(null);
         win.setVisible(true);

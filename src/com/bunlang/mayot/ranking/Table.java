@@ -40,16 +40,15 @@ public class Table implements Observer {
     protected Vector<Team> _teams;
     protected TeamUI _head;
 
-    JPanel _pan;
+    Box _box;
 
     public Table() {
         _teams = new Vector<>();
         _head = new TeamUI(null);
 
-        _pan = new JPanel();
-        _pan.setLayout(new BoxLayout(_pan, BoxLayout.PAGE_AXIS));
+        _box = Box.createVerticalBox();
 
-        _pan.add(_head.getPanel());
+        _box.add(_head.getPanel());
 
         if(logger.isDebugEnabled()) {
             logger.debug("ranking.Table created");
@@ -67,16 +66,17 @@ public class Table implements Observer {
             team.addObserver(this);
 
             // Add a spacer
-            _pan.add(Box.createRigidArea(new Dimension(0, 1)));
+            _box.add(Box.createRigidArea(new Dimension(0, 1)));
 
-            _pan.add(team.getPanel());
+            _box.add(team.getPanel());
 
             int width = team.getPanel().getWidth();
             int height = (_teams.size() + 1) * (team.getPanel().getHeight() + 1) - 1;
             Dimension pref = new Dimension(width, height);
-            _pan.setSize(pref);
-            _pan.setPreferredSize(pref);
-            _pan.setMinimumSize(pref);
+            _box.setSize(pref);
+            _box.setPreferredSize(pref);
+            _box.setMinimumSize(pref);
+            _box.setMaximumSize(pref);
 
             this.update(null, null);
 
@@ -89,18 +89,18 @@ public class Table implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         // Clear _pan
-        _pan.removeAll();
+        _box.removeAll();
 
         // Sort _teams
         Collections.sort(_teams);
 
         // Re-make _pan
         // Header
-        _pan.add(_head.getPanel());
+        _box.add(_head.getPanel());
         for(int i = 0 ; i < _teams.size() ; i++) {
-            _pan.add(Box.createRigidArea(new Dimension(0, 1)));
+            _box.add(Box.createRigidArea(new Dimension(0, 1)));
 
-            _pan.add(_teams.get(i).getPanel());
+            _box.add(_teams.get(i).getPanel());
 
             _teams.get(i).setPos((i+1) + "e");
         }
@@ -113,8 +113,8 @@ public class Table implements Observer {
      *
      * @return the panel of the Table
      */
-    public JPanel getPanel() {
-        return _pan;
+    public Box getPanel() {
+        return _box;
     }
 
     public Team findTeamById(int id) {

@@ -24,8 +24,8 @@ import com.bunlang.mayot.ranking.Team;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class MatchUITest {
 
@@ -41,12 +41,12 @@ public class MatchUITest {
         Team guest = new Team("Guest", 0,0,0,0,0, 0,0);
 
         Match data = new Match(host, guest);
-        JPanel ui = data.getPanel();
+        Box ui = data.getPanel();
         JFrame win = new JFrame();
         win.setContentPane(ui);
         win.setTitle("MaYoT - org.bunlang.mayot.scores.Match UI Test");
-        win.setSize(ui.getSize());
-        win.setMinimumSize(ui.getSize());
+        win.setMinimumSize(ui.getMinimumSize());
+        win.pack();
         win.setLocationRelativeTo(null);
         win.setVisible(true);
 

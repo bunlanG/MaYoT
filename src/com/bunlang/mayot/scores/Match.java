@@ -20,7 +20,7 @@ package com.bunlang.mayot.scores;
 
 import org.apache.log4j.Logger;
 
-import javax.swing.JPanel;
+import javax.swing.Box;
 
 /** Manage a Match.
  *
@@ -306,7 +306,7 @@ public class Match {
      *
      * @return the panel of the Match
      */
-    public JPanel getPanel() {
+    public Box getPanel() {
         return _ui.getPanel();
     }
 

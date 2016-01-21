@@ -24,8 +24,7 @@ import com.bunlang.mayot.scores.MatchDay;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -103,7 +102,7 @@ public class GroupUITest {
         };
         new Thread(test, "TEST change MatchDay").start();
 
-        JPanel ui = grp.getPanel();
+        Box ui = grp.getPanel();
         JFrame win = new JFrame();
         win.setContentPane(ui);
         win.setTitle("MaYoT - org.bunlang.mayot.Group UI Test");

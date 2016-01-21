@@ -18,10 +18,7 @@
 
 package com.bunlang.mayot.ranking;
 
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -53,7 +50,7 @@ public class TeamUI {
     protected JLabel _sep2;
     protected JLabel _sep3;
 
-    protected JPanel _pan;
+    protected Box _box;
 
 
     public TeamUI(Team data) {
@@ -184,35 +181,35 @@ public class TeamUI {
         _sep3.setBackground(Color.WHITE);
         _sep3.setOpaque(true);
 
-        _pan = new JPanel();
-        _pan.setLayout(new BoxLayout(_pan, BoxLayout.LINE_AXIS));
-        _pan.add(_pos);
+        _box = Box.createHorizontalBox();
+        _box.add(_pos);
 
-        _pan.add(_sep1);
+        _box.add(_sep1);
 
-        _pan.add(_name);
-        _pan.add(_pTotal);
+        _box.add(_name);
+        _box.add(_pTotal);
 
-        _pan.add(_sep2);
+        _box.add(_sep2);
 
-        _pan.add(_mPlayed);
-        _pan.add(_mWins);
-        _pan.add(_mDraws);
-        _pan.add(_mLoses);
-        _pan.add(_pBonus);
-        _pan.add(_pFixer);
+        _box.add(_mPlayed);
+        _box.add(_mWins);
+        _box.add(_mDraws);
+        _box.add(_mLoses);
+        _box.add(_pBonus);
+        _box.add(_pFixer);
 
-        _pan.add(_sep3);
+        _box.add(_sep3);
 
-        _pan.add(_sFor);
-        _pan.add(_sAgnst);
-        _pan.add(_sDiff);
+        _box.add(_sFor);
+        _box.add(_sAgnst);
+        _box.add(_sDiff);
 
-        _pan.setMinimumSize(dimTtl);
-        _pan.setPreferredSize(dimTtl);
-        _pan.setMaximumSize(dimTtl);
-        _pan.setSize(dimTtl);
-        _pan.setBackground(grey15);
+        _box.setMinimumSize(dimTtl);
+        _box.setPreferredSize(dimTtl);
+        _box.setMaximumSize(dimTtl);
+        _box.setSize(dimTtl);
+        _box.setBackground(grey15);
+        _box.setOpaque(true);
 
         this.update();
     }
@@ -251,7 +248,7 @@ public class TeamUI {
         }
     }
 
-    public JPanel getPanel() {
-        return _pan;
+    public Box getPanel() {
+        return _box;
     }
 }

@@ -18,12 +18,8 @@
 
 package com.bunlang.mayot;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 
 /** The window of MaYoT
  *
@@ -54,10 +50,14 @@ public class MaYoT extends JFrame {
 
     public void setTournament(Tournament tournament) {
         _tournament = tournament;
-        JPanel pan = _tournament.getPanel();
+        Box box = _tournament.getPanel();
 
-        this.setContentPane(pan);
-        this.setSize(pan.getWidth(), pan.getHeight() + 21);
-        this.setMinimumSize(new Dimension(pan.getWidth(), pan.getHeight()  + 21));
+        box.setBackground(new Color(0.33f,0.33f,0.33f));
+        box.setOpaque(true);
+
+        this.setContentPane(box);
+        this.setSize(new Dimension(box.getWidth(), box.getHeight() + 21));
+        this.setPreferredSize(new Dimension(box.getWidth(), box.getHeight() + 21));
+        this.setMinimumSize(new Dimension(box.getWidth(), box.getHeight()  + 21));
     }
 }

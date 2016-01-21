@@ -116,6 +116,7 @@ public class Main {
             win.setTitle("MaYoT");
             win.setLocationRelativeTo(null);
             win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        win.pack();
         win.setVisible(true);
         if(logger.isInfoEnabled()) {
             logger.info("MaYoT launched.");

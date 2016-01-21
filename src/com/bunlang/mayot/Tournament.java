@@ -23,9 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.util.Vector;
 
 /** Represent a tournament.
@@ -44,7 +42,7 @@ public class Tournament implements Navigable {
     protected JLabel _matchdayTitleUI;
     protected JPanel _panLine1;
     protected JPanel _panLine2;
-    protected JPanel _pan;
+    protected Box _box;
 
     public Tournament() {
         Dimension dimNav = new Dimension(90,90);
@@ -63,6 +61,7 @@ public class Tournament implements Navigable {
         _nav.setMinimumSize(dimNav);
         _nav.setMaximumSize(dimNav);
         _nav.setPreferredSize(dimNav);
+        _nav.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         _tournamentTitleUI = new JLabel("Tournament :");
         _tournamentTitleUI.setSize(dimTrnTtl);
@@ -72,6 +71,7 @@ public class Tournament implements Navigable {
         _tournamentTitleUI.setForeground(Color.WHITE);
         _tournamentTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
         _tournamentTitleUI.setFont(bigFont);
+        _tournamentTitleUI.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         _tableTitleUI = new JLabel("Table :");
         _tableTitleUI.setSize(dimTblTtl);
@@ -81,6 +81,7 @@ public class Tournament implements Navigable {
         _tableTitleUI.setForeground(Color.WHITE);
         _tableTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
         _tableTitleUI.setFont(normFont);
+        _tableTitleUI.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         _matchdayTitleUI = new JLabel("MatchDay :");
         _matchdayTitleUI.setSize(dimMDTtl);
@@ -90,6 +91,7 @@ public class Tournament implements Navigable {
         _matchdayTitleUI.setForeground(Color.WHITE);
         _matchdayTitleUI.setHorizontalAlignment(SwingConstants.CENTER);
         _matchdayTitleUI.setFont(normFont);
+        _matchdayTitleUI.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         _panLine1 = new JPanel();
         _panLine1.setLayout(new BoxLayout(_panLine1, BoxLayout.LINE_AXIS));
@@ -105,9 +107,9 @@ public class Tournament implements Navigable {
         _panLine2.add(_matchdayTitleUI);
         _panLine2.add(Box.createRigidArea(new Dimension(50,5)));
         _panLine2.add(_tableTitleUI);
+        _panLine2.setAlignmentY(Component.CENTER_ALIGNMENT);
 
-        _pan = new JPanel();
-        _pan.setLayout(new BoxLayout(_pan, BoxLayout.PAGE_AXIS));
+        _box = Box.createVerticalBox();
     }
 
     public void add(Object obj) {
@@ -125,17 +127,19 @@ public class Tournament implements Navigable {
         _matchdayTitleUI.setText(_groups.get(_currGroup).getCurrMDTitle());
 
         // Update UI
-        _pan.removeAll();
+        _box.removeAll();
 
-        _pan.add(_panLine1);
-        _pan.add(_panLine2);
-        _pan.add(_groups.get(_currGroup).getPanel());
+        _box.add(_panLine1);
+        _box.add(_panLine2);
+        _box.add(_groups.get(_currGroup).getPanel());
+        _box.add(Box.createGlue());
 
         int grpSizeW = _groups.get(_currGroup).getPanel().getWidth();
         int sizeH = 152 + _groups.get(_currGroup).getPanel().getHeight();
 
-        _pan.setSize(grpSizeW, sizeH);
-        _pan.setMinimumSize(new Dimension(grpSizeW, sizeH));
+        _box.setPreferredSize(new Dimension(grpSizeW, sizeH));
+        _box.setMinimumSize(new Dimension(grpSizeW, sizeH));
+        _box.setSize(new Dimension(grpSizeW, sizeH));
 
     }
 
@@ -191,8 +195,8 @@ public class Tournament implements Navigable {
         return _groups.get(_currGroup).isLastMD();
     }
 
-    public JPanel getPanel() {
-        return _pan;
+    public Box getPanel() {
+        return _box;
     }
 
     /** Get XML-format of the Tournament, with header line for XML.

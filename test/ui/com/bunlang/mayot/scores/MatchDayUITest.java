@@ -22,8 +22,7 @@ import com.bunlang.mayot.ranking.Team;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -52,7 +51,7 @@ public class MatchDayUITest {
         matchDay.add(match1);
         matchDay.add(match2);
         matchDay.add(match3);
-        JPanel ui = matchDay.getPanel();
+        Box ui = matchDay.getPanel();
         JFrame win = new JFrame();
         win.setContentPane(ui);
         win.setTitle("MaYoT - org.bunlang.mayot.scores.MatchDay UI Test");
