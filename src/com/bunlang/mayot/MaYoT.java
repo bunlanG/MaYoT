@@ -43,6 +43,10 @@ public class MaYoT extends JFrame implements ActionListener {
     private JMenuBar _menuBar;
     private JMenu _fileMenu;
     private JMenuItem _newFileMenu;
+    private JMenuItem _openFileMenu;
+    private JMenuItem _saveFileMenu;
+    private JMenuItem _saveFileAsMenu;
+    private JMenuItem _quitMenu;
 
     public MaYoT() {
         _tournament = null;
@@ -55,6 +59,26 @@ public class MaYoT extends JFrame implements ActionListener {
         _newFileMenu.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_MASK));
         _newFileMenu.addActionListener(this);
         _fileMenu.add(_newFileMenu);
+
+        _openFileMenu = new JMenuItem("Open...");
+        _openFileMenu.setAccelerator(KeyStroke.getKeyStroke('O', InputEvent.CTRL_MASK));
+        _openFileMenu.addActionListener(this);
+        _fileMenu.add(_openFileMenu);
+
+        _saveFileMenu = new JMenuItem("Save");
+        _saveFileMenu.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_MASK));
+        _saveFileMenu.addActionListener(this);
+        _fileMenu.add(_saveFileMenu);
+
+        _saveFileAsMenu = new JMenuItem("Save As...");
+        _saveFileAsMenu.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
+        _saveFileAsMenu.addActionListener(this);
+        _fileMenu.add(_saveFileAsMenu);
+
+        _quitMenu = new JMenuItem("Quit");
+        _quitMenu.setAccelerator(KeyStroke.getKeyStroke('Q', InputEvent.CTRL_MASK));
+        _quitMenu.addActionListener(this);
+        _fileMenu.add(_quitMenu);
 
         _menuBar.add(_fileMenu);
 
@@ -77,7 +101,40 @@ public class MaYoT extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource() == _newFileMenu) {
-            JOptionPane.showMessageDialog(this, "New File clicked !");
+            newFileAction();
+        }
+        if(actionEvent.getSource() == _openFileMenu) {
+            openFileAction();
+        }
+        if(actionEvent.getSource() == _saveFileMenu) {
+            saveFileAction();
+        }
+        if(actionEvent.getSource() == _saveFileAsMenu) {
+            saveFileAsAction();
+        }
+        if(actionEvent.getSource() == _quitMenu) {
+            quitAction();
         }
     }
+
+    private void newFileAction() {
+        JOptionPane.showMessageDialog(this, "New File");
+    }
+
+    private void openFileAction() {
+        JOptionPane.showMessageDialog(this, "Open File");
+    }
+
+    private void saveFileAction() {
+        JOptionPane.showMessageDialog(this, "Save File");
+    }
+
+    private void saveFileAsAction() {
+        JOptionPane.showMessageDialog(this, "Save File As");
+    }
+
+    private void quitAction() {
+        JOptionPane.showMessageDialog(this, "Quit");
+    }
+
 }
