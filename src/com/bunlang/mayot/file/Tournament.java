@@ -54,9 +54,9 @@ public class Tournament {
         _trmnt = trmnt;
     }
 
-    public void save(String path) {
+    public void save() {
         try {
-            Writer w = new FileWriter(path);
+            Writer w = new FileWriter(_trmnt.getFilePath());
 
             w.write(_trmnt.toXml());
 
@@ -66,12 +66,12 @@ public class Tournament {
         }
     }
 
-    public void load(String path) {
+    public void load() {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             final DocumentBuilder builder = factory.newDocumentBuilder();
 
-            final Document doc = builder.parse(new File(path));
+            final Document doc = builder.parse(new File(_trmnt.getFilePath()));
 
             final Element root = doc.getDocumentElement();
 

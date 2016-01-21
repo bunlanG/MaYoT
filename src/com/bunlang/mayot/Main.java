@@ -104,7 +104,8 @@ public class Main {
 
         final com.bunlang.mayot.file.Tournament loader = new com.bunlang.mayot.file.Tournament(trnmt);
 
-        loader.load("res/test-000.mtt");
+        trnmt.setFilePath("res/test-000.mtt");
+        loader.load();
 
         if(logger.isDebugEnabled()) {
             logger.debug("Tournament created.");
@@ -135,7 +136,7 @@ public class Main {
         Runnable save = new Runnable() {
             @Override
             public void run() {
-                loader.save("res/test-000.mtt");
+                loader.save();
                 logger.debug("File saved.");
             }
         };

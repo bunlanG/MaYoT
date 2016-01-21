@@ -36,6 +36,7 @@ public class Tournament implements Navigable {
     protected Vector<Group> _groups;
     protected int _currGroup;
     protected Navigator _nav;
+    protected String _path;
 
     protected JLabel _tournamentTitleUI;
     protected JLabel _tableTitleUI;
@@ -197,6 +198,14 @@ public class Tournament implements Navigable {
 
     public Box getPanel() {
         return _box;
+    }
+
+    public String getFilePath() {
+        return _path;
+    }
+
+    public void setFilePath(String path) {
+        _path = path;
     }
 
     /** Get XML-format of the Tournament, with header line for XML.
