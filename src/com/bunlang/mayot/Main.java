@@ -164,7 +164,6 @@ public class Main {
         UIManager.put("Button.shadow", new javax.swing.plaf.ColorUIResource(transparent));
         UIManager.put("Button.darkShadow", new javax.swing.plaf.ColorUIResource(transparent));
         UIManager.put("Button.select", new javax.swing.plaf.ColorUIResource(semiTrans));
-        UIManager.put("Button.gradient", new javax.swing.plaf.ColorUIResource(transparent));
         UIManager.put("Menu.font", new javax.swing.plaf.FontUIResource("Sansation", Font.BOLD, 14));
         UIManager.put("MenuItem.font", new javax.swing.plaf.FontUIResource("Sansation", Font.BOLD, 14));
 
