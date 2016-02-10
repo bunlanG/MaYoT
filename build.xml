@@ -4,7 +4,7 @@
     <description>
         MaYoT build file for Ant.
     </description>
-    <!-- Properties -->
+<!-- ============================= Properties ============================== -->
     <property name="project.name" value="MaYoT" />
     <property name="project.src.dir" value="src" />
     <property name="project.srcUITest.dir" value="test/ui" />
@@ -15,7 +15,7 @@
     <property name="project.buildUnitTest.dir" value="build/test/unit" />
     <property name="project.buildUITest.dir" value="build/test/ui" />
 
-    <!-- Classpaths -->
+<!-- ============================= Classpaths ============================== -->
     <path id="JUnit.classpath">
         <pathelement location="lib/junit4.jar" />
         <pathelement location="lib/hamcrest-all.jar" />
@@ -47,15 +47,13 @@
         <path refid="project.prop.classpath" />
     </path>
 
-    <!-- Show all available targets -->
+<!-- =============================== Targets =============================== -->
     <target name="help" description="Show this help.">
         <java classname="org.apache.tools.ant.Main">
             <arg value="-projecthelp" />
         </java>
     </target>
-
-
-    <!-- Create dirs for all build targets if not exist -->
+<!-- ....................................................................... -->
     <target name="init" description="Create folders for generated files.">
         <mkdir dir="build" />
           <mkdir dir="build/doc" />
@@ -68,41 +66,36 @@
           <mkdir dir="log/test-ui" />
           <mkdir dir="log/test-unit" />
     </target>
-
-    <!-- Build the App -->
+<!-- ....................................................................... -->
     <target name="build-app" depends="init" description="Build the main app.">
         <javac srcdir="${project.src.dir}" destdir="${project.buildApp.dir}" includeAntRuntime="false">
             <classpath refid="project.app.classpath" />
         </javac>
     </target>
-
-    <!-- Clean the build folder -->
+<!-- ....................................................................... -->
     <target name="clean" description="Clear ALL generated files.">
         <delete dir="build" />
         <delete dir="log" />
     </target>
-
-    <!-- Build the Test -->
+<!-- ....................................................................... -->
     <target name="build-unit-test" depends="build-app" description="Build the unit tests.">
         <javac srcdir="${project.srcUnitTest.dir}" destdir="${project.buildUnitTest.dir}" includeAntRuntime="false">
             <classpath refid="project.unitTest.classpath" />
         </javac>
     </target>
-
+<!-- ....................................................................... -->
     <target name="build-ui-test" depends="build-app" description="Build the UI tests.">
         <javac srcdir="${project.srcUITest.dir}" destdir="${project.buildUITest.dir}" includeAntRuntime="false">
             <classpath refid="project.uiTest.classpath" />
         </javac>
     </target>
-
-    <!-- Run the app -->
+<!-- ....................................................................... -->
     <target name="run-app" depends="build-app" description="Run the main app.">
         <java classname="com.bunlang.mayot.Main" fork="true" failonerror="true">
             <classpath refid="project.app.classpath" />
         </java>
     </target>
-
-    <!-- Run the test -->
+<!-- ....................................................................... -->
     <target name="-clear-log-unit-test">
         <delete includeemptydirs="true">
             <fileset dir="log/test-unit" includes="**/*"/>
@@ -131,13 +124,13 @@
     <target name="run-unit-test" depends="init,-clear-log-unit-test,-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
         <fail message="Unit Tests FAILED" if="test.unit.failed" />
     </target>
-
+<!-- ....................................................................... -->
     <target name="show-report-unit-test" description="Show the unit tests report in Firefox.">
         <exec executable="firefox">
             <arg value="log/test-unit/index.html" />
         </exec>
     </target>
-
+<!-- ....................................................................... -->
     <target name="-clear-log-ui-test">
         <delete includeemptydirs="true">
             <fileset dir="log/test-ui" includes="**/*"/>
@@ -172,14 +165,13 @@
 	<target name="run-ui-test" depends="init,-clear-log-ui-test,-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
         <fail message="UI Test FAILED" if="test.ui.failed" />
     </target>
-
+<!-- ....................................................................... -->
     <target name="show-report-ui-test" description="Show the UI test report in Firefox.">
         <exec executable="firefox">
             <arg value="log/test-ui/index.html" />
         </exec>
     </target>
-
-    <!-- Make the javadoc -->
+<!-- ....................................................................... -->
     <target name="build-javadoc" depends="init" description="Build the JavaDoc.">
         <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.unitTest.classpath">
             <fileset dir="src">
@@ -190,24 +182,23 @@
             </fileset>
         </javadoc>
     </target>
-
-    <!-- -->
+<!-- ....................................................................... -->
     <target name="build-doc" description="Build the Doxygen doc.">
         <exec executable="doxygen">
 
         </exec>
     </target>
-    <!-- Show the javadoc -->
+<!-- ....................................................................... -->
     <target name="show-javadoc" description="Show the JavaDoc in Firefox.">
         <exec executable="firefox">
             <arg value="build/jdoc/index.html" />
         </exec>
     </target>
-    <!-- -->
+<!-- ....................................................................... -->
     <target name="show-doc" description="Show the Doxygen doc in Firefox.">
         <exec executable="firefox">
             <arg value="build/doc/html/index.html" />
         </exec>
     </target>
-
+<!-- ....................................................................... -->
 </project>
