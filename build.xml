@@ -48,13 +48,15 @@
     </path>
 
 <!-- =============================== Targets =============================== -->
-    <target name="help" description="Show this help.">
+    <target name="help"
+            description="Show this help.">
         <java classname="org.apache.tools.ant.Main">
             <arg value="-projecthelp" />
         </java>
     </target>
 <!-- ....................................................................... -->
-    <target name="init" description="Create folders for generated files.">
+    <target name="init"
+            description="Create folders for generated files.">
         <mkdir dir="build" />
           <mkdir dir="build/doc" />
           <mkdir dir="build/jdoc" />
@@ -67,53 +69,61 @@
           <mkdir dir="log/test-unit" />
     </target>
 <!-- ....................................................................... -->
-    <target name="build-app" depends="init" description="Build the main app.">
+    <target name="build-app" depends="init"
+            description="Build the main app.">
         <javac srcdir="${project.src.dir}" destdir="${project.buildApp.dir}" includeAntRuntime="false">
             <classpath refid="project.app.classpath" />
         </javac>
     </target>
 <!-- ....................................................................... -->
-    <target name="clean" description="Clear ALL generated files.">
+    <target name="clean"
+            description="Clear ALL generated files.">
         <delete dir="build" />
         <delete dir="log" />
     </target>
 <!-- ....................................................................... -->
-    <target name="build-unit-test" depends="build-app" description="Build the unit tests.">
+    <target name="build-unit-test" depends="build-app"
+            description="Build the unit tests.">
         <javac srcdir="${project.srcUnitTest.dir}" destdir="${project.buildUnitTest.dir}" includeAntRuntime="false">
             <classpath refid="project.unitTest.classpath" />
         </javac>
     </target>
 <!-- ....................................................................... -->
-    <target name="build-ui-test" depends="build-app" description="Build the UI tests.">
+    <target name="build-ui-test" depends="build-app"
+            description="Build the UI tests.">
         <javac srcdir="${project.srcUITest.dir}" destdir="${project.buildUITest.dir}" includeAntRuntime="false">
             <classpath refid="project.uiTest.classpath" />
         </javac>
     </target>
 <!-- ....................................................................... -->
-    <target name="run-app" depends="build-app" description="Run the main app.">
+    <target name="run-app" depends="build-app"
+            description="Run the main app.">
         <java classname="com.bunlang.mayot.Main" fork="true" failonerror="true">
             <classpath refid="project.app.classpath" />
         </java>
     </target>
 <!-- ....................................................................... -->
     <target name="-clear-log-unit-test">
+            <!-- Clear log files from the previous unit tests. It avoids conflits in results. -->
         <delete includeemptydirs="true">
             <fileset dir="log/test-unit" includes="**/*"/>
         </delete>
         <echo>log/test-unit folder clean.</echo>
     </target>
     <target name="-junit-unit-test" depends="build-unit-test">
+            <!-- Launch all unit tests. -->
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.unit.failed">
             <classpath refid="project.unitTest.classpath" />
             <batchtest todir="log/test-unit">
                 <fileset dir="${project.srcUnitTest.dir}">
                     <include name="**/*Test*.java" />
                 </fileset>
-                <formatter type="xml" />
+                <formatter type="xml" /> <!-- Required for JUnit Report -->
             </batchtest>
         </junit>
     </target>
     <target name="-junitreport-unit">
+            <!-- Build HTML files from unit tests, with XML logs from tests. -->
         <junitreport todir="./log/test-unit">
             <fileset dir="./log/test-unit">
                 <include name="TEST-*.xml" />
@@ -121,23 +131,28 @@
             <report format="frames" todir="./log/test-unit" />
         </junitreport>
     </target>
-    <target name="run-unit-test" depends="init,-clear-log-unit-test,-junit-unit-test,-junitreport-unit" description="Run all unit tests.">
+    <!-- -->
+    <target name="run-unit-test" depends="init,-clear-log-unit-test,-junit-unit-test,-junitreport-unit"
+            description="Run all unit tests.">
         <fail message="Unit Tests FAILED" if="test.unit.failed" />
     </target>
 <!-- ....................................................................... -->
-    <target name="show-report-unit-test" description="Show the unit tests report in Firefox.">
+    <target name="show-report-unit-test"
+            description="Show the unit tests report in Firefox.">
         <exec executable="firefox">
             <arg value="log/test-unit/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
     <target name="-clear-log-ui-test">
+            <!-- Clear log files from the previous UI tests. It avoids conflits in results. -->
         <delete includeemptydirs="true">
             <fileset dir="log/test-ui" includes="**/*"/>
         </delete>
         <echo>log/test-ui folder clean.</echo>
     </target>
     <target name="-choice-ui-test">
+            <!-- Choose the UI test class to launch. It needs to be the complete class (with package) -->
         <echo>Availables UI :</echo>
         <echo>    > com.bunlang.mayot.GroupUITest</echo>
         <echo>    > com.bunlang.mayot.ranking.TableUITest</echo>
@@ -147,6 +162,7 @@
         <input addProperty="test.Ui.class" />
     </target>
     <target name="-junit-ui-test" depends="build-ui-test">
+            <!-- Launch all UI tests. -->
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.ui.failed">
 			<classpath refid="project.uiTest.classpath" />
             <test name="${test.Ui.class}" todir="log/test-ui">
@@ -155,6 +171,7 @@
         </junit>
     </target>
     <target name="-junitreport-ui">
+            <!-- Build HTML files from UI tests, with XML logs from tests. -->
         <junitreport todir="./log/test-ui">
             <fileset dir="./log/test-ui">
                 <include name="TEST-*.xml" />
@@ -162,17 +179,21 @@
             <report format="frames" todir="./log/test-ui" />
         </junitreport>
     </target>
-	<target name="run-ui-test" depends="init,-clear-log-ui-test,-choice-ui-test,-junit-ui-test,-junitreport-ui" description="Run the UI test. You select before the test class.">
+    <!-- -->
+	<target name="run-ui-test" depends="init,-clear-log-ui-test,-choice-ui-test,-junit-ui-test,-junitreport-ui"
+	        description="Run the UI test. You select before the test class.">
         <fail message="UI Test FAILED" if="test.ui.failed" />
     </target>
 <!-- ....................................................................... -->
-    <target name="show-report-ui-test" description="Show the UI test report in Firefox.">
+    <target name="show-report-ui-test"
+            description="Show the UI test report in Firefox.">
         <exec executable="firefox">
             <arg value="log/test-ui/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
-    <target name="build-javadoc" depends="init" description="Build the JavaDoc.">
+    <target name="build-javadoc" depends="init"
+            description="Build the JavaDoc.">
         <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.unitTest.classpath">
             <fileset dir="src">
 
@@ -183,19 +204,22 @@
         </javadoc>
     </target>
 <!-- ....................................................................... -->
-    <target name="build-doc" description="Build the Doxygen doc.">
+    <target name="build-doc"
+            description="Build the Doxygen doc.">
         <exec executable="doxygen">
 
         </exec>
     </target>
 <!-- ....................................................................... -->
-    <target name="show-javadoc" description="Show the JavaDoc in Firefox.">
+    <target name="show-javadoc"
+            description="Show the JavaDoc in Firefox.">
         <exec executable="firefox">
             <arg value="build/jdoc/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
-    <target name="show-doc" description="Show the Doxygen doc in Firefox.">
+    <target name="show-doc"
+            description="Show the Doxygen doc in Firefox.">
         <exec executable="firefox">
             <arg value="build/doc/html/index.html" />
         </exec>
