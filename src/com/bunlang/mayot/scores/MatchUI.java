@@ -1,6 +1,6 @@
 /*
  * MaYoT : Manage Your Tournament
- * Copyright (C) 2015 - Ronan GUILBAULT
+ * Copyright (C) 2015-2016 - Ronan GUILBAULT
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
