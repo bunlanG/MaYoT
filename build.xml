@@ -22,35 +22,29 @@
     <property name="ant.build.javac.source" value="1.7" />
 
 <!-- ============================= Classpaths ============================== -->
-    <path id="JUnit.classpath">
+    <path id="project.cp.lib.junit4">
         <pathelement location="lib/junit4.jar" />
         <pathelement location="lib/hamcrest-all.jar" />
     </path>
-    <path id="Log4J.classpath">
+    <path id="project.cp.lib.log4j">
         <pathelement location="lib/log4j-1.2.jar" />
     </path>
-    <path id="project.prop.classpath">
+    <path id="project.cp.prop">
         <pathelement location="prop" />
     </path>
-    <path id="project.app.classpath">
+    <path id="project.cp.app">
         <pathelement location="${project.dir.build.app}" />
-        <path refid="JUnit.classpath" />
-        <path refid="Log4J.classpath" />
-        <path refid="project.prop.classpath" />
+        <path refid="project.cp.lib.junit4" />
+        <path refid="project.cp.lib.log4j" />
+        <path refid="project.cp.prop" />
     </path>
-    <path id="project.unitTest.classpath">
-        <pathelement location="${project.dir.build.app}" />
+    <path id="project.cp.test">
+        <path refid="project.cp.app" />
         <pathelement location="${project.dir.build.test}" />
-        <path refid="JUnit.classpath" />
-        <path refid="Log4J.classpath" />
-        <path refid="project.prop.classpath" />
     </path>
-    <path id="project.uiTest.classpath">
-        <pathelement location="${project.dir.build.app}" />
+    <path id="project.cp.test.unit">
+        <path refid="project.cp.app" />
         <pathelement location="${project.dir.build.test.ui}" />
-        <path refid="JUnit.classpath" />
-        <path refid="Log4J.classpath" />
-        <path refid="project.prop.classpath" />
     </path>
 
 <!-- =============================== Targets =============================== -->
@@ -78,7 +72,7 @@
     <target name="build-app" depends="init"
             description="Build the main app.">
         <javac srcdir="${project.dir.src.app}" destdir="${project.dir.build.app}" includeAntRuntime="false">
-            <classpath refid="project.app.classpath" />
+            <classpath refid="project.cp.app" />
         </javac>
     </target>
 <!-- ....................................................................... -->
@@ -91,21 +85,21 @@
     <target name="build-unit-test" depends="build-app"
             description="Build the unit tests.">
         <javac srcdir="${project.dir.src.test}" destdir="${project.dir.build.test}" includeAntRuntime="false">
-            <classpath refid="project.unitTest.classpath" />
+            <classpath refid="project.cp.test" />
         </javac>
     </target>
 <!-- ....................................................................... -->
     <target name="build-ui-test" depends="build-app"
             description="Build the UI tests.">
         <javac srcdir="${project.dir.src.test.ui}" destdir="${project.dir.build.test.ui}" includeAntRuntime="false">
-            <classpath refid="project.uiTest.classpath" />
+            <classpath refid="project.cp.test.unit" />
         </javac>
     </target>
 <!-- ....................................................................... -->
     <target name="run-app" depends="build-app"
             description="Run the main app.">
         <java classname="${project.main.app}" fork="true" failonerror="true">
-            <classpath refid="project.app.classpath" />
+            <classpath refid="project.cp.app" />
         </java>
     </target>
 <!-- ....................................................................... -->
@@ -119,7 +113,7 @@
     <target name="-junit-unit-test" depends="build-unit-test">
             <!-- Launch all unit tests. -->
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.unit.failed">
-            <classpath refid="project.unitTest.classpath" />
+            <classpath refid="project.cp.test" />
             <batchtest todir="${project.dir.log.test}">
                 <fileset dir="${project.dir.src.test}">
                     <include name="**/*Test*.java" />
@@ -170,7 +164,7 @@
     <target name="-junit-ui-test" depends="build-ui-test">
             <!-- Launch all UI tests. -->
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.ui.failed">
-			<classpath refid="project.uiTest.classpath" />
+			<classpath refid="project.cp.test.unit" />
             <test name="${test.Ui.class}" todir="${project.dir.log.test.ui}">
                 <formatter type="xml" />
             </test>
@@ -200,7 +194,7 @@
 <!-- ....................................................................... -->
     <target name="build-javadoc" depends="init"
             description="Build the JavaDoc.">
-        <javadoc destdir="${project.dir.build.javadoc}" classpathref="project.unitTest.classpath">
+        <javadoc destdir="${project.dir.build.javadoc}" classpathref="project.cp.test">
             <fileset dir="${project.dir.src.app}">
 
             </fileset>
