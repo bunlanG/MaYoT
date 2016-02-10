@@ -96,6 +96,18 @@
         </javac>
     </target>
 <!-- ....................................................................... -->
+    <target name="build-jar" depends="build-app"
+            description="Build the jar archive with the main app.">
+        <jar destfile="mayot.jar">
+            <fileset dir="${project.dir.build.app}"/>
+            <fileset dir="prop"/>
+            <zipfileset includes="**/*.class" src="lib/log4j-1.2.jar"/>
+            <manifest>
+                <attribute name="Main-Class" value="${project.main.app}" />
+            </manifest>
+        </jar>
+    </target>
+<!-- ....................................................................... -->
     <target name="run-app" depends="build-app"
             description="Run the main app.">
         <java classname="${project.main.app}" fork="true" failonerror="true">
