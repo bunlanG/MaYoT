@@ -6,14 +6,20 @@
     </description>
 <!-- ============================= Properties ============================== -->
     <property name="project.name" value="MaYoT" />
-    <property name="project.src.dir" value="src" />
-    <property name="project.srcUITest.dir" value="test/ui" />
-    <property name="project.srcUnitTest.dir" value="test/unit" />
-    <property name="project.build.dir" value="build" />
-    <property name="project.buildApp.dir" value="build/prod" />
-    <property name="project.buildJavadoc.dir" value="build/jdoc" />
-    <property name="project.buildUnitTest.dir" value="build/test/unit" />
-    <property name="project.buildUITest.dir" value="build/test/ui" />
+    <property name="project.main.app" value="com.bunlang.mayot.Main" />
+    <property name="project.dir.src.app" value="src" />
+    <property name="project.dir.src.test.ui" value="test/ui" />
+    <property name="project.dir.src.test" value="test/unit" />
+    <property name="project.dir.build" value="build" />
+    <property name="project.dir.build.app" value="build/prod" />
+    <property name="project.dir.build.javadoc" value="build/jdoc" />
+    <property name="project.dir.build.test" value="build/test/unit" />
+    <property name="project.dir.build.test.ui" value="build/test/ui" />
+    <property name="project.dir.log" value="log" />
+    <property name="project.dir.log.test" value="log/test-unit" />
+    <property name="project.dir.log.test.ui" value="log/test-ui" />
+    <property name="ant.build.javac.target" value="1.7" />
+    <property name="ant.build.javac.source" value="1.7" />
 
 <!-- ============================= Classpaths ============================== -->
     <path id="JUnit.classpath">
@@ -27,21 +33,21 @@
         <pathelement location="prop" />
     </path>
     <path id="project.app.classpath">
-        <pathelement location="${project.buildApp.dir}" />
+        <pathelement location="${project.dir.build.app}" />
         <path refid="JUnit.classpath" />
         <path refid="Log4J.classpath" />
         <path refid="project.prop.classpath" />
     </path>
     <path id="project.unitTest.classpath">
-        <pathelement location="${project.buildApp.dir}" />
-        <pathelement location="${project.buildUnitTest.dir}" />
+        <pathelement location="${project.dir.build.app}" />
+        <pathelement location="${project.dir.build.test}" />
         <path refid="JUnit.classpath" />
         <path refid="Log4J.classpath" />
         <path refid="project.prop.classpath" />
     </path>
     <path id="project.uiTest.classpath">
-        <pathelement location="${project.buildApp.dir}" />
-        <pathelement location="${project.buildUITest.dir}" />
+        <pathelement location="${project.dir.build.app}" />
+        <pathelement location="${project.dir.build.test.ui}" />
         <path refid="JUnit.classpath" />
         <path refid="Log4J.classpath" />
         <path refid="project.prop.classpath" />
@@ -57,48 +63,48 @@
 <!-- ....................................................................... -->
     <target name="init"
             description="Create folders for generated files.">
-        <mkdir dir="build" />
+        <mkdir dir="${project.dir.build}" />
           <mkdir dir="build/doc" />
-          <mkdir dir="build/jdoc" />
-          <mkdir dir="build/prod" />
+          <mkdir dir="${project.dir.build.javadoc}" />
+          <mkdir dir="${project.dir.build.app}" />
           <mkdir dir="build/test" />
-            <mkdir dir="build/test/ui" />
-            <mkdir dir="build/test/unit" />
-        <mkdir dir="log" />
-          <mkdir dir="log/test-ui" />
-          <mkdir dir="log/test-unit" />
+            <mkdir dir="${project.dir.build.test.ui}" />
+            <mkdir dir="${project.dir.build.test}" />
+        <mkdir dir="${project.dir.log}" />
+          <mkdir dir="${project.dir.log.test.ui}" />
+          <mkdir dir="${project.dir.log.test}" />
     </target>
 <!-- ....................................................................... -->
     <target name="build-app" depends="init"
             description="Build the main app.">
-        <javac srcdir="${project.src.dir}" destdir="${project.buildApp.dir}" includeAntRuntime="false">
+        <javac srcdir="${project.dir.src.app}" destdir="${project.dir.build.app}" includeAntRuntime="false">
             <classpath refid="project.app.classpath" />
         </javac>
     </target>
 <!-- ....................................................................... -->
     <target name="clean"
             description="Clear ALL generated files.">
-        <delete dir="build" />
-        <delete dir="log" />
+        <delete dir="${project.dir.build}" />
+        <delete dir="${project.dir.log}" />
     </target>
 <!-- ....................................................................... -->
     <target name="build-unit-test" depends="build-app"
             description="Build the unit tests.">
-        <javac srcdir="${project.srcUnitTest.dir}" destdir="${project.buildUnitTest.dir}" includeAntRuntime="false">
+        <javac srcdir="${project.dir.src.test}" destdir="${project.dir.build.test}" includeAntRuntime="false">
             <classpath refid="project.unitTest.classpath" />
         </javac>
     </target>
 <!-- ....................................................................... -->
     <target name="build-ui-test" depends="build-app"
             description="Build the UI tests.">
-        <javac srcdir="${project.srcUITest.dir}" destdir="${project.buildUITest.dir}" includeAntRuntime="false">
+        <javac srcdir="${project.dir.src.test.ui}" destdir="${project.dir.build.test.ui}" includeAntRuntime="false">
             <classpath refid="project.uiTest.classpath" />
         </javac>
     </target>
 <!-- ....................................................................... -->
     <target name="run-app" depends="build-app"
             description="Run the main app.">
-        <java classname="com.bunlang.mayot.Main" fork="true" failonerror="true">
+        <java classname="${project.main.app}" fork="true" failonerror="true">
             <classpath refid="project.app.classpath" />
         </java>
     </target>
@@ -106,7 +112,7 @@
     <target name="-clear-log-unit-test">
             <!-- Clear log files from the previous unit tests. It avoids conflits in results. -->
         <delete includeemptydirs="true">
-            <fileset dir="log/test-unit" includes="**/*"/>
+            <fileset dir="${project.dir.log.test}" includes="**/*"/>
         </delete>
         <echo>log/test-unit folder clean.</echo>
     </target>
@@ -114,8 +120,8 @@
             <!-- Launch all unit tests. -->
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.unit.failed">
             <classpath refid="project.unitTest.classpath" />
-            <batchtest todir="log/test-unit">
-                <fileset dir="${project.srcUnitTest.dir}">
+            <batchtest todir="${project.dir.log.test}">
+                <fileset dir="${project.dir.src.test}">
                     <include name="**/*Test*.java" />
                 </fileset>
                 <formatter type="xml" /> <!-- Required for JUnit Report -->
@@ -124,11 +130,11 @@
     </target>
     <target name="-junitreport-unit">
             <!-- Build HTML files from unit tests, with XML logs from tests. -->
-        <junitreport todir="./log/test-unit">
-            <fileset dir="./log/test-unit">
+        <junitreport todir="${project.dir.log.test}">
+            <fileset dir="${project.dir.log.test}">
                 <include name="TEST-*.xml" />
             </fileset>
-            <report format="frames" todir="./log/test-unit" />
+            <report format="frames" todir="${project.dir.log.test}" />
         </junitreport>
     </target>
     <!-- -->
@@ -140,14 +146,14 @@
     <target name="show-report-unit-test"
             description="Show the unit tests report in Firefox.">
         <exec executable="firefox">
-            <arg value="log/test-unit/index.html" />
+            <arg value="${project.dir.log.test}/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
     <target name="-clear-log-ui-test">
             <!-- Clear log files from the previous UI tests. It avoids conflits in results. -->
         <delete includeemptydirs="true">
-            <fileset dir="log/test-ui" includes="**/*"/>
+            <fileset dir="${project.dir.log.test.ui}" includes="**/*"/>
         </delete>
         <echo>log/test-ui folder clean.</echo>
     </target>
@@ -165,18 +171,18 @@
             <!-- Launch all UI tests. -->
         <junit printsummary="on" showoutput="on" fork="yes" failureproperty="test.ui.failed">
 			<classpath refid="project.uiTest.classpath" />
-            <test name="${test.Ui.class}" todir="log/test-ui">
+            <test name="${test.Ui.class}" todir="${project.dir.log.test.ui}">
                 <formatter type="xml" />
             </test>
         </junit>
     </target>
     <target name="-junitreport-ui">
             <!-- Build HTML files from UI tests, with XML logs from tests. -->
-        <junitreport todir="./log/test-ui">
-            <fileset dir="./log/test-ui">
+        <junitreport todir="${project.dir.log.test.ui}">
+            <fileset dir="${project.dir.log.test.ui}">
                 <include name="TEST-*.xml" />
             </fileset>
-            <report format="frames" todir="./log/test-ui" />
+            <report format="frames" todir="${project.dir.log.test.ui}" />
         </junitreport>
     </target>
     <!-- -->
@@ -188,14 +194,14 @@
     <target name="show-report-ui-test"
             description="Show the UI test report in Firefox.">
         <exec executable="firefox">
-            <arg value="log/test-ui/index.html" />
+            <arg value="${project.dir.log.test.ui}/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
     <target name="build-javadoc" depends="init"
             description="Build the JavaDoc.">
-        <javadoc destdir="${project.buildJavadoc.dir}" classpathref="project.unitTest.classpath">
-            <fileset dir="src">
+        <javadoc destdir="${project.dir.build.javadoc}" classpathref="project.unitTest.classpath">
+            <fileset dir="${project.dir.src.app}">
 
             </fileset>
             <fileset dir="test">
@@ -214,7 +220,7 @@
     <target name="show-javadoc"
             description="Show the JavaDoc in Firefox.">
         <exec executable="firefox">
-            <arg value="build/jdoc/index.html" />
+            <arg value="${project.dir.build.javadoc}/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
