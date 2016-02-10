@@ -144,8 +144,8 @@
     </target>
 <!-- ....................................................................... -->
     <target name="show-report-unit-test"
-            description="Show the unit tests report in Firefox.">
-        <exec executable="firefox">
+            description="Show the unit tests report in a browser.">
+        <exec executable="xdg-open">
             <arg value="${project.dir.log.test}/index.html" />
         </exec>
     </target>
@@ -192,8 +192,8 @@
     </target>
 <!-- ....................................................................... -->
     <target name="show-report-ui-test"
-            description="Show the UI test report in Firefox.">
-        <exec executable="firefox">
+            description="Show the UI test report in a browser.">
+        <exec executable="xdg-open">
             <arg value="${project.dir.log.test.ui}/index.html" />
         </exec>
     </target>
@@ -218,15 +218,15 @@
     </target>
 <!-- ....................................................................... -->
     <target name="show-javadoc"
-            description="Show the JavaDoc in Firefox.">
-        <exec executable="firefox">
+            description="Show the JavaDoc in a browser.">
+        <exec executable="xdg-open">
             <arg value="${project.dir.build.javadoc}/index.html" />
         </exec>
     </target>
 <!-- ....................................................................... -->
     <target name="show-doc"
-            description="Show the Doxygen doc in Firefox.">
-        <exec executable="firefox">
+            description="Show the Doxygen doc in a browser.">
+        <exec executable="xdg-open">
             <arg value="build/doc/html/index.html" />
         </exec>
     </target>
