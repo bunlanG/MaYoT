@@ -2,6 +2,7 @@
 
 # compilated output dirs
 build/
+target/
 # log test
 log/
 
